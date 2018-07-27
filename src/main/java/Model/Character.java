@@ -3,38 +3,41 @@ package Model;
 public class Character {
     private int x;
     private int y;
+    private int level;
 
-    public Character(int mapSize) {
-        // subtract 1 because map starts from 0
-        if (mapSize % 2 != 0) {
-            this.x = mapSize / 2;
-            this.y = mapSize / 2;
-        }
-        else {
-            this.x = mapSize / 2;
-            this.y = mapSize / 2;
-        }
-
+    public Character (int level) {
+        this.x = 0;
+        this.x = 0;
+        this.level = level;
     }
 
     public Character() {
         this.x = 0;
         this.y = 0;
+        this.level = 0;
     }
 
-    public int get_x() {
+    public int getX() {
         return x;
     }
 
-    public void set_x(int x) {
+    public void setX(int x) {
         this.x = x;
     }
 
-    public int get_y() {
+    public int getY() {
         return y;
     }
 
-    public void set_y(int y_pos) {
-        this.y = y_pos;
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }
