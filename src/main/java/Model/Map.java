@@ -8,16 +8,26 @@ public class Map {
     public Map (Character character) {
         this.size = (character.getLevel() - 1) * 5 + 10 - (character.getLevel() % 2);
         this.character = character;
+        setCharacterPos();
     }
 
-    public void drawMap() {
-        setCharacterPos();
+    public void drawMap(Character character) {
+        this.character = character;
+        if (character.getX() < 0)
+            character.setX(0);
+        if (character.getX() >= size)
+            character.setX(size - 1);
+        if (character.getY() < 0)
+            character.setY(0);
+        if (character.getY() >= size)
+            character.setY(size - 1);
         for(int y = 0; y < size; ++y) {
             for (int x = 0; x < size; ++x) {
-                if (character.getX() == x && character.getY() == y) {
+                if (this.character.getX() == x && this.character.getY() == y) {
                     if (x == 0)
                         System.out.print("o ");
-                    if (x == size - 1)
+                    else
+                        if (x == size - 1)
                         System.out.print(" o");
                     else
                         System.out.print(" o ");
@@ -26,7 +36,7 @@ public class Map {
 
                 if (x == 0)
                     System.out.print(". ");
-                if (x == size - 1)
+                else if (x == size - 1)
                     System.out.print(" .");
                 else
                     System.out.print(" . ");
