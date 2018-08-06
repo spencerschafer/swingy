@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Character {
@@ -7,7 +8,9 @@ public class Character {
     private int y = 0;
 
 
-//  Attributes
+
+
+    //  Attributes
     private String name; // May not be relevant in all characters i.e Villians
     private String type; // May not be relevant in all characters i.e Villians
     private int level = 0;
@@ -30,15 +33,17 @@ public class Character {
         this.level = level;
     }
 
-/*
-    public Character(File file) {
+    public Character(ArrayList<String> list) {
         this.x = 0;
         this.y = 0;
-        this.name = file.name;
-        this.type = file.type;
-        this.level = file.level;
+        this.name = list.get(0);
+        this.type = list.get(1);
+        this.level = Integer.parseInt(list.get(2));
+        this.experience = Integer.parseInt(list.get(3));
+        this.attack = Integer.parseInt(list.get(4));
+        this.defense = Integer.parseInt(list.get(5));
+        this.hitPoints = Integer.parseInt(list.get(6));
     }
-*/
 
 //  New character will be level 0 by default
     public Character() {
@@ -60,6 +65,25 @@ public class Character {
         } else if (str.equalsIgnoreCase("d")) {
             this.x += 1;
         }
+    }
+
+    public void printAttributes() {
+        System.out.println("Character Stats");
+        System.out.println("---------------");
+        System.out.println("Name:       " + name);
+        System.out.println("Class:      " + type);
+        System.out.println("Level:      " + level);
+        System.out.println("Experience: " + experience);
+        System.out.println("Attack:     " + attack);
+        System.out.println("Defense:    " + defense);
+        System.out.println("Hit Points: " + hitPoints);
+/*
+        System.out.println("Character Artifacts");
+        System.out.println("-------------------");
+        System.out.println("Weapon: " );
+        System.out.println("Armor: ");
+        System.out.println("Helm: ");
+*/
     }
 
     int getX() {
@@ -93,22 +117,44 @@ public class Character {
        return name;
     }
 
-    public void printAttributes() {
-        System.out.println("Character Stats");
-        System.out.println("---------------");
-        System.out.println("Name:       " + name);
-        System.out.println("Class:      " + type);
-        System.out.println("Level:      " + level);
-        System.out.println("Experience: " + experience);
-        System.out.println("Attack:     " + attack);
-        System.out.println("Defense:    " + defense);
-        System.out.println("Hit Points: " + hitPoints);
-/*
-        System.out.println("Character Artifacts");
-        System.out.println("-------------------");
-        System.out.println("Weapon: " );
-        System.out.println("Armor: ");
-        System.out.println("Helm: ");
-*/
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public int getHitPoints() {
+        return hitPoints;
+    }
+
+    public void setHitPoints(int hitPoints) {
+        this.hitPoints = hitPoints;
+
     }
 }

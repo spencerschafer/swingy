@@ -1,19 +1,22 @@
 package Controller;
 
 import Model.Character;
-import View.View;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 //NOTE: Reminder: When going back in main menu, methods are recalled, double check that recalling these methods do not create new instances of existing characters.
 //NOTE: Reminder: Validation of user input has not been checked
+//NOTE: Reminder: When loading character, it is assumed the file format (input) is correct as no validation has yet to be done on the file
 
 //NOTE: Current goal: Create Character -> Save Character -> Load Character
 
 public class Main {
-    static Character character = null;
-    static FileReader fileReader = new FileReader();
+    private static Character character = null;
 
     public static void main(String[] args) {
 
@@ -159,10 +162,24 @@ public class Main {
     }
 
     private static void loadCharacter() {
-//      type in file name/location
-//        fileReader.readFile();
+        ArrayList<String> list = new ArrayList<String>();
+
+        //reads a file to access already saved information
+            String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/save.txt";
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    list.add(line);
+                }
+                reader.close();
+            } catch (IOException e) {
+                System.exit(11);
+            }
+            character = new Character(list);
         System.out.println("Character Loaded.");
-    }
+        mainMenu();
+        }
 
     private static void selectView() {
 //      TODO
@@ -172,7 +189,7 @@ public class Main {
     //NOTE: Menu Option 0
     private static void saveAndExit() {
 //      TODO
-//        fileReader.saveFile();
+//        readFile.saveFile();
 
         System.out.println("Progress Saved.");
         System.exit(1);

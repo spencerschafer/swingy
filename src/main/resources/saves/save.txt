@@ -1,0 +1,10 @@
+Name
+Type
+0
+0
+30
+10
+100
+null
+null
+null
