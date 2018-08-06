@@ -1,22 +1,47 @@
 package Model;
 
+import apple.laf.JRSUIConstants;
+
 import java.util.Scanner;
 
 public class Character {
-    private int x;
-    private int y;
-    private int level;
+    private int x = 0;
+    private int y = 0;
 
+
+//  Attributes
+    private String Name; // May not be relevant in all characters
+    private String Class; // May not be relevant in all characters;
+    private int Level = 0;
+    private int Experience = 0;
+    private int Attack = 30;
+    private int Defense = 10;
+    private int hitPoints = 100;
+
+//  Artifacts
+    Artifact Weapon = null; // increases attack
+    Artifact Armor = null; // increases defense
+    Artifact Helm = null; // increases hit points
+
+//  Temporary level input to simulate character level from saved file
     public Character(int level) {
         this.x = 0;
         this.x = 0;
-        this.level = level;
+        this.Level = level;
     }
 
-    public Character() {
+/*
+    public Character(File file) {
         this.x = 0;
         this.y = 0;
-        this.level = 0;
+        this.Level = file.Level;
+    }
+*/
+
+//  New character will be level 0 by default
+    Character() {
+        this.x = 0;
+        this.y = 0;
     }
 
     public void move() {
@@ -33,27 +58,46 @@ public class Character {
         }
     }
 
-    public int getX() {
+    int getX() {
         return x;
     }
 
-    public void setX(int x) {
+    void setX(int x) {
         this.x = x;
     }
 
-    public int getY() {
+    int getY() {
         return y;
     }
 
-    public void setY(int y) {
+    void setY(int y) {
         this.y = y;
     }
 
     public int getLevel() {
-        return level;
+        return Level;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setLevel(int Level) {
+        this.Level = Level;
+    }
+
+    public void printAttributes() {
+        System.out.printf("Character Stats");
+        System.out.printf("---------------");
+        System.out.println("Name:" + Name);
+        System.out.println("Class:" + Class);
+        System.out.println("Level:" + Level);
+        System.out.println("Experience:" + Experience);
+        System.out.println("Attack:" + Attack);
+        System.out.println("Defense:" + Defense);
+        System.out.println("Hit Points:" + hitPoints);
+/*
+        System.out.println("Character Artifacts");
+        System.out.println("-------------------");
+        System.out.println("Weapon: " );
+        System.out.println("Armor: ");
+        System.out.println("Helm: ");
+*/
     }
 }
