@@ -20,3 +20,32 @@ public class FileReader {
 
     }
 }
+/*
+public class Main {
+    public static void main(String[] args) {
+
+        boolean loadFromClasspath = true;
+        String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/save.txt";
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(new File(fileName)));
+
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                // do something with the line here
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            return;
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (Exception e) {
+                    return;
+                }
+            }
+        }
+    }
+}
+*/
