@@ -1,7 +1,5 @@
 package Model;
 
-import apple.laf.JRSUIConstants;
-
 import java.util.Scanner;
 
 public class Character {
@@ -10,12 +8,12 @@ public class Character {
 
 
 //  Attributes
-    private String Name; // May not be relevant in all characters
-    private String Class; // May not be relevant in all characters;
-    private int Level = 0;
-    private int Experience = 0;
-    private int Attack = 30;
-    private int Defense = 10;
+    private String name; // May not be relevant in all characters i.e Villians
+    private String type; // May not be relevant in all characters i.e Villians
+    private int level = 0;
+    private int experience = 0;
+    private int attack = 30;
+    private int defense = 10;
     private int hitPoints = 100;
 
 //  Artifacts
@@ -24,24 +22,30 @@ public class Character {
     Artifact Helm = null; // increases hit points
 
 //  Temporary level input to simulate character level from saved file
-    public Character(int level) {
+    public Character(String name, String type, int level){
         this.x = 0;
         this.x = 0;
-        this.Level = level;
+        this.name = name;
+        this.type = type;
+        this.level = level;
     }
 
 /*
     public Character(File file) {
         this.x = 0;
         this.y = 0;
-        this.Level = file.Level;
+        this.name = file.name;
+        this.type = file.type;
+        this.level = file.level;
     }
 */
 
 //  New character will be level 0 by default
-    Character() {
+    public Character() {
         this.x = 0;
         this.y = 0;
+        this.name = "Default";
+        this.type = "Default";
     }
 
     public void move() {
@@ -75,23 +79,30 @@ public class Character {
     }
 
     public int getLevel() {
-        return Level;
+        return level;
     }
 
-    public void setLevel(int Level) {
-        this.Level = Level;
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public  void setName(String name) {
+        this.name = name;
+    }
+    public String getName() {
+       return name;
     }
 
     public void printAttributes() {
-        System.out.printf("Character Stats");
-        System.out.printf("---------------");
-        System.out.println("Name:" + Name);
-        System.out.println("Class:" + Class);
-        System.out.println("Level:" + Level);
-        System.out.println("Experience:" + Experience);
-        System.out.println("Attack:" + Attack);
-        System.out.println("Defense:" + Defense);
-        System.out.println("Hit Points:" + hitPoints);
+        System.out.println("Character Stats");
+        System.out.println("---------------");
+        System.out.println("Name:       " + name);
+        System.out.println("Class:      " + type);
+        System.out.println("Level:      " + level);
+        System.out.println("Experience: " + experience);
+        System.out.println("Attack:     " + attack);
+        System.out.println("Defense:    " + defense);
+        System.out.println("Hit Points: " + hitPoints);
 /*
         System.out.println("Character Artifacts");
         System.out.println("-------------------");

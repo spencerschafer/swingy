@@ -6,7 +6,7 @@ public class FileReader {
 
     File file = null;
 
-    public FileReader(File file) {
+    public FileReader() {
         this.file = file;
     }
 

@@ -7,10 +7,15 @@ import java.io.File;
 import java.util.Scanner;
 
 //NOTE: Reminder: When going back in main menu, methods are recalled, double check that recalling these methods do not create new instances of existing characters.
+//NOTE: Reminder: Validation of user input has not been checked
+
+//NOTE: Current goal: Create Character -> Save Character -> Load Character
 
 public class Main {
+    static Character character = null;
+    static FileReader fileReader = new FileReader();
+
     public static void main(String[] args) {
-        Character character = new Character(2); // Model Character
 
         mainMenu();
 //        NOTE: Read from file and set appropriate settings
@@ -54,11 +59,19 @@ public class Main {
 
     private static void startGame() {
         //call map class here
-        System.out.println("Game Started.");
+        if (character == null) {
+            System.out.println("No character selected. Please select a character.\n");
+            mainMenu();
+        } else {
+            System.out.println("Game Started.");
+            System.out.println("The character you selected is: \n");
+            character.printAttributes();
+        }
+        System.out.println();
     }
 
     private static void selectCharacter() {
-        int Option;
+        int option;
 
         System.out.println("Select Character");
         System.out.println("-------------");
@@ -66,9 +79,9 @@ public class Main {
         System.out.println("2. Load Character");
         System.out.println("\n0. Cancel");
         Scanner scanner = new Scanner(System.in);
-        Option = scanner.nextInt();
+        option = scanner.nextInt();
 
-        switch (Option) {
+        switch (option) {
             case 1:
                 newCharacter();
                 break;
@@ -82,52 +95,52 @@ public class Main {
     }
 
     private static void newCharacter() {
-        int Option;
-        String Name;
-        String Class;
+        int option;
+        String name;
+        String type;
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Character Name: ");
-        Name = scanner.next();
+        System.out.println("Enter Character name: ");
+        name = scanner.next();
 
 //      perhaps only limit to 2 classes
-        System.out.println("Select Character Class:  ");
+        System.out.println("Select Character type:  ");
         System.out.println("1. Warrior  ");
         System.out.println("2. Archer  ");
         System.out.println("3. Thief  ");
         System.out.println("4. Magician  ");
-        Option = scanner.nextInt();
-        switch (Option) {
+        option = scanner.nextInt();
+        switch (option) {
             case 1:
-                Class = "Warrior";
+                type = "Warrior";
                 break;
             case 2:
-                Class = "Archer";
+                type = "Archer";
                 break;
             case 3:
-                Class = "Thief";
+                type = "Thief";
                 break;
             case 4:
-                Class = "Magician";
+                type = "Magician";
                 break;
             default:
-                Class = "Default";
+                type = "Default";
                 break;
         }
 
-        System.out.println("Create Character '" + Name + "' of Class '" + Class + "'?");
+        System.out.println("Create Character '" + name + "' of type '" + type + "'?");
         System.out.println("1. Yes");
         System.out.println("2. No");
         System.out.println("\n0. Cancel");
-        Option = scanner.nextInt();
-        switch (Option) {
+        option = scanner.nextInt();
+        switch (option) {
             case 0:
                 mainMenu();
                 break;
             case 1:
                 System.out.println("Character Created.");
-//              TODO
-//              play();
+                createCharacter(name, type, 2);
+                mainMenu();
                 break;
             case 2:
                 newCharacter();
@@ -135,9 +148,19 @@ public class Main {
         }
     }
 
+    //temp method to allow modification of levels
+    private static void createCharacter(String name, String type, int level) {
+        character = new Character(name, type, 2);
+    }
+
+    //default create character method
+    private static void createCharacter(String name, String type) {
+        character = new Character();
+    }
+
     private static void loadCharacter() {
 //      type in file name/location
-//      TODO
+//        fileReader.readFile();
         System.out.println("Character Loaded.");
     }
 
@@ -149,6 +172,7 @@ public class Main {
     //NOTE: Menu Option 0
     private static void saveAndExit() {
 //      TODO
+//        fileReader.saveFile();
 
         System.out.println("Progress Saved.");
         System.exit(1);
