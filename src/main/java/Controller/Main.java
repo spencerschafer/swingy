@@ -63,20 +63,20 @@ public class Main {
     private static void startGame() {
         //call map class here
         if (character == null) {
-            System.out.println("No character selected. Please select a character.\n");
+            System.out.println("\nNo character selected. Please select a character.\n");
             mainMenu();
         } else {
             System.out.println("Game Started.");
             System.out.println("The character you selected is: \n");
             character.printAttributes();
         }
-        System.out.println();
+        mainMenu();
     }
 
     private static void selectCharacter() {
         int option;
 
-        System.out.println("Select Character");
+        System.out.println("\nSelect Character");
         System.out.println("-------------");
         System.out.println("1. Create Character");
         System.out.println("2. Load Character");
@@ -103,11 +103,11 @@ public class Main {
         String type;
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Character name: ");
+        System.out.println("\nEnter Character name: ");
         name = scanner.next();
 
 //      perhaps only limit to 2 classes
-        System.out.println("Select Character type:  ");
+        System.out.println("\nSelect Character type:  ");
         System.out.println("1. Warrior  ");
         System.out.println("2. Archer  ");
         System.out.println("3. Thief  ");
@@ -131,7 +131,7 @@ public class Main {
                 break;
         }
 
-        System.out.println("Create Character '" + name + "' of type '" + type + "'?");
+        System.out.println("\nCreate Character '" + name + "' of type '" + type + "'?");
         System.out.println("1. Yes");
         System.out.println("2. No");
         System.out.println("\n0. Cancel");
@@ -141,12 +141,12 @@ public class Main {
                 mainMenu();
                 break;
             case 1:
-                System.out.println("Character Created.");
+                System.out.println("\nCharacter Created.\n");
                 createCharacter(name, type, 2);
                 mainMenu();
                 break;
             case 2:
-                newCharacter();
+                selectCharacter();
                 break;
         }
     }
@@ -162,24 +162,37 @@ public class Main {
     }
 
     private static void loadCharacter() {
+
         ArrayList<String> list = new ArrayList<String>();
 
-        //reads a file to access already saved information
-            String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/save.txt";
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    list.add(line);
-                }
-                reader.close();
-            } catch (IOException e) {
-                System.exit(11);
-            }
-            character = new Character(list);
-        System.out.println("Character Loaded.");
-        mainMenu();
+        String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/";
+        File folder = new File (fileName);
+        File[] listOfFiles = folder.listFiles();
+        System.out.println("\nSaved Files");
+        System.out.println("-----------");
+        for (File file : listOfFiles) {
+            System.out.println(file.getName());
         }
+
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nEnter the name of the file you would like to load:");
+        String textFile = input.nextLine();
+        fileName = System.getProperty("user.dir") + "/src/main/resources/saves/" + textFile;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                list.add(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("That file does not exist.");
+            loadCharacter();
+        }
+        character = new Character(list);
+        System.out.println("\nCharacter Loaded.\n");
+        mainMenu();
+    }
 
     private static void selectView() {
 //      TODO
@@ -191,7 +204,7 @@ public class Main {
 //      TODO
 //        readFile.saveFile();
 
-        System.out.println("Progress Saved.");
+        System.out.println("\nProgress Saved.");
         System.exit(1);
     }
 }
