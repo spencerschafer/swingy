@@ -67,6 +67,20 @@ public class Character {
         }
     }
 
+    public ArrayList<String> saveAttributes() {
+        ArrayList<String> list = new ArrayList<String>();
+
+        list.add(name);
+        list.add(type);
+        list.add(Integer.toString(level));
+        list.add(Integer.toString(experience));
+        list.add(Integer.toString(attack));
+        list.add(Integer.toString(defense));
+        list.add(Integer.toString(hitPoints));
+
+        return list;
+    }
+
     public void printAttributes() {
         System.out.println("Character Stats");
         System.out.println("---------------");
@@ -77,6 +91,7 @@ public class Character {
         System.out.println("Attack:     " + attack);
         System.out.println("Defense:    " + defense);
         System.out.println("Hit Points: " + hitPoints);
+        System.out.println();
 /*
         System.out.println("Character Artifacts");
         System.out.println("-------------------");

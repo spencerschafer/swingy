@@ -2,10 +2,7 @@ package Controller;
 
 import Model.Character;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -166,7 +163,7 @@ public class Main {
         ArrayList<String> list = new ArrayList<String>();
 
         String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/";
-        File folder = new File (fileName);
+        File folder = new File(fileName);
         File[] listOfFiles = folder.listFiles();
         System.out.println("\nSaved Files");
         System.out.println("-----------");
@@ -201,10 +198,42 @@ public class Main {
 
     //NOTE: Menu Option 0
     private static void saveAndExit() {
-//      TODO
-//        readFile.saveFile();
 
-        System.out.println("\nProgress Saved.");
-        System.exit(1);
+        if (character != null) {
+
+            int option;
+            Scanner scanner = new Scanner(System.in);
+            ArrayList<String> list = new ArrayList<String>();
+
+            System.out.println("Save Game");
+            System.out.println("----------");
+            System.out.println("1. Yes");
+            System.out.println("2. No");
+            System.out.println("\n0. Cancel");
+
+            option = scanner.nextInt();
+            switch (option) {
+                case 0:
+                    mainMenu();
+                    break;
+                case 1:
+                    try {
+                        String textFile = character.getName() + "_" + character.getType() + "_" + character.getLevel() + "_" + character.getExperience() + ".txt";
+                        String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/" + textFile;
+                        PrintWriter file = new PrintWriter(fileName);
+                        list = character.saveAttributes();
+                        for (String str: list)
+                            file.println(str);
+                        file.close();
+                    } catch (FileNotFoundException e) {
+                        System.out.println("OOPS");
+                    }
+                    System.out.println("\nGame Saved.");
+                    break;
+                case 2:
+                    System.exit(1);
+                    break;
+            }
+        }
     }
 }
