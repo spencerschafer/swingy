@@ -57,22 +57,21 @@ public class Character {
         Scanner s = new Scanner(System.in);
         String str = s.nextLine();
         System.out.println();
-        if (str.equalsIgnoreCase("w")) {
+        if (str.equalsIgnoreCase("w") || str.equalsIgnoreCase("W")) {
             this.y -= 1;
-        } else if (str.equalsIgnoreCase("s")) {
-            this.y += 1;
-        } else if (str.equalsIgnoreCase("a")) {
+        } else if (str.equalsIgnoreCase("a") || str.equalsIgnoreCase("A")) {
             this.x -= 1;
-        } else if (str.equalsIgnoreCase("d")) {
+        } else if (str.equalsIgnoreCase("s") || str.equalsIgnoreCase("S")) {
+            this.y += 1;
+        } else if (str.equalsIgnoreCase("d") || str.equalsIgnoreCase("D")) {
             this.x += 1;
-        }
-        else if (str.equalsIgnoreCase("z")) {
+        } else if (str.equalsIgnoreCase("z") || str.equalsIgnoreCase("Z")) {
             printAttributes();
-        }
-        else if (str.equalsIgnoreCase("c")) {
+        } else if (str.equalsIgnoreCase("z") || str.equalsIgnoreCase("X")) {
+            printKey();
+        } else if (str.equalsIgnoreCase("c") || str.equalsIgnoreCase("C")) {
             printControls();
-        }
-        else if (str.equalsIgnoreCase("q")) {
+        } else if (str.equalsIgnoreCase("q") || str.equalsIgnoreCase("Q")) {
             Main.mainMenu();
         }
     }
@@ -118,13 +117,22 @@ public class Character {
         System.out.println("A - Left");
         System.out.println("S - Down");
         System.out.println("D - Right");
-
+        System.out.println();
         System.out.println("Q - Main Menu");
         System.out.println("Z - Hero Stats");
+        System.out.println("X - Map Key");
         System.out.println("C - Controls");
         System.out.println();
     }
 
+    public void printKey() {
+        System.out.println("\nMap Key");
+        System.out.println("-------");
+        System.out.println("o - Hero");
+        System.out.println("| - Villain");
+        System.out.println(". - Empty");
+        System.out.println();
+    }
     int getX() {
         return x;
     }

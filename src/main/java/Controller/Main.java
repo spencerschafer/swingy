@@ -60,7 +60,8 @@ public class Main {
             System.out.println("Game Started.");
             System.out.println("The character you selected is: \n");
             character.printAttributes();
-            System.out.println("To view controls press the 'c' key.\n");
+            System.out.println("To view controls press the 'c' key.");
+            character.printKey();
 
             view = new View(selectView, character);
         }

@@ -20,6 +20,7 @@ public class View {
         map.displayMap();
         while (true)
         {
+            System.out.println();
             character.move();
             map.displayMap();
         }
