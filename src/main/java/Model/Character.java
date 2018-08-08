@@ -1,8 +1,6 @@
 package Model;
 
 import Controller.Main;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,7 +11,7 @@ public class Character {
 
 
 
-    //  Attributes
+//  Attributes
     private String name; // May not be relevant in all characters i.e Villians
     private String type; // May not be relevant in all characters i.e Villians
     private int level = 0;
@@ -22,12 +20,20 @@ public class Character {
     private int defense = 10;
     private int hitPoints = 100;
 
+//  TODO
 //  Artifacts
     Artifact Weapon = null; // increases attack
     Artifact Armor = null; // increases defense
     Artifact Helm = null; // increases hit points
 
-//  Temporary level input to simulate character level from saved file
+//  New character will be level 0 by default
+    public Character() {
+        this.x = 0;
+        this.y = 0;
+        this.name = "Default";
+        this.type = "Default";
+    }
+
     public Character(String name, String type){
         this.x = 0;
         this.x = 0;
@@ -45,14 +51,6 @@ public class Character {
         this.attack = Integer.parseInt(list.get(4));
         this.defense = Integer.parseInt(list.get(5));
         this.hitPoints = Integer.parseInt(list.get(6));
-    }
-
-//  New character will be level 0 by default
-    public Character() {
-        this.x = 0;
-        this.y = 0;
-        this.name = "Default";
-        this.type = "Default";
     }
 
     public void move() {

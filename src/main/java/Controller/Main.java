@@ -7,11 +7,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//NOTE: Reminder: When going back in main menu, methods are recalled, double check that recalling these methods do not create new instances of existing characters.
-//NOTE: Reminder: Validation of user input has not been checked
-//NOTE: Reminder: When loading character, it is assumed the file format (input) is correct as no validation has yet to be done on the file
+//    Reminder: When going back in main menu, methods are recalled, double check that recalling these methods do not create new instances of existing characters.
+//    Reminder: User input validation not checked
+//    Reminder: When loading character, it is assumed the file format (input) is correct as no validation has yet to be done on the file
 
-//NOTE: Current goal: Create Character -> Save Character -> Load Character
 
 public class Main {
     private static Character character = null;
@@ -21,11 +20,6 @@ public class Main {
     public static void main(String[] args) {
 
         mainMenu();
-
-//        NOTE: Create or load Map
-//        View view = new View(character);
-
-//        NOTE: Create or update Map
     }
 
     public static void mainMenu() {
@@ -170,6 +164,7 @@ public class Main {
         File[] listOfFiles = folder.listFiles();
         System.out.println("\nSaved Files");
         System.out.println("-----------");
+
         //TODO: check for exception
         for (File file : listOfFiles) {
             System.out.println(file.getName());
@@ -214,11 +209,13 @@ public class Main {
                 break;
             case 1:
                 selectView = 1;
-                System.out.println("\nConsole View selected.");
+                System.out.println("\nConsole View selected.\n");
+                mainMenu();
                 break;
             case 2:
                 selectView = 2;
-                System.out.println("\nGUI View selected.");
+                System.out.println("\nGUI View selected.\n");
+                mainMenu();
                 break;
         }
     }
@@ -255,6 +252,7 @@ public class Main {
                             file.println(str);
                         file.close();
                     } catch (FileNotFoundException e) {
+
                         //TODO
                         System.out.println("OOPS");
                     }

@@ -16,20 +16,16 @@ public class View {
 
     public void consoleView(Character character) {
         Map map = new Map(character);
-//        System.out.println("Character location is at (" + user.get_x() + ", " + user.get_y() + ").");
 
         map.drawMap();
-//        System.out.println("x: " + character.getX() + "\ny: " + character.getY());
         while (true)
         {
             character.move();
-//            System.out.println("1x: " + character.getX() + "\ny: " + character.getY());
             map.drawMap();
-//            System.out.println("2x: " + character.getX() + "\ny: " + character.getY());
         }
     }
 
-    //NOTE: call to GUI View method
+// Note: call to GUI View method
    public void guiView(Character character) {
    }
 }

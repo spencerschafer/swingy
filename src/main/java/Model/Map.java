@@ -1,9 +1,12 @@
 package Model;
 
+import java.util.Random;
+
 public class Map {
 
     private int size;
     private Character character;
+    private Random rand = new Random();
 
     public Map (Character character) {
         this.size = (character.getLevel() - 1) * 5 + 10 - (character.getLevel() % 2);
@@ -33,12 +36,23 @@ public class Map {
                     continue;
                 }
 
-                if (x == 0)
-                    System.out.print(". ");
-                else if (x == size - 1)
-                    System.out.print(" .");
-                else
-                    System.out.print(" . ");
+                int placeVillain = rand.nextInt(5) + 1;
+                if (placeVillain != 1 && placeVillain != 2 ) {
+                    if (x == 0)
+                        System.out.print("v ");
+                    else if (x == size - 1)
+                        System.out.print(" v");
+                    else
+                        System.out.print(" v ");
+                }
+                else {
+                    if (x == 0)
+                        System.out.print(". ");
+                    else if (x == size - 1)
+                        System.out.print(" .");
+                    else
+                        System.out.print(" . ");
+                }
             }
             System.out.println();
         }
