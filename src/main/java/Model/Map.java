@@ -3,64 +3,66 @@ package Model;
 import java.util.Random;
 
 public class Map {
-
     private int size;
-    private Character character;
+    private Point[][] map;
     private Random rand = new Random();
 
-    public Map (Character character) {
-        this.size = (character.getLevel() - 1) * 5 + 10 - (character.getLevel() % 2);
-        this.character = character;
-        setCharacterPos();
+    public Map() {
+        size = 0;
     }
 
-    public void drawMap() {
-        if (character.getX() < 0)
-            character.setX(0);
-        if (character.getX() >= size)
-            character.setX(size - 1);
-        if (character.getY() < 0)
-            character.setY(0);
-        if (character.getY() >= size)
-            character.setY(size - 1);
-        for(int y = 0; y < size; ++y) {
-            for (int x = 0; x < size; ++x) {
-                if (this.character.getX() == x && this.character.getY() == y) {
-                    if (x == 0)
-                        System.out.print("o ");
-                    else
-                        if (x == size - 1)
-                        System.out.print(" o");
-                    else
-                        System.out.print(" o ");
-                    continue;
-                }
+    public Map(Character character) {
+        this.size = (character.getLevel() - 1) * 5 + 10 - (character.getLevel() % 2);
+        map = new Point[size][size];
+        createMap();
+    }
 
-                int placeVillain = rand.nextInt(5) + 1;
-                if (placeVillain != 1 && placeVillain != 2 ) {
-                    if (x == 0)
-                        System.out.print("v ");
-                    else if (x == size - 1)
-                        System.out.print(" v");
-                    else
-                        System.out.print(" v ");
-                }
-                else {
-                    if (x == 0)
-                        System.out.print(". ");
-                    else if (x == size - 1)
-                        System.out.print(" .");
-                    else
-                        System.out.print(" . ");
-                }
+    private void createMap() {
+        for (int y = 0; y < size; ++y) {
+            for (int x = 0; x < size; ++x) {
+                createGrid(x, y);
+            }
+        }
+        createHero(size / 2, size / 2);
+    }
+
+    //Create Villain depending on outcome of random, or place empty slot
+    private void createGrid(int x, int y) {
+
+        int placeVillain = rand.nextInt(5) + 1;
+
+        if (placeVillain != 1 && placeVillain != 2) {
+            if (x == 0)
+                map[y][x] = new Point("|", "| ");
+            else if (x == size - 1)
+                map[y][x] = new Point("|", " |");
+            else
+                map[y][x] = new Point("|", " | ");
+        } else {
+            if (x == 0)
+                map[y][x] = new Point(".", ". ");
+            else if (x == size - 1)
+                map[y][x] = new Point(".", " .");
+            else
+                map[y][x] = new Point(".", " . ");
+        }
+    }
+
+    private void createHero(int x, int y) {
+        if (x == 0)
+            map[y][x] = new Point("o", "o ");
+        else if (x == size - 1)
+            map[y][x] = new Point("o", " o");
+        else
+            map[y][x] = new Point("o", " o ");
+    }
+
+    public void displayMap() {
+        for (int y = 0; y < size; ++y) {
+            for (int x = 0; x < size; ++x) {
+                System.out.print(map[y][x].getMapCharacter());
             }
             System.out.println();
         }
-        System.out.println();
-    }
-
-    public void setCharacterPos() {
-        this.character.setX(size / 2);
-        this.character.setY(size / 2);
     }
 }

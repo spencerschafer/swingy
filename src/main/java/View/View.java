@@ -17,11 +17,11 @@ public class View {
     public void consoleView(Character character) {
         Map map = new Map(character);
 
-        map.drawMap();
+        map.displayMap();
         while (true)
         {
             character.move();
-            map.drawMap();
+            map.displayMap();
         }
     }
 
