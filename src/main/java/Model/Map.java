@@ -11,8 +11,7 @@ public class Map {
         setCharacterPos();
     }
 
-    public void drawMap(Character character) {
-        this.character = character;
+    public void drawMap() {
         if (character.getX() < 0)
             character.setX(0);
         if (character.getX() >= size)
@@ -43,6 +42,7 @@ public class Map {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     public void setCharacterPos() {

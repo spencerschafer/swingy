@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Character;
+import View.View;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,14 +15,12 @@ import java.util.Scanner;
 
 public class Main {
     private static Character character = null;
+    private static int selectView = 1;
+    private static View view;
 
     public static void main(String[] args) {
 
         mainMenu();
-//        NOTE: Read from file and set appropriate settings
-
-//        NOTE: Create new character
-//        Character character = new Character(); // Model Character
 
 //        NOTE: Create or load Map
 //        View view = new View(character);
@@ -29,7 +28,7 @@ public class Main {
 //        NOTE: Create or update Map
     }
 
-    private static void mainMenu() {
+    public static void mainMenu() {
         int option;
 
         System.out.println("Main Menu");
@@ -38,6 +37,7 @@ public class Main {
         System.out.println("2. Select Character");
         System.out.println("3. Select View");
         System.out.println("\n0. Exit");
+        System.out.println();
         Scanner scanner = new Scanner(System.in);
         option = scanner.nextInt();
 
@@ -60,14 +60,16 @@ public class Main {
     private static void startGame() {
         //call map class here
         if (character == null) {
-            System.out.println("\nNo character selected. Please select a character.\n");
-            mainMenu();
+            System.out.println("\nNo character selected. Please select a character.");
+            selectCharacter();
         } else {
             System.out.println("Game Started.");
             System.out.println("The character you selected is: \n");
             character.printAttributes();
+            System.out.println("To view controls press the 'c' key.\n");
+
+            view = new View(selectView, character);
         }
-        mainMenu();
     }
 
     private static void selectCharacter() {
@@ -78,6 +80,7 @@ public class Main {
         System.out.println("1. Create Character");
         System.out.println("2. Load Character");
         System.out.println("\n0. Cancel");
+        System.out.println();
         Scanner scanner = new Scanner(System.in);
         option = scanner.nextInt();
 
@@ -89,6 +92,7 @@ public class Main {
                 loadCharacter();
                 break;
             case 0:
+                System.out.println();
                 mainMenu();
                 break;
         }
@@ -109,6 +113,7 @@ public class Main {
         System.out.println("2. Archer  ");
         System.out.println("3. Thief  ");
         System.out.println("4. Magician  ");
+        System.out.println();
         option = scanner.nextInt();
         switch (option) {
             case 1:
@@ -132,14 +137,17 @@ public class Main {
         System.out.println("1. Yes");
         System.out.println("2. No");
         System.out.println("\n0. Cancel");
+        System.out.println();
         option = scanner.nextInt();
         switch (option) {
             case 0:
+                System.out.println();
                 mainMenu();
                 break;
             case 1:
-                System.out.println("\nCharacter Created.\n");
-                createCharacter(name, type, 2);
+                System.out.println("\nCharacter Created.");
+                createCharacter(name, type);
+                System.out.println();
                 mainMenu();
                 break;
             case 2:
@@ -148,14 +156,9 @@ public class Main {
         }
     }
 
-    //temp method to allow modification of levels
-    private static void createCharacter(String name, String type, int level) {
-        character = new Character(name, type, 2);
-    }
-
     //default create character method
     private static void createCharacter(String name, String type) {
-        character = new Character();
+        character = new Character(name, type);
     }
 
     private static void loadCharacter() {
@@ -167,6 +170,7 @@ public class Main {
         File[] listOfFiles = folder.listFiles();
         System.out.println("\nSaved Files");
         System.out.println("-----------");
+        //TODO: check for exception
         for (File file : listOfFiles) {
             System.out.println(file.getName());
         }
@@ -183,7 +187,7 @@ public class Main {
             }
             reader.close();
         } catch (IOException e) {
-            System.out.println("That file does not exist.");
+            System.out.println("\nThat file does not exist.");
             loadCharacter();
         }
         character = new Character(list);
@@ -192,28 +196,53 @@ public class Main {
     }
 
     private static void selectView() {
-//      TODO
-        System.out.println("Changed to GUI view.");
+        int option;
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\nSelect View");
+        System.out.println("-----------");
+        System.out.println("1. Console View");
+        System.out.println("2. GUI View");
+        System.out.println("\n0. Cancel");
+        System.out.println();
+        option = scanner.nextInt();
+
+        switch (option) {
+            case 0:
+                System.out.println();
+                mainMenu();
+                break;
+            case 1:
+                selectView = 1;
+                System.out.println("\nConsole View selected.");
+                break;
+            case 2:
+                selectView = 2;
+                System.out.println("\nGUI View selected.");
+                break;
+        }
     }
 
-    //NOTE: Menu Option 0
+    //menu option 0
     private static void saveAndExit() {
 
         if (character != null) {
 
             int option;
             Scanner scanner = new Scanner(System.in);
-            ArrayList<String> list = new ArrayList<String>();
+            ArrayList<String> list;
 
-            System.out.println("Save Game");
+            System.out.println("\nSave Game");
             System.out.println("----------");
             System.out.println("1. Yes");
             System.out.println("2. No");
             System.out.println("\n0. Cancel");
+            System.out.println();
 
             option = scanner.nextInt();
             switch (option) {
                 case 0:
+                    System.out.println();
                     mainMenu();
                     break;
                 case 1:
@@ -222,16 +251,17 @@ public class Main {
                         String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/" + textFile;
                         PrintWriter file = new PrintWriter(fileName);
                         list = character.saveAttributes();
-                        for (String str: list)
+                        for (String str : list)
                             file.println(str);
                         file.close();
                     } catch (FileNotFoundException e) {
+                        //TODO
                         System.out.println("OOPS");
                     }
                     System.out.println("\nGame Saved.");
                     break;
                 case 2:
-                    System.exit(1);
+                    System.exit(0);
                     break;
             }
         }

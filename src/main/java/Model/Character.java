@@ -1,5 +1,8 @@
 package Model;
 
+import Controller.Main;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,12 +28,11 @@ public class Character {
     Artifact Helm = null; // increases hit points
 
 //  Temporary level input to simulate character level from saved file
-    public Character(String name, String type, int level){
+    public Character(String name, String type){
         this.x = 0;
         this.x = 0;
         this.name = name;
         this.type = type;
-        this.level = level;
     }
 
     public Character(ArrayList<String> list) {
@@ -56,6 +58,7 @@ public class Character {
     public void move() {
         Scanner s = new Scanner(System.in);
         String str = s.nextLine();
+        System.out.println();
         if (str.equalsIgnoreCase("w")) {
             this.y -= 1;
         } else if (str.equalsIgnoreCase("s")) {
@@ -64,6 +67,15 @@ public class Character {
             this.x -= 1;
         } else if (str.equalsIgnoreCase("d")) {
             this.x += 1;
+        }
+        else if (str.equalsIgnoreCase("z")) {
+            printAttributes();
+        }
+        else if (str.equalsIgnoreCase("c")) {
+            printControls();
+        }
+        else if (str.equalsIgnoreCase("q")) {
+            Main.mainMenu();
         }
     }
 
@@ -82,7 +94,7 @@ public class Character {
     }
 
     public void printAttributes() {
-        System.out.println("Character Stats");
+        System.out.println("\nCharacter Stats");
         System.out.println("---------------");
         System.out.println("Name:       " + name);
         System.out.println("Class:      " + type);
@@ -99,6 +111,20 @@ public class Character {
         System.out.println("Armor: ");
         System.out.println("Helm: ");
 */
+    }
+
+    public void printControls() {
+        System.out.println("\nControls");
+        System.out.println("--------");
+        System.out.println("W - Up");
+        System.out.println("A - Left");
+        System.out.println("S - Down");
+        System.out.println("D - Right");
+
+        System.out.println("Q - Main Menu");
+        System.out.println("Z - Hero Stats");
+        System.out.println("C - Controls");
+        System.out.println();
     }
 
     int getX() {
