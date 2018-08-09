@@ -1,6 +1,7 @@
 package Model;
 
 public class Point {
+    //TODO: String to Character
     private String character;
     private String mapCharacter;
 
@@ -9,7 +10,7 @@ public class Point {
         mapCharacter = null;
     }
 
-    //Reminder: change String to Character to hold an actual character that will be retrieved in the battle simulation
+    //TODO: String to Character
     Point(String character, String mapCharacter) {
         this.character = character;
         this.mapCharacter = mapCharacter;

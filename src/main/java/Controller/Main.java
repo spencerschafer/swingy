@@ -15,7 +15,6 @@ import java.util.Scanner;
 public class Main {
     private static Character character = null;
     private static int selectView = 1;
-    private static View view;
 
     public static void main(String[] args) {
 
@@ -52,7 +51,7 @@ public class Main {
     }
 
     private static void startGame() {
-        //call map class here
+
         if (character == null) {
             System.out.println("\nNo character selected. Please select a character.");
             selectCharacter();
@@ -63,7 +62,8 @@ public class Main {
             System.out.println("To view controls press the 'c' key.");
             character.printKey();
 
-            view = new View(selectView, character);
+            //TODO: Implement GUI View
+            View view = new View(selectView, character);
         }
     }
 

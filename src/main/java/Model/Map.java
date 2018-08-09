@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Map {
     private int size;
@@ -34,6 +35,7 @@ public class Map {
         int placeVillain = rand.nextInt(5) + 1;
         if (placeVillain != 1 && placeVillain != 2) {
 
+            //TODO: String to Character
             if ((x == size / 2) && (y == size / 2)) // Initial position of hero is on top of a hero resulting in a battle if no valid key is pressed
                 map[y][x] = new Point(".", " . ");
             else if (x == 0)
@@ -53,17 +55,6 @@ public class Map {
         }
     }
 
-/*
-    private void createHero(int x, int y) {
-        if (x == 0)
-            map[y][x] = new Point("o", "o ");
-        else if (x == size - 1)
-            map[y][x] = new Point("o", " o");
-        else
-            map[y][x] = new Point("o", " o ");
-    }
-*/
-
     public void displayMap() {
         for (int y = 0; y < size; ++y) {
             for (int x = 0; x < size; ++x) {
@@ -82,27 +73,52 @@ public class Map {
         }
     }
 
-    //Reminder: String villain needs to be replaced with Character Villain
+    //TODO: String to Character
     public boolean battle() {
         if (map[character.getY()][character.getX()].getCharacter().equalsIgnoreCase("|")) {
-            int outcome = rand.nextInt(5) + 1;
+            int option;
 
-            System.out.println("\nVillain Encountered!");
+            System.out.println("Villain Encountered!");
             System.out.println("--------------------");
             System.out.println("1. Fight");
             System.out.println("2. Run");
 
-            if (outcome != 1) {
-                System.out.println("\nBattle WON!");
-                System.out.println();
-                //call to modify map square from villain to empty square
-                return true;
-            } else {
-                System.out.println("\nYou were defeated.");
-                System.out.println();
-                return false;
+            Scanner scanner = new Scanner(System.in);
+            System.out.println();
+            option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    return fight();
+                case 2:
+                    return run();
             }
         }
         return true;
+    }
+
+    private boolean fight() {
+        int outcome = rand.nextInt(5) + 1;
+        if (outcome != 1 && outcome != 2) {
+            System.out.println("\nBattle won!\n");
+            //call to modify map square from villain to empty square
+            return true;
+        } else {
+            System.out.println("\nBattle lost!\n");
+            return false;
+        }
+    }
+
+    private boolean run() {
+        int outcome = rand.nextInt(5) + 1;
+        if (outcome != 1 && outcome != 2) {
+            System.out.println("\nYou successfully evaded battle!\n");
+            return true;
+        }
+        else {
+            System.out.println("\nYou were unable to evade the battle.");
+            System.out.println("Prepare to fight!");
+            return fight();
+        }
     }
 }

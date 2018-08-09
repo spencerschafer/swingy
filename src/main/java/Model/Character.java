@@ -11,8 +11,8 @@ public class Character {
     private int mapLimit;
 
     //  Attributes
-    private String name; // May not be relevant in all characters i.e Villians
-    private String type; // May not be relevant in all characters i.e Villians
+    private String name; // May not be relevant in all characters i.e Villains
+    private String type; // May not be relevant in all characters i.e Villains
     private int level = 0;
     private int experience = 0;
     private int attack = 30;
