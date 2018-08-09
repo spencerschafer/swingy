@@ -2,8 +2,6 @@ package Model;
 
 import java.util.Random;
 
-import static Controller.Main.mainMenu;
-
 public class Map {
     private int size;
     private Point[][] map;
