@@ -1,17 +1,16 @@
 package Model;
 
 import Controller.Main;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Character {
     private int x = 0;
     private int y = 0;
+    private int mapLimit;
 
-
-
-
-//  Attributes
+    //  Attributes
     private String name; // May not be relevant in all characters i.e Villians
     private String type; // May not be relevant in all characters i.e Villians
     private int level = 0;
@@ -20,30 +19,26 @@ public class Character {
     private int defense = 10;
     private int hitPoints = 100;
 
-//  TODO
+    //  TODO
 //  Artifacts
     Artifact Weapon = null; // increases attack
     Artifact Armor = null; // increases defense
     Artifact Helm = null; // increases hit points
 
-//  New character will be level 0 by default
+    //  New character will be level 0 by default
     public Character() {
-        this.x = 0;
-        this.y = 0;
         this.name = "Default";
         this.type = "Default";
+        this.mapLimit = (this.level - 1) * 5 + 10 - (this.level % 2);
     }
 
-    public Character(String name, String type){
-        this.x = 0;
-        this.x = 0;
+    public Character(String name, String type) {
         this.name = name;
         this.type = type;
+        this.mapLimit = (this.level - 1) * 5 + 10 - (this.level % 2);
     }
 
     public Character(ArrayList<String> list) {
-        this.x = 0;
-        this.y = 0;
         this.name = list.get(0);
         this.type = list.get(1);
         this.level = Integer.parseInt(list.get(2));
@@ -51,6 +46,7 @@ public class Character {
         this.attack = Integer.parseInt(list.get(4));
         this.defense = Integer.parseInt(list.get(5));
         this.hitPoints = Integer.parseInt(list.get(6));
+        this.mapLimit = (this.level - 1) * 5 + 10 - (this.level % 2);
     }
 
     public void move() {
@@ -58,12 +54,16 @@ public class Character {
         String str = s.nextLine();
         System.out.println();
         if (str.equalsIgnoreCase("w") || str.equalsIgnoreCase("W")) {
-            this.y -= 1;
+            if (this.y != 0)
+                this.y -= 1;
         } else if (str.equalsIgnoreCase("a") || str.equalsIgnoreCase("A")) {
+            if (this.x != 0)
             this.x -= 1;
         } else if (str.equalsIgnoreCase("s") || str.equalsIgnoreCase("S")) {
+            if (this.y != mapLimit - 1)
             this.y += 1;
         } else if (str.equalsIgnoreCase("d") || str.equalsIgnoreCase("D")) {
+            if (this.x != mapLimit - 1)
             this.x += 1;
         } else if (str.equalsIgnoreCase("z") || str.equalsIgnoreCase("Z")) {
             printAttributes();
@@ -74,6 +74,11 @@ public class Character {
         } else if (str.equalsIgnoreCase("q") || str.equalsIgnoreCase("Q")) {
             Main.mainMenu();
         }
+    }
+
+    public void setCharacterPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public ArrayList<String> saveAttributes() {
@@ -133,6 +138,7 @@ public class Character {
         System.out.println(". - Empty");
         System.out.println();
     }
+
     int getX() {
         return x;
     }
@@ -157,11 +163,12 @@ public class Character {
         this.level = level;
     }
 
-    public  void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
+
     public String getName() {
-       return name;
+        return name;
     }
 
     public String getType() {
