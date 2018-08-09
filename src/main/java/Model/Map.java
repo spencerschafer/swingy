@@ -64,8 +64,7 @@ public class Map {
     }
 */
 
-    public Point displayMap() {
-        Point villainEncountered = null;
+    public void displayMap() {
         for (int y = 0; y < size; ++y) {
             for (int x = 0; x < size; ++x) {
                 if (character.getX() == x && character.getY() == y) {
@@ -75,18 +74,35 @@ public class Map {
                         System.out.print(" o");
                     else
                         System.out.print(" o ");
-
-                    if (map[y][x].getMapCharacter().equalsIgnoreCase("| ") ||
-                            map[y][x].getMapCharacter().equalsIgnoreCase(" | ") ||
-                            map[y][x].getMapCharacter().equalsIgnoreCase(" |")) {
-                        villainEncountered = map[y][x];
-                    }
                     continue;
                 }
                 System.out.print(map[y][x].getMapCharacter());
             }
             System.out.println();
         }
-        return (villainEncountered);
+    }
+
+    //Reminder: String villain needs to be replaced with Character Villain
+    public boolean battle() {
+        if (map[character.getY()][character.getX()].getCharacter().equalsIgnoreCase("|")) {
+            int outcome = rand.nextInt(5) + 1;
+
+            System.out.println("\nVillain Encountered!");
+            System.out.println("--------------------");
+            System.out.println("1. Fight");
+            System.out.println("2. Run");
+
+            if (outcome != 1) {
+                System.out.println("\nBattle WON!");
+                System.out.println();
+                //call to modify map square from villain to empty square
+                return true;
+            } else {
+                System.out.println("\nYou were defeated.");
+                System.out.println();
+                return false;
+            }
+        }
+        return true;
     }
 }
