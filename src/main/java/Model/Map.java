@@ -2,6 +2,8 @@ package Model;
 
 import java.util.Random;
 
+import static Controller.Main.mainMenu;
+
 public class Map {
     private int size;
     private Point[][] map;
@@ -33,12 +35,16 @@ public class Map {
         //Create Villain depending on outcome of random, or place empty slot
         int placeVillain = rand.nextInt(5) + 1;
         if (placeVillain != 1 && placeVillain != 2) {
-            if (x == 0)
+
+            if ((x == size / 2) && (y == size / 2)) // Initial position of hero is on top of a hero resulting in a battle if no valid key is pressed
+                map[y][x] = new Point(".", " . ");
+            else if (x == 0)
                 map[y][x] = new Point("|", "| ");
             else if (x == size - 1)
                 map[y][x] = new Point("|", " |");
             else
                 map[y][x] = new Point("|", " | ");
+
         } else {
             if (x == 0)
                 map[y][x] = new Point(".", ". ");
@@ -60,7 +66,8 @@ public class Map {
     }
 */
 
-    public void displayMap() {
+    public Point displayMap() {
+        Point villainEncountered = null;
         for (int y = 0; y < size; ++y) {
             for (int x = 0; x < size; ++x) {
                 if (character.getX() == x && character.getY() == y) {
@@ -70,11 +77,18 @@ public class Map {
                         System.out.print(" o");
                     else
                         System.out.print(" o ");
+
+                    if (map[y][x].getMapCharacter().equalsIgnoreCase("| ") ||
+                            map[y][x].getMapCharacter().equalsIgnoreCase(" | ") ||
+                            map[y][x].getMapCharacter().equalsIgnoreCase(" |")) {
+                        villainEncountered = map[y][x];
+                    }
                     continue;
                 }
                 System.out.print(map[y][x].getMapCharacter());
             }
             System.out.println();
         }
+        return (villainEncountered);
     }
 }

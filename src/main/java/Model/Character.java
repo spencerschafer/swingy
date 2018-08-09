@@ -19,7 +19,7 @@ public class Character {
     private int defense = 10;
     private int hitPoints = 100;
 
-    //  TODO
+//  TODO
 //  Artifacts
     Artifact Weapon = null; // increases attack
     Artifact Armor = null; // increases defense

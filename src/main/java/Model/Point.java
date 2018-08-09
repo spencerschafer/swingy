@@ -1,8 +1,8 @@
 package Model;
 
 public class Point {
-    String character;
-    String mapCharacter;
+    private String character;
+    private String mapCharacter;
 
     Point() {
         character = null;
@@ -10,13 +10,21 @@ public class Point {
     }
 
     //Reminder: change String to Character to hold an actual character that will be retrieved in the battle simulation
-    Point(String character, String mapChar) {
+    Point(String character, String mapCharacter) {
         this.character = character;
-        this.mapCharacter = mapChar;
+        this.mapCharacter = mapCharacter;
     }
 
     public String getCharacter() {
         return character;
+    }
+
+    public void setCharacter(String character) {
+        this.character = character;
+    }
+
+    public void setMapCharacter(String mapCharacter) {
+        this.character = mapCharacter;
     }
 
     public String getMapCharacter() {

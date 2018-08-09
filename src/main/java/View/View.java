@@ -2,6 +2,8 @@ package View;
 
 import Model.Map;
 import Model.Character;
+import Model.Point;
+import Model.Simulation;
 
 public class View {
     //call to console view
@@ -16,13 +18,17 @@ public class View {
 
     public void consoleView(Character character) {
         Map map = new Map(character);
+        Point point;
+        Simulation simluate = new Simulation();
 
         map.displayMap();
         while (true)
         {
             System.out.println();
             character.move();
-            map.displayMap();
+            if ((point = map.displayMap()) != null) {
+                simluate.battle(character, point.getCharacter());
+            }
         }
     }
 
