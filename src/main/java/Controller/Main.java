@@ -171,9 +171,9 @@ public class Main {
             System.out.println(file.getName());
         }
 
-        Scanner input = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("\nEnter the name of the file you would like to load:");
-        String textFile = input.nextLine();
+        String textFile = scanner.nextLine();
         fileName = System.getProperty("user.dir") + "/src/main/resources/saves/" + textFile;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));

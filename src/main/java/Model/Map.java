@@ -102,6 +102,7 @@ public class Map {
         if (outcome != 1 && outcome != 2) {
             System.out.println("\nBattle won!\n");
             //call to modify map square from villain to empty square
+            removeVillain();
             return true;
         } else {
             System.out.println("\nBattle lost!\n");
@@ -114,11 +115,19 @@ public class Map {
         if (outcome != 1 && outcome != 2) {
             System.out.println("\nYou successfully evaded battle!\n");
             return true;
-        }
-        else {
+        } else {
             System.out.println("\nYou were unable to evade the battle.");
             System.out.println("Prepare to fight!");
             return fight();
         }
+    }
+
+    private void removeVillain() {
+        if (character.getX() == 0)
+            map[character.getY()][character.getX()] = new Point(".", ". ");
+        else if (character.getX() == size - 1)
+            map[character.getY()][character.getX()] = new Point(".", " .");
+        else
+            map[character.getY()][character.getX()] = new Point(".", " . ");
     }
 }

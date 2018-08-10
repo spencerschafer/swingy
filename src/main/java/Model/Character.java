@@ -50,28 +50,28 @@ public class Character {
     }
 
     public void move() {
-        Scanner s = new Scanner(System.in);
-        String str = s.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
         System.out.println();
-        if (str.equalsIgnoreCase("w") || str.equalsIgnoreCase("W")) {
+        if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("W")) {
             if (this.y != 0)
                 this.y -= 1;
-        } else if (str.equalsIgnoreCase("a") || str.equalsIgnoreCase("A")) {
+        } else if (input.equalsIgnoreCase("a") || input.equalsIgnoreCase("A")) {
             if (this.x != 0)
             this.x -= 1;
-        } else if (str.equalsIgnoreCase("s") || str.equalsIgnoreCase("S")) {
+        } else if (input.equalsIgnoreCase("s") || input.equalsIgnoreCase("S")) {
             if (this.y != mapLimit - 1)
             this.y += 1;
-        } else if (str.equalsIgnoreCase("d") || str.equalsIgnoreCase("D")) {
+        } else if (input.equalsIgnoreCase("d") || input.equalsIgnoreCase("D")) {
             if (this.x != mapLimit - 1)
             this.x += 1;
-        } else if (str.equalsIgnoreCase("z") || str.equalsIgnoreCase("Z")) {
+        } else if (input.equalsIgnoreCase("z") || input.equalsIgnoreCase("Z")) {
             printAttributes();
-        } else if (str.equalsIgnoreCase("z") || str.equalsIgnoreCase("X")) {
+        } else if (input.equalsIgnoreCase("z") || input.equalsIgnoreCase("X")) {
             printKey();
-        } else if (str.equalsIgnoreCase("c") || str.equalsIgnoreCase("C")) {
+        } else if (input.equalsIgnoreCase("c") || input.equalsIgnoreCase("C")) {
             printControls();
-        } else if (str.equalsIgnoreCase("q") || str.equalsIgnoreCase("Q")) {
+        } else if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("Q")) {
             Main.mainMenu();
         }
     }
