@@ -254,7 +254,7 @@ public class Main {
                         file.close();
                     } catch (FileNotFoundException e) {
 
-                        //TODO
+                        //TODO: Catch exception
                         System.out.println("OOPS");
                     }
                     System.out.println("\nGame Saved.");

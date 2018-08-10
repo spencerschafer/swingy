@@ -35,23 +35,22 @@ public class Map {
         int placeVillain = rand.nextInt(5) + 1;
         if (placeVillain != 1 && placeVillain != 2) {
 
-            //TODO: String to Character
             if ((x == size / 2) && (y == size / 2)) // Initial position of hero is on top of a hero resulting in a battle if no valid key is pressed
-                map[y][x] = new Point(".", " . ");
+                map[y][x] = new Point(new Character("Empty", "Empty" ), " . ");
             else if (x == 0)
-                map[y][x] = new Point("|", "| ");
+                map[y][x] = new Point(new Character("Villain", "Villain"), "| ");
             else if (x == size - 1)
-                map[y][x] = new Point("|", " |");
+                map[y][x] = new Point(new Character("Villain", "Villain"), " |");
             else
-                map[y][x] = new Point("|", " | ");
+            map[y][x] = new Point(new Character("Villain", "Villain"), " | ");
 
         } else {
             if (x == 0)
-                map[y][x] = new Point(".", ". ");
+                map[y][x] = new Point(new Character("Empty", "Empty"), ". ");
             else if (x == size - 1)
-                map[y][x] = new Point(".", " .");
+                map[y][x] = new Point(new Character("Empty", "Empty"), " .");
             else
-                map[y][x] = new Point(".", " . ");
+            map[y][x] = new Point(new Character("Empty", "Empty"), " . ");
         }
     }
 
@@ -73,9 +72,8 @@ public class Map {
         }
     }
 
-    //TODO: String to Character
     public boolean battle() {
-        if (map[character.getY()][character.getX()].getCharacter().equalsIgnoreCase("|")) {
+        if (map[character.getY()][character.getX()].getCharacter().getType().equalsIgnoreCase("Villain")) {
             int option;
 
             System.out.println("Villain Encountered!");
@@ -124,10 +122,10 @@ public class Map {
 
     private void removeVillain() {
         if (character.getX() == 0)
-            map[character.getY()][character.getX()] = new Point(".", ". ");
+            map[character.getY()][character.getX()] = new Point(new Character("Empty", "Empty"), ". ");
         else if (character.getX() == size - 1)
-            map[character.getY()][character.getX()] = new Point(".", " .");
+            map[character.getY()][character.getX()] = new Point(new Character("Empty", "Empty"), " .");
         else
-            map[character.getY()][character.getX()] = new Point(".", " . ");
+        map[character.getY()][character.getX()] = new Point(new Character("Empty", "Empty"), " . ");
     }
 }

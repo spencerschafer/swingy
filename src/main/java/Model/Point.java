@@ -1,8 +1,7 @@
 package Model;
 
 public class Point {
-    //TODO: String to Character
-    private String character;
+    private Character character;
     private String mapCharacter;
 
     Point() {
@@ -10,22 +9,21 @@ public class Point {
         mapCharacter = null;
     }
 
-    //TODO: String to Character
-    Point(String character, String mapCharacter) {
+    Point(Character character, String mapCharacter) {
         this.character = character;
         this.mapCharacter = mapCharacter;
     }
 
-    public String getCharacter() {
+    public Character getCharacter() {
         return character;
     }
 
-    public void setCharacter(String character) {
+    public void setCharacter(Character character) {
         this.character = character;
     }
 
     public void setMapCharacter(String mapCharacter) {
-        this.character = mapCharacter;
+        this.mapCharacter = mapCharacter;
     }
 
     public String getMapCharacter() {
