@@ -15,15 +15,15 @@ public class Character {
     private String type; // May not be relevant in all characters i.e Villains
     private int level = 0;
     private int experience = 0;
-    private int attack = 30;
-    private int defense = 10;
+    private int attack = 0;
+    private int defense = 0;
     private int hitPoints = 100;
 
 //  TODO: Implement Artifacts
 //  Artifacts
-    Artifact Weapon = null; // increases attack
-    Artifact Armor = null; // increases defense
-    Artifact Helm = null; // increases hit points
+    //Artifact Weapon = null; // increases attack
+    //Artifact Armor = null; // increases defense
+    //Artifact Helm = null; // increases hit points
 
     //  New character will be level 0 by default
     public Character() {
