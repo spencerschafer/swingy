@@ -31,4 +31,5 @@ public class Point {
     public String getMapCharacter() {
         return mapCharacter;
     }
+
 }

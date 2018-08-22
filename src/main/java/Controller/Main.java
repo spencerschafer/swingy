@@ -9,11 +9,11 @@ import java.util.Scanner;
 
 //    Reminder: When going back in main menu, methods are recalled, double check that recalling these methods do not create new instances of existing characters.
 //    Reminder: User input validation not checked
-//    Reminder: When loading character, it is assumed the file format (input) is correct as no validation has yet to be done on the file
+//    Reminder: When loading hero, it is assumed the file format (input) is correct as no validation has yet to be done on the file
 
 
 public class Main {
-    private static Hero character = null;
+    private static Hero hero = null;
     private static int selectView = 1;
 
     public static void main(String[] args) {
@@ -52,18 +52,18 @@ public class Main {
 
     private static void startGame() {
 
-        if (character == null) {
-            System.out.println("\nNo character selected. Please select a character.");
+        if (hero == null) {
+            System.out.println("\nNo hero selected. Please select a hero.");
             selectCharacter();
         } else {
             System.out.println("Game Started.");
-            System.out.println("The character you selected is: \n");
-            character.printAttributes();
+            System.out.println("The hero you selected is: \n");
+            hero.printAttributes();
             System.out.println("To view controls press the 'c' key.");
-            character.printKey();
+            hero.printKey();
 
             //TODO: Implement GUI View
-            View view = new View(selectView, character);
+            View view = new View(selectView, hero);
         }
     }
 
@@ -151,9 +151,9 @@ public class Main {
         }
     }
 
-    //default create character method
+    //default create hero method
     private static void createCharacter(String name, String type) {
-        character = new Hero(name, type);
+        hero = new Hero(name, type);
     }
 
     private static void loadCharacter() {
@@ -186,7 +186,7 @@ public class Main {
             System.out.println("\nThat file does not exist.");
             loadCharacter();
         }
-        character = new Hero(list);
+        hero = new Hero(list);
         System.out.println("\nCharacter Loaded.\n");
         mainMenu();
     }
@@ -224,7 +224,7 @@ public class Main {
     //menu option 0
     private static void saveAndExit() {
 
-        if (character != null) {
+        if (hero != null) {
 
             int option;
             Scanner scanner = new Scanner(System.in);
@@ -245,11 +245,11 @@ public class Main {
                     break;
                 case 1:
                     try {
-                        String textFile = character.getName() + "_" + character.getType() + "_"
-                                + character.getLevel() + "_" + character.getExperience() + ".txt";
+                        String textFile = hero.getName() + "_" + hero.getType() + "_"
+                                + hero.getLevel() + "_" + hero.getExperience() + ".txt";
                         String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/" + textFile;
                         PrintWriter file = new PrintWriter(fileName);
-                        list = character.saveAttributes();
+                        list = hero.saveAttributes();
                         for (String str : list)
                             file.println(str);
                         file.close();

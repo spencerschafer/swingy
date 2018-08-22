@@ -1,8 +1,5 @@
 package Model.Characters;
 
-import Model.Characters.Character;
-import Model.Characters.Hero;
-
 public class Villain implements Character {
 
     private int x = 0;
@@ -41,7 +38,6 @@ public class Villain implements Character {
         this.y = y;
     }
 
-    @Override
     public int getAttack() {
         return attack;
     }
@@ -50,7 +46,6 @@ public class Villain implements Character {
         this.attack = attack;
     }
 
-    @Override
     public int getDefense() {
         return defense;
     }
@@ -59,7 +54,6 @@ public class Villain implements Character {
         this.defense = defense;
     }
 
-    @Override
     public int getHitPoints() {
         return hitPoints;
     }

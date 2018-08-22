@@ -149,16 +149,22 @@ public class Hero implements Character {
         this.y = y;
     }
 
+    @Override
     public int getX() {
         return x;
     }
+
+    @Override
     public void setX(int x) {
         this.x = x;
     }
 
+    @Override
     public int getY() {
         return y;
     }
+
+    @Override
     public void setY(int y) {
         this.y = y;
     }
@@ -166,6 +172,7 @@ public class Hero implements Character {
     public int getMapLimit() {
         return mapLimit;
     }
+
     public void setMapLimit(int mapLimit) {
         this.mapLimit = mapLimit;
     }
@@ -173,6 +180,7 @@ public class Hero implements Character {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -180,6 +188,7 @@ public class Hero implements Character {
     public String getType() {
         return type;
     }
+
     public void setType(String type) {
         this.type = type;
     }
@@ -187,6 +196,7 @@ public class Hero implements Character {
     public int getLevel() {
         return level;
     }
+
     public void setLevel(int level) {
         this.level = level;
     }
@@ -194,6 +204,7 @@ public class Hero implements Character {
     public int getExperience() {
         return experience;
     }
+
     public void setExperience(int experience) {
         this.experience = experience;
     }
@@ -201,6 +212,7 @@ public class Hero implements Character {
     public Helm getHelmet() {
         return helmet;
     }
+
     public void setHelmet(Helm helmet) {
         this.helmet = helmet;
     }
@@ -208,6 +220,7 @@ public class Hero implements Character {
     public Armor getArmor() {
         return armor;
     }
+
     public void setArmor(Armor armor) {
         this.armor = armor;
     }
@@ -215,11 +228,11 @@ public class Hero implements Character {
     public Weapon getWeapon() {
         return weapon;
     }
+
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
 
-    @Override
     public int getAttack() {
         return attack;
     }
@@ -228,7 +241,6 @@ public class Hero implements Character {
         this.attack = attack;
     }
 
-    @Override
     public int getDefense() {
         return defense;
     }
@@ -237,7 +249,6 @@ public class Hero implements Character {
         this.defense = defense;
     }
 
-    @Override
     public int getHitPoints() {
         return hitPoints;
     }

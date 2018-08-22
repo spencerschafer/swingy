@@ -77,7 +77,9 @@ public class Map {
     }
 
     public boolean battle() {
-        if (map[hero.getY()][hero.getX()].getCharacter().getType().equalsIgnoreCase("Villain")) {
+
+        System.out.println(map[hero.getY()][hero.getX()].getCharacter().getClass().getName() + "\n");
+        if (map[hero.getY()][hero.getX()].getCharacter().getClass().getSimpleName().equals("Villain")) {
             int option;
 
             System.out.println("Villain Encountered!");
@@ -99,6 +101,7 @@ public class Map {
         return true;
     }
 
+//     TODO: randomise fight based on outcome of attributes
     private boolean fight() {
         int outcome = rand.nextInt(5) + 1;
         if (outcome != 1 && outcome != 2) {
@@ -126,10 +129,10 @@ public class Map {
 
     private void removeVillain() {
         if (hero.getX() == 0)
-            map[hero.getY()][hero.getX()] = new Point(new Hero("Empty", "Empty"), ". ");
+            map[hero.getY()][hero.getX()] = new Point(new Empty(), ". ");
         else if (hero.getX() == size - 1)
-            map[hero.getY()][hero.getX()] = new Point(new Hero("Empty", "Empty"), " .");
+            map[hero.getY()][hero.getX()] = new Point(new Empty(), " .");
         else
-            map[hero.getY()][hero.getX()] = new Point(new Hero("Empty", "Empty"), " . ");
+            map[hero.getY()][hero.getX()] = new Point(new Empty(), " . ");
     }
 }
