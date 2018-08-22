@@ -115,35 +115,26 @@ public class Map {
         int villainAttack = villain.getAttack();
         int villainDamageFactor;
 
-        int attack = 0;
-//        while(heroHitPoints != 0 || villainHitPoints != 0) {
-        int i = 10;
-        while (i-- > 0) {
-            System.out.println("$1");
-            System.out.println("h: " + heroHitPoints);
-            System.out.println("v: " + villainHitPoints);
+        while(heroHitPoints > 0 && villainHitPoints > 0) {
+            System.out.println("\nSTART");
+            System.out.println("h: " + heroHitPoints + " | " + heroDefense + " | " +  heroAttack );
+            System.out.println("v: " + villainHitPoints + " | " + villainDefense + " | " +  villainAttack );
             heroDamageFactor = rand.nextInt(4) + 1;
             villainDamageFactor = rand.nextInt(4) + 1;
 
-            attack = (heroAttack / heroDamageFactor) - villainDefense;
-            System.out.println("A1: " + attack);
-            villainHitPoints -= attack;
-//            villainHitPoints -= ((heroAttack / heroDamageFactor) - villainDefense);
-            if (villainHitPoints == 0) {
+            villainHitPoints -= (heroAttack / heroDamageFactor) - villainDefense;
+            if (villainHitPoints < 0) {
                 System.out.println("\nBattle won!\n");
                 removeVillain();
                 return true;
             }
 
-            attack = (villainAttack / villainDamageFactor) - heroDefense;
-            System.out.println("A2: " + attack);
-            heroHitPoints -= attack;
-//            heroHitPoints -= ((villainAttack / villainDamageFactor) - heroDefense);
-            if (heroHitPoints == 0) {
+            heroHitPoints -= (villainAttack / villainDamageFactor) - heroDefense;
+            if (heroHitPoints < 0) {
                 System.out.println("\nBattle lost!\n");
                 return false;
             }
-            System.out.println("$2");
+            System.out.println("FINISH");
         }
         return true;
     }
