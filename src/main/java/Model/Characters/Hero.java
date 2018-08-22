@@ -4,18 +4,14 @@ import Controller.Main;
 import Model.Artifacts.Armor;
 import Model.Artifacts.Helm;
 import Model.Artifacts.Weapon;
-import Model.Characters.Character;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Hero implements Character {
-    private int x = 0;
-    private int y = 0;
+public class Hero extends Character {
     private int mapLimit;
 
-    private String name; // May not be relevant in all characters i.e Villains
-    private String type; // May not be relevant in all characters i.e Villains
+    private String type;
     private int level = 0;
     private int experience = 0;
     private int attack;
@@ -28,7 +24,7 @@ public class Hero implements Character {
 
 
     public Hero() {
-        this.name = "Default";
+        this.setName("Default");
         this.type = "Default";
         this.mapLimit = (this.level - 1) * 5 + 10 - (this.level % 2);
     }
@@ -47,9 +43,11 @@ public class Hero implements Character {
         this.setType(list.get(1));
         this.setLevel(Integer.parseInt(list.get(2)));
         this.setExperience(Integer.parseInt(list.get(3)));
-        this.attack = Integer.parseInt(list.get(4));
-        this.defense = Integer.parseInt(list.get(5));
-        this.hitPoints = Integer.parseInt(list.get(6));
+        this.setAttack(Integer.parseInt(list.get(4)));
+        this.setDefense(Integer.parseInt(list.get(5)));
+        this.setHitPoints(Integer.parseInt(list.get(6)));
+
+        //TODO: set attack,hitpoints,defense after helmet,armor,weapon has been set so that artifact attributes can be applied
         this.helmet = new Helm(Integer.parseInt(list.get(7)));
         this.armor = new Armor(Integer.parseInt(list.get(8)));
         this.weapon = new Weapon(Integer.parseInt(list.get(9)));
@@ -61,17 +59,17 @@ public class Hero implements Character {
         String input = scanner.nextLine();
         System.out.println();
         if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("W")) {
-            if (this.y != 0)
-                this.y -= 1;
+            if (this.getY() != 0)
+                this.setY(this.getY() - 1);
         } else if (input.equalsIgnoreCase("a") || input.equalsIgnoreCase("A")) {
-            if (this.x != 0)
-                this.x -= 1;
+            if (this.getX() != 0)
+                this.setX(this.getX() - 1);
         } else if (input.equalsIgnoreCase("s") || input.equalsIgnoreCase("S")) {
-            if (this.y != mapLimit - 1)
-                this.y += 1;
+            if (this.getY() != mapLimit - 1)
+                this.setY(this.getY() + 1);
         } else if (input.equalsIgnoreCase("d") || input.equalsIgnoreCase("D")) {
-            if (this.x != mapLimit - 1)
-                this.x += 1;
+            if (this.getX() != mapLimit - 1)
+                this.setX(this.getX() + 1);
         } else if (input.equalsIgnoreCase("z") || input.equalsIgnoreCase("Z")) {
             printAttributes();
         } else if (input.equalsIgnoreCase("x") || input.equalsIgnoreCase("X")) {
@@ -145,28 +143,8 @@ public class Hero implements Character {
     }
 
     public void setCharacterPosition(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    @Override
-    public int getX() {
-        return x;
-    }
-
-    @Override
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    @Override
-    public void setY(int y) {
-        this.y = y;
+        this.setX(x);
+        this.setY(y);
     }
 
     public int getMapLimit() {
@@ -175,14 +153,6 @@ public class Hero implements Character {
 
     public void setMapLimit(int mapLimit) {
         this.mapLimit = mapLimit;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getType() {
@@ -231,29 +201,5 @@ public class Hero implements Character {
 
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
-
-    public int getHitPoints() {
-        return hitPoints;
-    }
-
-    void setHitPoints(int hitPoints) {
-        this.hitPoints = hitPoints;
     }
 }
