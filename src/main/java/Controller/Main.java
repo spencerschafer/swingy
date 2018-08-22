@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Character;
+import Model.Hero;
 import View.View;
 
 import java.io.*;
@@ -13,7 +14,7 @@ import java.util.Scanner;
 
 
 public class Main {
-    private static Character character = null;
+    private static Hero character = null;
     private static int selectView = 1;
 
     public static void main(String[] args) {
@@ -153,7 +154,7 @@ public class Main {
 
     //default create character method
     private static void createCharacter(String name, String type) {
-        character = new Character(name, type);
+        character = new Hero(name, type);
     }
 
     private static void loadCharacter() {
@@ -186,7 +187,7 @@ public class Main {
             System.out.println("\nThat file does not exist.");
             loadCharacter();
         }
-        character = new Character(list);
+        character = new Hero(list);
         System.out.println("\nCharacter Loaded.\n");
         mainMenu();
     }
@@ -245,7 +246,8 @@ public class Main {
                     break;
                 case 1:
                     try {
-                        String textFile = character.getName() + "_" + character.getType() + "_" + character.getLevel() + "_" + character.getExperience() + ".txt";
+                        String textFile = character.getName() + "_" + character.getType() + "_"
+                                + character.getLevel() + "_" + character.getExperience() + ".txt";
                         String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/" + textFile;
                         PrintWriter file = new PrintWriter(fileName);
                         list = character.saveAttributes();

@@ -1,11 +1,23 @@
 package Model.Artifacts;
 
+import java.util.ArrayList;
+
 public class Armor {
-    private String name;
     private int defense;
 
-    Armor() {
-        this.name = "Default Armor";
+    public Armor() {
         this.defense = 10;
+    }
+
+    public Armor(int defense) {
+        this.defense = defense;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
     }
 }

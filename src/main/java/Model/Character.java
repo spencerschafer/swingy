@@ -38,16 +38,7 @@ public class Character {
         this.mapLimit = (this.level - 1) * 5 + 10 - (this.level % 2);
     }
 
-    public Character(ArrayList<String> list) {
-        this.name = list.get(0);
-        this.type = list.get(1);
-        this.level = Integer.parseInt(list.get(2));
-        this.experience = Integer.parseInt(list.get(3));
-        this.attack = Integer.parseInt(list.get(4));
-        this.defense = Integer.parseInt(list.get(5));
-        this.hitPoints = Integer.parseInt(list.get(6));
-        this.mapLimit = (this.level - 1) * 5 + 10 - (this.level % 2);
-    }
+
 
     public void move() {
         Scanner scanner = new Scanner(System.in);
@@ -67,7 +58,7 @@ public class Character {
             this.x += 1;
         } else if (input.equalsIgnoreCase("z") || input.equalsIgnoreCase("Z")) {
             printAttributes();
-        } else if (input.equalsIgnoreCase("z") || input.equalsIgnoreCase("X")) {
+        } else if (input.equalsIgnoreCase("x") || input.equalsIgnoreCase("X")) {
             printKey();
         } else if (input.equalsIgnoreCase("c") || input.equalsIgnoreCase("C")) {
             printControls();
@@ -81,19 +72,7 @@ public class Character {
         this.y = y;
     }
 
-    public ArrayList<String> saveAttributes() {
-        ArrayList<String> list = new ArrayList<String>();
 
-        list.add(name);
-        list.add(type);
-        list.add(Integer.toString(level));
-        list.add(Integer.toString(experience));
-        list.add(Integer.toString(attack));
-        list.add(Integer.toString(defense));
-        list.add(Integer.toString(hitPoints));
-
-        return list;
-    }
 
     public void printAttributes() {
         System.out.println("\nCharacter Stats");
@@ -106,13 +85,6 @@ public class Character {
         System.out.println("Defense:    " + defense);
         System.out.println("Hit Points: " + hitPoints);
         System.out.println();
-/*
-        System.out.println("Character Artifacts");
-        System.out.println("-------------------");
-        System.out.println("Weapon: " );
-        System.out.println("Armor: ");
-        System.out.println("Helm: ");
-*/
     }
 
     public void printControls() {
@@ -209,6 +181,13 @@ public class Character {
 
     public void setHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
+    }
 
+    public int getMapLimit() {
+        return mapLimit;
+    }
+
+    public void setMapLimit(int mapLimit) {
+        this.mapLimit = mapLimit;
     }
 }
