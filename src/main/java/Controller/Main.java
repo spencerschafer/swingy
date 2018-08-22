@@ -1,7 +1,6 @@
 package Controller;
 
-import Model.Character;
-import Model.Hero;
+import Model.Characters.Hero;
 import View.View;
 
 import java.io.*;

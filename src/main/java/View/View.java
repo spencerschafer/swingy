@@ -1,12 +1,12 @@
 package View;
 
+import Model.Characters.Hero;
 import Model.Map;
-import Model.Character;
 
 import static Controller.Main.mainMenu;
 
 public class View {
-    public View(int view, Character character) {
+    public View(int view, Hero character) {
         if (view == 1) {
             consoleView(character);
         } else if (view == 2) {
@@ -14,7 +14,7 @@ public class View {
         }
     }
 
-    private void consoleView(Character character) {
+    private void consoleView(Hero character) {
         Map map = new Map(character);
 
         while (true) {
@@ -28,7 +28,7 @@ public class View {
         mainMenu();
     }
 
-    private void guiView(Character character) {
+    private void guiView(Hero character) {
     }
 
 

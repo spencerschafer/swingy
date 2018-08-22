@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Characters.Character;
+
 public class Point {
     private Character character;
     private String mapCharacter;
