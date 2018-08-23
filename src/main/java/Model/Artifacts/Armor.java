@@ -1,6 +1,5 @@
 package Model.Artifacts;
 
-import java.util.ArrayList;
 
 public class Armor {
     private int defense;

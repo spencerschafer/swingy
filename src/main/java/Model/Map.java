@@ -41,7 +41,7 @@ public class Map {
         if (placeVillain != 1 && placeVillain != 2) {
 
             if ((x == size / 2) && (y == size / 2)) // Initial position of hero is on top of a hero resulting in a battle if no valid key is pressed
-                map[y][x] = new Empty(". ");
+                map[y][x] = new Empty(" . ");
             else if (x == 0)
                 map[y][x] = new Villain("| ");
             else if (x == size - 1)
@@ -122,14 +122,14 @@ public class Map {
             heroDamageFactor = rand.nextInt(4) + 1;
             villainDamageFactor = rand.nextInt(4) + 1;
 
-            villainHitPoints -= (heroAttack / heroDamageFactor) - villainDefense;
+            villainHitPoints -= (heroAttack / heroDamageFactor);
             if (villainHitPoints < 0) {
                 System.out.println("\nBattle won!\n");
                 removeVillain();
                 return true;
             }
 
-            heroHitPoints -= (villainAttack / villainDamageFactor) - heroDefense;
+            heroHitPoints -= (villainAttack / villainDamageFactor);
             if (heroHitPoints < 0) {
                 System.out.println("\nBattle lost!\n");
                 return false;

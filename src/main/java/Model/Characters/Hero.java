@@ -14,9 +14,6 @@ public class Hero extends Character {
     private String type;
     private int level = 0;
     private int experience = 0;
-    private int attack;
-    private int defense;
-    private int hitPoints;
 
     private Helm helmet;
     private Armor armor;
@@ -36,6 +33,9 @@ public class Hero extends Character {
         helmet = new Helm();
         armor = new Armor();
         weapon = new Weapon();
+        this.setHitPoints(this.getHitPoints() + helmet.getHitPoints());
+        this.setDefense(armor.getDefense());
+        this.setAttack(weapon.getAttack());
     }
 
     public Hero(ArrayList<String> list) {
@@ -43,14 +43,15 @@ public class Hero extends Character {
         this.setType(list.get(1));
         this.setLevel(Integer.parseInt(list.get(2)));
         this.setExperience(Integer.parseInt(list.get(3)));
-        this.setAttack(Integer.parseInt(list.get(4)));
-        this.setDefense(Integer.parseInt(list.get(5)));
-        this.setHitPoints(Integer.parseInt(list.get(6)));
 
-        //TODO: set attack,hitpoints,defense after helmet,armor,weapon has been set so that artifact attributes can be applied
         this.helmet = new Helm(Integer.parseInt(list.get(7)));
         this.armor = new Armor(Integer.parseInt(list.get(8)));
         this.weapon = new Weapon(Integer.parseInt(list.get(9)));
+
+        this.setHitPoints(Integer.parseInt(list.get(6) + this.helmet.getHitPoints()));
+        this.setDefense(Integer.parseInt(list.get(5)) + this.armor.getDefense());
+        this.setAttack(Integer.parseInt(list.get(4)) + this.weapon.getAttack());
+
         this.setMapLimit((this.getLevel() - 1) * 5 + 10 - (this.getLevel() % 2));
     }
 
@@ -88,9 +89,9 @@ public class Hero extends Character {
         System.out.println("Class:      " + this.getType());
         System.out.println("Level:      " + this.getLevel());
         System.out.println("Experience: " + this.getExperience());
-        System.out.println("Attack:     " + this.attack);
-        System.out.println("Defense:    " + this.defense);
-        System.out.println("Hit Points: " + this.hitPoints);
+        System.out.println("Attack:     " + this.getAttack());
+        System.out.println("Defense:    " + this.getDefense());
+        System.out.println("Hit Points: " + this.getHitPoints());
         System.out.println();
 
         System.out.println("Character Artifacts");
@@ -132,9 +133,9 @@ public class Hero extends Character {
         list.add(this.getType());
         list.add(Integer.toString(this.getLevel()));
         list.add(Integer.toString(this.getExperience()));
-        list.add(Integer.toString(attack));
-        list.add(Integer.toString(defense));
-        list.add(Integer.toString(hitPoints));
+        list.add(Integer.toString(this.getAttack()));
+        list.add(Integer.toString(this.getDefense()));
+        list.add(Integer.toString(this.getHitPoints()));
         list.add(Integer.toString(helmet.getHitPoints()));
         list.add(Integer.toString(armor.getDefense()));
         list.add(Integer.toString(weapon.getAttack()));
@@ -179,27 +180,22 @@ public class Hero extends Character {
         this.experience = experience;
     }
 
-    public Helm getHelmet() {
-        return helmet;
-    }
 
-    public void setHelmet(Helm helmet) {
+    public void newHelm(Helm helmet) {
+        int updateHitPoints = (this.getHitPoints() - this.helmet.getHitPoints()) + helmet.getHitPoints();
         this.helmet = helmet;
+        this.setHitPoints(updateHitPoints);
     }
 
-    public Armor getArmor() {
-        return armor;
-    }
-
-    public void setArmor(Armor armor) {
+    public void newArmor(Armor armor) {
+        int updateDefense = (this.getDefense() - this.armor.getDefense()) + armor.getDefense();
         this.armor = armor;
+        this.setHitPoints(updateDefense);
     }
 
-    public Weapon getWeapon() {
-        return weapon;
-    }
-
-    public void setWeapon(Weapon weapon) {
+    public void newWeapon(Weapon weapon) {
+        int updateAttack = (this.getAttack() - this.weapon.getAttack()) + weapon.getAttack();
         this.weapon = weapon;
+        this.setHitPoints(updateAttack);
     }
 }

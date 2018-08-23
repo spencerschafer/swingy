@@ -6,8 +6,8 @@ public class Character {
 
     private String name;
     private int hitPoints = 100;
-    private int defense;
-    private int attack;
+    private int defense = 0;
+    private int attack = 0;
 
     public int getX() {
         return x;
