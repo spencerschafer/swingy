@@ -33,9 +33,16 @@ public class Hero extends Character {
         helmet = new Helm(this);
         armor = new Armor(this);
         weapon = new Weapon(this);
-        this.setHitPoints(this.getHitPoints() + helmet.getHitPoints());
-        this.setDefense(armor.getDefense());
-        this.setAttack(weapon.getAttack());
+        if (type.equalsIgnoreCase("warrior")) {
+            this.setDefense(armor.getDefense() + 20);
+            this.setAttack(weapon.getAttack());
+            this.setHitPoints(this.getHitPoints() + helmet.getHitPoints() + 50);
+        }
+        else if (type.equalsIgnoreCase("archer")) {
+            this.setDefense(armor.getDefense());
+            this.setAttack(weapon.getAttack() + 20);
+            this.setHitPoints(this.getHitPoints() + helmet.getHitPoints());
+        }
     }
 
     public Hero(ArrayList<String> list) {

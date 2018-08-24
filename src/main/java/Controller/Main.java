@@ -106,8 +106,6 @@ public class Main {
         System.out.println("\nSelect Character type:  ");
         System.out.println("1. Warrior  ");
         System.out.println("2. Archer  ");
-        System.out.println("3. Thief  ");
-        System.out.println("4. Magician  ");
         System.out.println();
         option = scanner.nextInt();
         switch (option) {
@@ -116,12 +114,6 @@ public class Main {
                 break;
             case 2:
                 type = "Archer";
-                break;
-            case 3:
-                type = "Thief";
-                break;
-            case 4:
-                type = "Magician";
                 break;
             default:
                 type = "Default";
@@ -151,7 +143,6 @@ public class Main {
         }
     }
 
-    //default create hero method
     private static void createCharacter(String name, String type) {
         hero = new Hero(name, type);
     }
