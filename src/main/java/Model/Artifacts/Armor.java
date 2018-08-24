@@ -1,11 +1,16 @@
 package Model.Artifacts;
 
 
+import Model.Characters.Hero;
+
+import java.util.Random;
+
 public class Armor {
     private int defense;
 
-    public Armor() {
-        this.defense = 10;
+    public Armor(Hero hero) {
+        Random rand = new Random();
+        this.defense = (hero.getLevel() + 1) * 10 - (rand.nextInt(5) + 1);
     }
 
     public Armor(int defense) {

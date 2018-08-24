@@ -30,9 +30,9 @@ public class Hero extends Character {
         this.setName(name);
         this.setType(type);
         this.mapLimit = (this.level - 1) * 5 + 10 - (this.level % 2);
-        helmet = new Helm();
-        armor = new Armor();
-        weapon = new Weapon();
+        helmet = new Helm(this);
+        armor = new Armor(this);
+        weapon = new Weapon(this);
         this.setHitPoints(this.getHitPoints() + helmet.getHitPoints());
         this.setDefense(armor.getDefense());
         this.setAttack(weapon.getAttack());
@@ -59,6 +59,7 @@ public class Hero extends Character {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         System.out.println();
+        //TODO: ignore case may not need both checks (i.e ignore case "s" includes "S" and "s"
         if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("W")) {
             if (this.getY() != 0)
                 this.setY(this.getY() - 1);

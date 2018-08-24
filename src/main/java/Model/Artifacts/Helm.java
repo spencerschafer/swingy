@@ -1,10 +1,15 @@
 package Model.Artifacts;
 
+import Model.Characters.Hero;
+
+import java.util.Random;
+
 public class Helm {
     private int hitPoints;
 
-    public Helm(){
-        this.hitPoints = 10;
+    public Helm(Hero hero){
+        Random rand = new Random();
+        this.hitPoints = (hero.getLevel() + 1) * 10 - (rand.nextInt(5) + 1);
     }
 
     public Helm(int hitPoints) {

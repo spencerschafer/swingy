@@ -105,12 +105,21 @@ public class Map {
         int heroHitPoints = hero.getHitPoints();
         int villainHitPoints = villain.getHitPoints();
 
-        while(heroHitPoints > 0 && villainHitPoints > 0) {
+        System.out.println("\nHero     | Villain");
+        System.out.println("--------------------");
+        System.out.println("HP : " + hero.getHitPoints() + " | " + villain.getHitPoints());
+        System.out.println("DEF:   " + hero.getDefense() + " | " + villain.getDefense());
+        System.out.println("ATT:   " + hero.getAttack() + " | " + villain.getAttack());
+
+        while (heroHitPoints > 0 && villainHitPoints > 0) {
 
 //          hero's attack damage on villain
             attack = hero.getAttack() / ((rand.nextInt(5) + 1));
+//            System.out.println("\nH HP: " + heroHitPoints + " | H ATT: " + attack);
 
             if ((villainHitPoints -= attack) <= 0) {
+//                System.out.println("H HP: " + heroHitPoints);
+//                System.out.println("V HP: " + villainHitPoints + "\n");
                 System.out.println("\nBattle won!\n");
                 this.hero.increaseExperience();
                 removeVillain();
@@ -119,10 +128,13 @@ public class Map {
 
 //          villain's attack damage on hero
             attack = villain.getAttack() / ((rand.nextInt(5) + 1));
-            if ((rand.nextInt(5) + 1) == 1)
-                attack *= 2;
+            if ((rand.nextInt(20) + 1) == 1)
+                attack *= 1.5;
 
+//            System.out.println("V HP: " + villainHitPoints + " | V ATT: " + attack + "\n");
             if ((heroHitPoints -= attack) <= 0) {
+//                System.out.println("H HP: " + heroHitPoints);
+//                System.out.println("V HP: " + villainHitPoints + "\n");
                 System.out.println("\nBattle lost!\n");
                 return false;
             }

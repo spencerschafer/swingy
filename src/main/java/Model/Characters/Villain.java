@@ -1,17 +1,14 @@
 package Model.Characters;
 
+import java.util.Random;
+
 public class Villain extends Character {
 
     public Villain(String name, Hero hero) {
+        Random rand = new Random();
         this.setName(name);
-
-        if (hero.getLevel() != 0) {
-            this.setAttack(hero.getLevel() * 10);
-            this.setDefense(hero.getLevel() * 10);
-        }
-        else {
-            this.setAttack(10);
-            this.setDefense(10);
-        }
+        this.setHitPoints((hero.getLevel() + 1) * 100);
+        this.setDefense((hero.getLevel() + 1) * 10 - rand.nextInt(5) + 1);
+        this.setAttack((hero.getLevel() + 1) * 10 - rand.nextInt(5) + 1);
     }
 }
