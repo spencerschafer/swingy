@@ -19,6 +19,8 @@ public class Hero extends Character {
     private Armor armor;
     private Weapon weapon;
 
+    int previousX;
+    int previousY;
 
     public Hero() {
         this.setName("Default");
@@ -67,6 +69,9 @@ public class Hero extends Character {
         String input = scanner.nextLine();
         System.out.println();
         //TODO: ignore case may not need both checks (i.e ignore case "s" includes "S" and "s"
+
+        setPreviousPosition(this.getX(), this.getY());
+
         if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("W")) {
             if (this.getY() != 0)
                 this.setY(this.getY() - 1);
@@ -89,8 +94,6 @@ public class Hero extends Character {
             Main.mainMenu();
         }
     }
-
-
 
     public void increaseExperience() {
         this.experience += ((this.level + 1) * 100);
@@ -126,7 +129,7 @@ public class Hero extends Character {
         System.out.println();
     }
 
-    public void printControls() {
+    private void printControls() {
         System.out.println("\nControls");
         System.out.println("--------");
         System.out.println("W - Up");
@@ -168,8 +171,23 @@ public class Hero extends Character {
     }
 
     public void setCharacterPosition(int x, int y) {
+        this.previousX = x;
+        this.previousY = y;
         this.setX(x);
         this.setY(y);
+    }
+
+    private void setPreviousPosition(int x, int y) {
+        this.previousX = x;
+        this.previousY = y;
+    }
+
+    public int getPreviousX() {
+        return previousX;
+    }
+
+    public int getPreviousY() {
+        return previousY;
     }
 
     public int getMapLimit() {

@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Main;
 import Model.Characters.Character;
 import Model.Characters.Empty;
 import Model.Characters.Hero;
@@ -136,7 +137,7 @@ public class Map {
 //                System.out.println("H HP: " + heroHitPoints);
 //                System.out.println("V HP: " + villainHitPoints + "\n");
                 System.out.println("\nBattle lost!\n");
-                return false;
+                Main.mainMenu();
             }
         }
         System.out.println("\n---\n");
@@ -147,6 +148,7 @@ public class Map {
         int outcome = rand.nextInt(5) + 1;
         if (outcome != 1 && outcome != 2) {
             System.out.println("\nYou successfully evaded battle!\n");
+            this.hero.setCharacterPosition(this.hero.getPreviousX(), this.hero.getPreviousY());
             return true;
         } else {
             System.out.println("\nYou were unable to evade the battle.");
