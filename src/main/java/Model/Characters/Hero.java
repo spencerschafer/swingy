@@ -22,6 +22,8 @@ public class Hero extends Character {
     int previousX;
     int previousY;
 
+    final int MAX_LEVEL = 1;
+
     public Hero() {
         this.setName("Default");
         this.type = "Default";
@@ -100,12 +102,17 @@ public class Hero extends Character {
 
         double total = (this.level * 1000) + (Math.pow((this.level - 1), 2) * 450);
         if  (this.experience > total) {
-            this.level++;
-            this.experience -= total;
+            if (this.level < MAX_LEVEL) {
+                this.level++;
+                this.experience -= total;
+            }
+            else
+                this.experience = 0;
         }
     }
 
     public void levelUp() {
+        if (this.level < MAX_LEVEL )
         this.level++;
     }
 
@@ -222,6 +229,9 @@ public class Hero extends Character {
         this.experience = experience;
     }
 
+    public int getMAXLEVEL () {
+        return MAX_LEVEL;
+    }
 
     public void newHelm(Helm helmet) {
         int updateHitPoints = (this.getHitPoints() - this.helmet.getHitPoints()) + helmet.getHitPoints();
