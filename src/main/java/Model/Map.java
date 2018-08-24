@@ -14,10 +14,6 @@ public class Map {
     private Random rand = new Random();
     private Hero hero;
 
-    public Map() {
-        size = 0;
-    }
-
     public Map(Hero hero) {
         this.size = (hero.getLevel() - 1) * 5 + 10 - (hero.getLevel() % 2);
         this.hero = hero;
@@ -116,6 +112,7 @@ public class Map {
 
             if ((villainHitPoints -= attack) <= 0) {
                 System.out.println("\nBattle won!\n");
+                this.hero.increaseExperience();
                 removeVillain();
                 return true;
             }
@@ -153,5 +150,14 @@ public class Map {
             map[hero.getY()][hero.getX()] = new Empty(" .");
         else
             map[hero.getY()][hero.getX()] = new Empty(" . ");
+    }
+
+    public boolean victory() {
+        if ((hero.getX() == 0) || (hero.getX() == (size - 1)) || (hero.getY() == 0) || (hero.getY() == (size - 1))) {
+            System.out.println("Level Complete!\n");
+            this.hero.levelUp();
+            return true;
+        }
+        return false;
     }
 }

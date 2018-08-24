@@ -158,7 +158,7 @@ public class Main {
 
     private static void loadCharacter() {
 
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
 
         String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/";
         File folder = new File(fileName);

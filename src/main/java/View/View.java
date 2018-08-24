@@ -24,6 +24,10 @@ public class View {
             if (!map.battle()) {
                 break;
             }
+
+            if (map.victory()) {
+                map = new Map(character);
+            }
         }
         mainMenu();
     }

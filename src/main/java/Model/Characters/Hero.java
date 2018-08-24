@@ -82,6 +82,22 @@ public class Hero extends Character {
         }
     }
 
+
+
+    public void increaseExperience() {
+        this.experience += ((this.level + 1) * 100);
+
+        double total = (this.level * 1000) + (Math.pow((this.level - 1), 2) * 450);
+        if  (this.experience > total) {
+            this.level++;
+            this.experience -= total;
+        }
+    }
+
+    public void levelUp() {
+        this.level++;
+    }
+
     public void printAttributes() {
         System.out.println("\nCharacter Stats");
         System.out.println("---------------");
@@ -127,7 +143,7 @@ public class Hero extends Character {
     }
 
     public ArrayList<String> saveAttributes() {
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
 
         list.add(this.getName());
         list.add(this.getType());
