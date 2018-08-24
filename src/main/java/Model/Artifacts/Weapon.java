@@ -4,7 +4,7 @@ public class Weapon {
     private int attack;
 
     public Weapon() {
-        this.attack = 30;
+        this.attack = 10;
     }
 
     public Weapon(int attack) {

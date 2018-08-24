@@ -48,7 +48,7 @@ public class Hero extends Character {
         this.armor = new Armor(Integer.parseInt(list.get(8)));
         this.weapon = new Weapon(Integer.parseInt(list.get(9)));
 
-        this.setHitPoints(Integer.parseInt(list.get(6) + this.helmet.getHitPoints()));
+        this.setHitPoints(Integer.parseInt(list.get(6)) + this.helmet.getHitPoints());
         this.setDefense(Integer.parseInt(list.get(5)) + this.armor.getDefense());
         this.setAttack(Integer.parseInt(list.get(4)) + this.weapon.getAttack());
 

@@ -43,19 +43,19 @@ public class Map {
             if ((x == size / 2) && (y == size / 2)) // Initial position of hero is on top of a hero resulting in a battle if no valid key is pressed
                 map[y][x] = new Empty(" . ");
             else if (x == 0)
-                map[y][x] = new Villain("| ");
+                map[y][x] = new Villain("| ", hero);
             else if (x == size - 1)
-                map[y][x] = new Villain( " |");
+                map[y][x] = new Villain(" |", hero);
             else
-                map[y][x] = new Villain( " | ");
+                map[y][x] = new Villain(" | ", hero);
 
         } else {
             if (x == 0)
-                map[y][x] = new Empty( ". ");
+                map[y][x] = new Empty(". ");
             else if (x == size - 1)
-                map[y][x] = new Empty( " .");
+                map[y][x] = new Empty(" .");
             else
-                map[y][x] = new Empty( " . ");
+                map[y][x] = new Empty(" . ");
         }
     }
 
@@ -105,37 +105,32 @@ public class Map {
     }
 
     private boolean fight(Character hero, Character villain) {
+        int attack;
         int heroHitPoints = hero.getHitPoints();
-        int heroDefense = hero.getDefense();
-        int heroAttack = hero.getAttack();
-        int heroDamageFactor;
-
         int villainHitPoints = villain.getHitPoints();
-        int villainDefense = villain.getDefense();
-        int villainAttack = villain.getAttack();
-        int villainDamageFactor;
 
         while(heroHitPoints > 0 && villainHitPoints > 0) {
-            System.out.println("\nSTART");
-            System.out.println("h: " + heroHitPoints + " | " + heroDefense + " | " +  heroAttack );
-            System.out.println("v: " + villainHitPoints + " | " + villainDefense + " | " +  villainAttack );
-            heroDamageFactor = rand.nextInt(4) + 1;
-            villainDamageFactor = rand.nextInt(4) + 1;
 
-            villainHitPoints -= (heroAttack / heroDamageFactor);
-            if (villainHitPoints < 0) {
+//          hero's attack damage on villain
+            attack = hero.getAttack() / ((rand.nextInt(5) + 1));
+
+            if ((villainHitPoints -= attack) <= 0) {
                 System.out.println("\nBattle won!\n");
                 removeVillain();
                 return true;
             }
 
-            heroHitPoints -= (villainAttack / villainDamageFactor);
-            if (heroHitPoints < 0) {
+//          villain's attack damage on hero
+            attack = villain.getAttack() / ((rand.nextInt(5) + 1));
+            if ((rand.nextInt(5) + 1) == 1)
+                attack *= 2;
+
+            if ((heroHitPoints -= attack) <= 0) {
                 System.out.println("\nBattle lost!\n");
                 return false;
             }
-            System.out.println("FINISH");
         }
+        System.out.println("\n---\n");
         return true;
     }
 
