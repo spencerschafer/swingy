@@ -19,6 +19,7 @@ public class Map {
         this.size = (hero.getLevel() - 1) * 5 + 10 - (hero.getLevel() % 2);
         this.hero = hero;
         map = new Character[size][size];
+        hero.setMapLimit((hero.getLevel() - 1) * 5 + 10 - (hero.getLevel() % 2));
         createMap();
     }
 
@@ -78,7 +79,7 @@ public class Map {
 
         Character villain = map[hero.getY()][hero.getX()];
 
-        System.out.println(map[hero.getY()][hero.getX()].getClass().getName() + "\n");
+        System.out.println(map[hero.getY()][hero.getX()].getClass().getName() + "\n"); //TODO: remove
         if (map[hero.getY()][hero.getX()].getClass().getSimpleName().equals("Villain")) {
             int option;
 
@@ -109,8 +110,8 @@ public class Map {
         System.out.println("\nHero     | Villain");
         System.out.println("--------------------");
         System.out.println("HP : " + hero.getHitPoints() + " | " + villain.getHitPoints());
-        System.out.println("DEF:   " + hero.getDefense() + " | " + villain.getDefense());
-        System.out.println("ATT:   " + hero.getAttack() + " | " + villain.getAttack());
+        System.out.println("DEF:  " + hero.getDefense() + " | " + villain.getDefense());
+        System.out.println("ATT:  " + hero.getAttack() + " | " + villain.getAttack());
 
         while (heroHitPoints > 0 && villainHitPoints > 0) {
 

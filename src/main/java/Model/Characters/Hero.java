@@ -24,12 +24,6 @@ public class Hero extends Character {
 
     final int MAX_LEVEL = 1;
 
-    public Hero() {
-        this.setName("Default");
-        this.type = "Default";
-        this.mapLimit = (this.level - 1) * 5 + 10 - (this.level % 2);
-    }
-
     public Hero(String name, String type) {
         this.setName(name);
         this.setType(type);
@@ -95,6 +89,7 @@ public class Hero extends Character {
         } else if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("Q")) {
             Main.mainMenu();
         }
+        System.out.println("Limit: " + this.getMapLimit());
     }
 
     public void increaseExperience() {
