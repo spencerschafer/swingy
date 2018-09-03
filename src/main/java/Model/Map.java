@@ -1,6 +1,9 @@
 package Model;
 
 import Controller.Main;
+import Model.Artifacts.Armor;
+import Model.Artifacts.Helm;
+import Model.Artifacts.Weapon;
 import Model.Characters.Character;
 import Model.Characters.Empty;
 import Model.Characters.Hero;
@@ -102,6 +105,8 @@ public class Map {
         return true;
     }
 
+
+    //TODO: only returns true, or calls mainMenu. Check if a false call is necessary
     private boolean fight(Character hero, Character villain) {
         int attack;
         int heroHitPoints = hero.getHitPoints();
@@ -125,6 +130,7 @@ public class Map {
                 System.out.println("\nBattle won!\n");
                 this.hero.increaseExperience();
                 removeVillain();
+                dropArtifact(this.hero.getLevel());
                 return true;
             }
 
@@ -178,12 +184,56 @@ public class Map {
         return false;
     }
 
-    public boolean checkHeroLevel() {
-        if (this.hero.getLevel() == this.hero.getMAXLEVEL()) {
+    private void dropArtifact(int level) {
+        int dropChance = rand.nextInt(6) + 1;
+        int option;
+
+        if (dropChance == 1 || dropChance == 2 || dropChance == 3) {
+            Armor armor = new Armor(this.hero);
+            Helm helm = new Helm(this.hero);
+            Weapon weapon = new Weapon(this.hero);
+
+            System.out.println(dropChance);
+            System.out.println("New Artifact Discovered") ;
+            System.out.println("-----------------------") ;
+            if (dropChance == 1) {
+                System.out.println("Old Artifact HP: " + this.hero.getHelmet().getHitPoints());
+                System.out.println("New Artifact HP: " + helm.getHitPoints());
+            } else if (dropChance == 2) {
+                System.out.println("Old Artifact DEF: " + this.hero.getArmor().getDefense());
+                System.out.println("New Artifact DEF: " + armor.getDefense());
+            } else if (dropChance == 3) {
+                System.out.println("Old Artifact ATT: " + this.hero.getWeapon().getAttack());
+                System.out.println("New Artifact ATT: " + weapon.getAttack());
+            }
+            System.out.println("\nEquip");
+            System.out.println("------");
+            System.out.println("1. Yes");
+            System.out.println("2. No");
+            Scanner scanner = new Scanner(System.in);
+            System.out.println();
+            option = scanner.nextInt();
+
+            if (option == 1) {
+                if (dropChance == 1) {
+                    hero.newHelm(helm);
+                    System.out.println("\nYou have gained a new Helmet!\n");
+                } else if (dropChance == 2) {
+                    hero.newArmor(armor);
+                    System.out.println("\nYou have gained new Armor!\n");
+                } else if (dropChance == 3) {
+                    hero.newWeapon(weapon);
+                    System.out.println("\nYou have gained a new Weapon!\n");
+                }
+            }
+        }
+    }
+
+    private boolean checkHeroLevel() {
+        if (this.hero.getLevel() >= this.hero.getMAX_LEVEL()) {
             System.out.println("You have successfully defeated all levels.");
             System.out.println("Congratulations! You, " + hero.getName() + ", have ascended to LEGENDARY status!\n");
             return true;
-        }
-        else return false;
+        } else return false;
     }
 }

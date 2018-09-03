@@ -19,10 +19,10 @@ public class Hero extends Character {
     private Armor armor;
     private Weapon weapon;
 
-    int previousX;
-    int previousY;
+    private int previousX;
+    private int previousY;
 
-    final int MAX_LEVEL = 1;
+    private final int MAX_LEVEL = 1;
 
     public Hero(String name, String type) {
         this.setName(name);
@@ -89,7 +89,6 @@ public class Hero extends Character {
         } else if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("Q")) {
             Main.mainMenu();
         }
-        System.out.println("Limit: " + this.getMapLimit());
     }
 
     public void increaseExperience() {
@@ -224,8 +223,20 @@ public class Hero extends Character {
         this.experience = experience;
     }
 
-    public int getMAXLEVEL () {
+    public int getMAX_LEVEL () {
         return MAX_LEVEL;
+    }
+
+    public Helm getHelmet() {
+        return helmet;
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
     }
 
     public void newHelm(Helm helmet) {
@@ -237,12 +248,12 @@ public class Hero extends Character {
     public void newArmor(Armor armor) {
         int updateDefense = (this.getDefense() - this.armor.getDefense()) + armor.getDefense();
         this.armor = armor;
-        this.setHitPoints(updateDefense);
+        this.setDefense(updateDefense);
     }
 
     public void newWeapon(Weapon weapon) {
         int updateAttack = (this.getAttack() - this.weapon.getAttack()) + weapon.getAttack();
         this.weapon = weapon;
-        this.setHitPoints(updateAttack);
+        this.setAttack(updateAttack);
     }
 }

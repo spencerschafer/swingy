@@ -21,15 +21,16 @@ public class View {
             map.displayMap();
             System.out.println();
             character.move();
-            if (!map.battle()) {
+            map.battle();
+            /*if (!map.battle()) {
                 break;
-            }
+            }*/
 
             if (map.victory()) {
                 map = new Map(character);
             }
         }
-        mainMenu();
+//        mainMenu();
     }
 
     private void guiView(Hero character) {
