@@ -1,7 +1,8 @@
 package Controller;
 
 import Model.Characters.Hero;
-import View.View;
+import View.Console;
+import View.Gui.View;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -62,8 +63,8 @@ public class Main {
             System.out.println("To view controls press the 'c' key.");
             hero.printKey();
 
-            //TODO: Implement GUI View
-            View view = new View(selectView, hero);
+            //TODO: Implement GUI Console
+            Console view = new Console(selectView, hero);
         }
     }
 
@@ -206,8 +207,10 @@ public class Main {
                 break;
             case 2:
                 selectView = 2;
-                System.out.println("\nGUI View selected.\n");
-                mainMenu();
+                //System.out.println("\nGUI View selected.\n");
+                //mainMenu();
+                View gui = new View();
+                
                 break;
         }
     }

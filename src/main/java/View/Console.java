@@ -5,8 +5,8 @@ import Model.Map;
 
 import static Controller.Main.mainMenu;
 
-public class View {
-    public View(int view, Hero character) {
+public class Console {
+    public Console(int view, Hero character) {
         if (view == 1) {
             consoleView(character);
         } else if (view == 2) {
