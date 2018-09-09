@@ -28,8 +28,8 @@ public class SwitchView extends javax.swing.JPanel {
     private void initComponents() {
 
         backButton = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        saveButton = new javax.swing.JButton();
+        switchViewComboBox = new javax.swing.JComboBox<>();
+        loadButton = new javax.swing.JButton();
 
         backButton.setText("Back");
         backButton.setMaximumSize(new java.awt.Dimension(165, 30));
@@ -40,23 +40,23 @@ public class SwitchView extends javax.swing.JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GUI", "Console" }));
-        jComboBox1.setMaximumSize(new java.awt.Dimension(400, 30));
-        jComboBox1.setMinimumSize(new java.awt.Dimension(400, 30));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(400, 30));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        switchViewComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select View", "GUI", "Console" }));
+        switchViewComboBox.setMaximumSize(new java.awt.Dimension(400, 30));
+        switchViewComboBox.setMinimumSize(new java.awt.Dimension(400, 30));
+        switchViewComboBox.setPreferredSize(new java.awt.Dimension(400, 30));
+        switchViewComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                switchViewComboBoxActionPerformed(evt);
             }
         });
 
-        saveButton.setText("Save");
-        saveButton.setMaximumSize(new java.awt.Dimension(165, 30));
-        saveButton.setMinimumSize(new java.awt.Dimension(165, 30));
-        saveButton.setPreferredSize(new java.awt.Dimension(165, 30));
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
+        loadButton.setText("Load");
+        loadButton.setMaximumSize(new java.awt.Dimension(165, 30));
+        loadButton.setMinimumSize(new java.awt.Dimension(165, 30));
+        loadButton.setPreferredSize(new java.awt.Dimension(165, 30));
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
+                loadButtonActionPerformed(evt);
             }
         });
 
@@ -66,12 +66,12 @@ public class SwitchView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(150, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(switchViewComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(150, 150, 150))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -79,12 +79,12 @@ public class SwitchView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(80, 80, 80)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
-                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(switchViewComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
+                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addGap(63, 63, 63))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -93,18 +93,19 @@ public class SwitchView extends javax.swing.JPanel {
         this.firePropertyChange("Back", null, evt);
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        this.firePropertyChange("Load", null, evt);
+    }//GEN-LAST:event_loadButtonActionPerformed
 
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+    private void switchViewComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_switchViewComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_saveButtonActionPerformed
+    }//GEN-LAST:event_switchViewComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JButton saveButton;
+    private javax.swing.JButton loadButton;
+    private javax.swing.JComboBox<String> switchViewComboBox;
     // End of variables declaration//GEN-END:variables
 }

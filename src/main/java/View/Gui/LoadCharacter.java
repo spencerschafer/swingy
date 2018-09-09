@@ -5,17 +5,47 @@
  */
 package View.Gui;
 
+import Model.Characters.Hero;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author spencer
  */
 public class LoadCharacter extends javax.swing.JPanel {
 
+    private ArrayList<String> list;
+    private static Hero hero;
+
     /**
      * Creates new form LoadCharacter
      */
     public LoadCharacter() {
         initComponents();
+
+        addItems();
+    }
+
+    private void addItems() {
+//        ArrayList<String> list = new ArrayList<>();
+
+        String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/";
+        File folder = new File(fileName);
+        File[] listOfFiles = folder.listFiles();
+
+        //TODO: check for exception
+        for (File file : listOfFiles) {
+            loadCharacterComboBox.addItem(file.getName());
+        }
+    }
+
+    public static Hero getHero() {
+        return hero;
     }
 
     /**
@@ -28,10 +58,10 @@ public class LoadCharacter extends javax.swing.JPanel {
     private void initComponents() {
 
         backButton = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        saveButton = new javax.swing.JButton();
+        loadCharacterComboBox = new javax.swing.JComboBox<>();
+        heroInfoScrollPanel = new javax.swing.JScrollPane();
+        heroInfoTextArea = new javax.swing.JTextArea();
+        loadButton = new javax.swing.JButton();
 
         backButton.setText("Back");
         backButton.setMaximumSize(new java.awt.Dimension(165, 30));
@@ -43,27 +73,27 @@ public class LoadCharacter extends javax.swing.JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2" }));
-        jComboBox1.setMaximumSize(new java.awt.Dimension(400, 30));
-        jComboBox1.setMinimumSize(new java.awt.Dimension(400, 30));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(400, 30));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        loadCharacterComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Hero" }));
+        loadCharacterComboBox.setMaximumSize(new java.awt.Dimension(400, 30));
+        loadCharacterComboBox.setMinimumSize(new java.awt.Dimension(400, 30));
+        loadCharacterComboBox.setPreferredSize(new java.awt.Dimension(400, 30));
+        loadCharacterComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                loadCharacterComboBoxActionPerformed(evt);
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        heroInfoTextArea.setColumns(20);
+        heroInfoTextArea.setRows(5);
+        heroInfoScrollPanel.setViewportView(heroInfoTextArea);
 
-        saveButton.setText("Save");
-        saveButton.setMaximumSize(new java.awt.Dimension(165, 30));
-        saveButton.setMinimumSize(new java.awt.Dimension(165, 30));
-        saveButton.setPreferredSize(new java.awt.Dimension(165, 30));
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
+        loadButton.setText("Load");
+        loadButton.setMaximumSize(new java.awt.Dimension(165, 30));
+        loadButton.setMinimumSize(new java.awt.Dimension(165, 30));
+        loadButton.setPreferredSize(new java.awt.Dimension(165, 30));
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
+                loadButtonActionPerformed(evt);
             }
         });
 
@@ -76,12 +106,12 @@ public class LoadCharacter extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(heroInfoScrollPanel)
+                            .addComponent(loadCharacterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(275, 275, 275)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(150, Short.MAX_VALUE))
         );
@@ -89,14 +119,14 @@ public class LoadCharacter extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(80, 80, 80)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loadCharacterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(heroInfoScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                .addGap(63, 63, 63))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -105,20 +135,62 @@ public class LoadCharacter extends javax.swing.JPanel {
         this.firePropertyChange("Back", null, evt);
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void loadCharacterComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadCharacterComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        heroInfoTextArea.setText(null);
 
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        if (!(loadCharacterComboBox.getSelectedItem() == "Select Hero")) {
+            String fileName = System.getProperty("user.dir")
+                    + "/src/main/resources/saves/"
+                    + loadCharacterComboBox.getSelectedItem();
+            list = new ArrayList<>();
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    list.add(line);
+                }
+                reader.close();
+            } catch (IOException e) {
+                System.out.println("\nThat file does not exist.");
+//            loadCharacter();
+            }
+
+            heroInfoTextArea.setText(
+                    "Hero Attributes\n"
+                    + "- - - - - - - - - - - - - - - -"
+                    + "\nName:   " + list.get(0)
+                    + "\nClass:    " + list.get(1)
+                    + "\nLevel:    " + list.get(2)
+                    + "\nEXP:       " + list.get(3)
+                    + "\nATT:       " + list.get(4)
+                    + "\nDEF:      " + list.get(5)
+                    + "\nHP:         " + list.get(6)
+                    + "\n\nHero Artifacts"
+                    + "\n- - - - - - - - - - - - - -"
+                    + "\nHelmet:    " + list.get(7) + " HP"
+                    + "\nArmor:      " + list.get(8) + " DEF"
+                    + "\nWeapon:  " + list.get(9) + " ATT\n"
+            );
+        }
+    }//GEN-LAST:event_loadCharacterComboBoxActionPerformed
+
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_saveButtonActionPerformed
+        if (loadCharacterComboBox.getSelectedItem() == "Select Hero") {
+            this.firePropertyChange("Default", null, evt);
+        } else {
+            hero = new Hero(list);
+            this.firePropertyChange("Load", null, evt);
+        }
+    }//GEN-LAST:event_loadButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JButton saveButton;
+    private javax.swing.JScrollPane heroInfoScrollPanel;
+    private javax.swing.JTextArea heroInfoTextArea;
+    private javax.swing.JButton loadButton;
+    private javax.swing.JComboBox<String> loadCharacterComboBox;
     // End of variables declaration//GEN-END:variables
 }

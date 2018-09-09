@@ -139,7 +139,7 @@ public class Hero extends Character {
         System.out.println("D - Right");
         System.out.println();
         System.out.println("Q - Main Menu");
-        System.out.println("Z - Hero Stats");
+        System.out.println("Z - Hero Attributes");
         System.out.println("X - Map Key");
         System.out.println("C - Controls");
         System.out.println();
@@ -149,7 +149,7 @@ public class Hero extends Character {
         System.out.println("\nMap Key");
         System.out.println("-------");
         System.out.println("o - Hero");
-        System.out.println("| - Villain");
+        System.out.println("x - Villain");
         System.out.println(". - Empty");
         System.out.println();
     }
@@ -178,7 +178,7 @@ public class Hero extends Character {
         this.setY(y);
     }
 
-    private void setPreviousPosition(int x, int y) {
+    public void setPreviousPosition(int x, int y) {
         this.previousX = x;
         this.previousY = y;
     }

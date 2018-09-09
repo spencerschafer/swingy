@@ -1,7 +1,8 @@
 package Controller;
 
 import Model.Characters.Hero;
-import View.Console;
+import Model.Map;
+import View.GameViews;
 import View.Gui.View;
 
 import java.io.*;
@@ -19,7 +20,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        mainMenu();
+        View view = new View();
+//        mainMenu();
     }
 
     public static void mainMenu() {
@@ -57,14 +59,7 @@ public class Main {
             System.out.println("\nNo hero selected. Please select a hero.");
             selectCharacter();
         } else {
-            System.out.println("Game Started.");
-            System.out.println("The hero you selected is: \n");
-            hero.printAttributes();
-            System.out.println("To view controls press the 'c' key.");
-            hero.printKey();
-
-            //TODO: Implement GUI Console
-            Console view = new Console(selectView, hero);
+            GameViews view = new GameViews(selectView, hero);
         }
     }
 
@@ -207,9 +202,9 @@ public class Main {
                 break;
             case 2:
                 selectView = 2;
-                //System.out.println("\nGUI View selected.\n");
+                System.out.println("\nGUI View selected.\n");
                 //mainMenu();
-                View gui = new View();
+                View gui = new View(new Map(hero), hero);
                 
                 break;
         }

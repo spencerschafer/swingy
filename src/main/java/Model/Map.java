@@ -44,11 +44,11 @@ public class Map {
             if ((x == size / 2) && (y == size / 2)) // Initial position of hero is on top of a hero resulting in a battle if no valid key is pressed
                 map[y][x] = new Empty(" . ");
             else if (x == 0)
-                map[y][x] = new Villain("| ", hero);
+                map[y][x] = new Villain("x ", hero);
             else if (x == size - 1)
-                map[y][x] = new Villain(" |", hero);
+                map[y][x] = new Villain(" x", hero);
             else
-                map[y][x] = new Villain(" | ", hero);
+                map[y][x] = new Villain(" x ", hero);
 
         } else {
             if (x == 0)
@@ -164,7 +164,7 @@ public class Map {
         }
     }
 
-    private void removeVillain() {
+    public void removeVillain() {
         if (hero.getX() == 0)
             map[hero.getY()][hero.getX()] = new Empty(". ");
         else if (hero.getX() == size - 1)
@@ -235,5 +235,13 @@ public class Map {
             System.out.println("Congratulations! You, " + hero.getName() + ", have ascended to LEGENDARY status!\n");
             return true;
         } else return false;
+    }
+
+    public int getSize() {
+        return size;
+    }
+    
+    public Character getCharacter(int y, int x) {
+        return (map[y][x]);
     }
 }

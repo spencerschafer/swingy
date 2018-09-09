@@ -3,4 +3,4 @@
 .gitignore.swp
 out/
 swingy.iml
-/swingy/target/
+/target/
