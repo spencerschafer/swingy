@@ -12,15 +12,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -33,7 +25,6 @@ public class View {
     private static Map map;
     private static Hero hero;
     private JFrame frame;
-    private JOptionPane pane;
     private MainMenu mainMenu;
     private StartGame startGame;
     private CreateHero createHero;
@@ -41,10 +32,13 @@ public class View {
     private SwitchView switchView;
 
     public View() {
+        setVariablesNull();
         initialiseView();
     }
 
     public View(Map map, Hero hero) {
+        setVariablesNull();
+        System.out.println("@1");
         this.hero = hero;
         this.map = map;
 
@@ -52,6 +46,7 @@ public class View {
     }
 
     public void initialiseView() {
+        System.out.println("@2");
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
@@ -60,10 +55,9 @@ public class View {
         frame = new JFrame();
         frame.addPropertyChangeListener(new MainMenuListener());
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double x = (double) screenSize.getWidth();
-        double y = (double) screenSize.getHeight();
-
+//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        double x = (double) screenSize.getWidth();
+//        double y = (double) screenSize.getHeight();
         mainMenu = new MainMenu();
         mainMenu.addPropertyChangeListener(new MainMenuListener());
 
@@ -74,6 +68,7 @@ public class View {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        System.out.println("@3");
     }
 
     private class MainMenuListener implements PropertyChangeListener {
@@ -177,8 +172,7 @@ public class View {
                 removeSwitchView();
                 newMainMenu();
             } else if (source == "ConsoleView") {
-                System.out.println("@@FIRED");
-                Main.changeViewConsole();
+                Main.changeViewConsole(View.hero);
             }
         }
     }
@@ -323,10 +317,21 @@ public class View {
         removeStartGame();
         newMainMenu();
     }
-    
+
     public void closeFrame() {
         frame.dispose();
         frame.setVisible(false);
         frame = null;
+    }
+
+    private void setVariablesNull() {
+        map = null;
+        hero = null;
+        frame = null;
+        mainMenu = null;
+        startGame = null;
+        createHero = null;
+        loadCharacter = null;
+        switchView = null;
     }
 }

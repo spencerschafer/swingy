@@ -3,12 +3,11 @@ package View;
 import Model.Characters.Hero;
 import Model.Map;
 
-import static Controller.Main.mainMenu;
 import View.Gui.View;
 
 public class GameViews {
-    Map map;
-    Hero hero;
+    private static Map map;
+    private static Hero hero;
     
     public GameViews(int view, Hero hero) {
         map = new Map(hero);
@@ -17,7 +16,7 @@ public class GameViews {
         if (view == 1) {
             consoleView();
         } else if (view == 2) {
-            guiView();
+//            guiView();
         }
     }
 
@@ -33,20 +32,16 @@ public class GameViews {
             System.out.println();
             hero.move();
             map.battle();
-            /*if (!map.battle()) {
-                break;
-            }*/
 
             if (map.victory()) {
                 map = new Map(hero);
             }
         }
-//        mainMenu();
     }
 
-    private void guiView() {
-        View view = new View(this.map, this.hero);
-    }
+//    private void guiView() {
+//        View view = new View(this.map, this.hero);
+//    }
 
     public Map getMap() {
         return map;
@@ -62,6 +57,12 @@ public class GameViews {
 
     public void setHero(Hero hero) {
         this.hero = hero;
+    }
+    
+    public static Hero updateHero() {
+        Hero tempHero = map.getHero();
+        hero = tempHero;
+        return hero;
     }
 }
 

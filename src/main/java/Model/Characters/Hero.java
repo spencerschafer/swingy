@@ -24,6 +24,25 @@ public class Hero extends Character {
 
     private final int MAX_LEVEL = 1;
 
+    public Hero () {
+        this.setName("Default");
+        this.setType("Archer");
+        this.mapLimit = (this.level - 1) * 5 + 10 - (this.level % 2);
+        helmet = new Helm(this);
+        armor = new Armor(this);
+        weapon = new Weapon(this);
+        if (type.equalsIgnoreCase("warrior")) {
+            this.setDefense(armor.getDefense() + 20);
+            this.setAttack(weapon.getAttack());
+            this.setHitPoints(this.getHitPoints() + helmet.getHitPoints() + 50);
+        }
+        else if (type.equalsIgnoreCase("archer")) {
+            this.setDefense(armor.getDefense());
+            this.setAttack(weapon.getAttack() + 20);
+            this.setHitPoints(this.getHitPoints() + helmet.getHitPoints());
+        }
+    }
+    
     public Hero(String name, String type) {
         this.setName(name);
         this.setType(type);
@@ -68,25 +87,25 @@ public class Hero extends Character {
 
         setPreviousPosition(this.getX(), this.getY());
 
-        if (input.equalsIgnoreCase("w") || input.equalsIgnoreCase("W")) {
+        if (input.equalsIgnoreCase("w")) {
             if (this.getY() != 0)
                 this.setY(this.getY() - 1);
-        } else if (input.equalsIgnoreCase("a") || input.equalsIgnoreCase("A")) {
+        } else if (input.equalsIgnoreCase("a")) {
             if (this.getX() != 0)
                 this.setX(this.getX() - 1);
-        } else if (input.equalsIgnoreCase("s") || input.equalsIgnoreCase("S")) {
+        } else if (input.equalsIgnoreCase("s")) {
             if (this.getY() != mapLimit - 1)
                 this.setY(this.getY() + 1);
-        } else if (input.equalsIgnoreCase("d") || input.equalsIgnoreCase("D")) {
+        } else if (input.equalsIgnoreCase("d")) {
             if (this.getX() != mapLimit - 1)
                 this.setX(this.getX() + 1);
-        } else if (input.equalsIgnoreCase("z") || input.equalsIgnoreCase("Z")) {
+        } else if (input.equalsIgnoreCase("z")) {
             printAttributes();
-        } else if (input.equalsIgnoreCase("x") || input.equalsIgnoreCase("X")) {
+        } else if (input.equalsIgnoreCase("x")) {
             printKey();
-        } else if (input.equalsIgnoreCase("c") || input.equalsIgnoreCase("C")) {
+        } else if (input.equalsIgnoreCase("c")) {
             printControls();
-        } else if (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("Q")) {
+        } else if (input.equalsIgnoreCase("q")) {
             Main.mainMenu();
         }
     }

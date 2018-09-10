@@ -13,6 +13,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Map {
+
     private int size;
     private Character[][] map;
     private Random rand = new Random();
@@ -42,21 +43,24 @@ public class Map {
         if (placeVillain != 1 && placeVillain != 2) {
 
             if ((x == size / 2) && (y == size / 2)) // Initial position of hero is on top of a hero resulting in a battle if no valid key is pressed
+            {
                 map[y][x] = new Empty(" . ");
-            else if (x == 0)
+            } else if (x == 0) {
                 map[y][x] = new Villain("x ", hero);
-            else if (x == size - 1)
+            } else if (x == size - 1) {
                 map[y][x] = new Villain(" x", hero);
-            else
+            } else {
                 map[y][x] = new Villain(" x ", hero);
+            }
 
         } else {
-            if (x == 0)
+            if (x == 0) {
                 map[y][x] = new Empty(". ");
-            else if (x == size - 1)
+            } else if (x == size - 1) {
                 map[y][x] = new Empty(" .");
-            else
+            } else {
                 map[y][x] = new Empty(" . ");
+            }
         }
     }
 
@@ -64,12 +68,13 @@ public class Map {
         for (int y = 0; y < size; ++y) {
             for (int x = 0; x < size; ++x) {
                 if (hero.getX() == x && hero.getY() == y) {
-                    if (x == 0)
+                    if (x == 0) {
                         System.out.print("o ");
-                    else if (x == size - 1)
+                    } else if (x == size - 1) {
                         System.out.print(" o");
-                    else
+                    } else {
                         System.out.print(" o ");
+                    }
                     continue;
                 }
                 System.out.print(map[y][x].getName());
@@ -82,7 +87,6 @@ public class Map {
 
         Character villain = map[hero.getY()][hero.getX()];
 
-        System.out.println(map[hero.getY()][hero.getX()].getClass().getName() + "\n"); //TODO: remove
         if (map[hero.getY()][hero.getX()].getClass().getSimpleName().equals("Villain")) {
             int option;
 
@@ -93,18 +97,27 @@ public class Map {
 
             Scanner scanner = new Scanner(System.in);
             System.out.println();
-            option = scanner.nextInt();
 
-            switch (option) {
-                case 1:
-                    return fight(hero, villain);
-                case 2:
-                    return run(hero, villain);
+            if (scanner.hasNextInt()) {
+                option = scanner.nextInt();
+
+                switch (option) {
+                    case 1:
+                        return fight(hero, villain);
+                    case 2:
+                        return run(hero, villain);
+                    default:
+                        System.out.println("\nIncorrect Value.\n");
+                        battle();
+                        break;
+                }
+            } else {
+                System.out.println("\nIncorrect Value.\n");
+                battle();
             }
         }
         return true;
     }
-
 
     //TODO: only returns true, or calls mainMenu. Check if a false call is necessary
     private boolean fight(Character hero, Character villain) {
@@ -130,14 +143,15 @@ public class Map {
                 System.out.println("\nBattle won!\n");
                 this.hero.increaseExperience();
                 removeVillain();
-                dropArtifact(this.hero.getLevel());
+                dropArtifact();
                 return true;
             }
 
 //          villain's attack damage on hero
             attack = villain.getAttack() / ((rand.nextInt(5) + 1));
-            if ((rand.nextInt(20) + 1) == 1)
+            if ((rand.nextInt(20) + 1) == 1) {
                 attack *= 1.5;
+            }
 
 //            System.out.println("V HP: " + villainHitPoints + " | V ATT: " + attack + "\n");
             if ((heroHitPoints -= attack) <= 0) {
@@ -165,26 +179,28 @@ public class Map {
     }
 
     public void removeVillain() {
-        if (hero.getX() == 0)
+        if (hero.getX() == 0) {
             map[hero.getY()][hero.getX()] = new Empty(". ");
-        else if (hero.getX() == size - 1)
+        } else if (hero.getX() == size - 1) {
             map[hero.getY()][hero.getX()] = new Empty(" .");
-        else
+        } else {
             map[hero.getY()][hero.getX()] = new Empty(" . ");
+        }
     }
 
     public boolean victory() {
         if ((hero.getX() == 0) || (hero.getX() == (size - 1)) || (hero.getY() == 0) || (hero.getY() == (size - 1))) {
             System.out.println("Level Complete!\n");
-            if (checkHeroLevel())
+            if (checkHeroLevel()) {
                 Main.mainMenu();
+            }
             this.hero.levelUp();
             return true;
         }
         return false;
     }
 
-    private void dropArtifact(int level) {
+    private void dropArtifact() {
         int dropChance = rand.nextInt(6) + 1;
         int option;
 
@@ -194,8 +210,8 @@ public class Map {
             Weapon weapon = new Weapon(this.hero);
 
             System.out.println(dropChance);
-            System.out.println("New Artifact Discovered") ;
-            System.out.println("-----------------------") ;
+            System.out.println("New Artifact Discovered");
+            System.out.println("-----------------------");
             if (dropChance == 1) {
                 System.out.println("Old Artifact HP: " + this.hero.getHelmet().getHitPoints());
                 System.out.println("New Artifact HP: " + helm.getHitPoints());
@@ -212,19 +228,29 @@ public class Map {
             System.out.println("2. No");
             Scanner scanner = new Scanner(System.in);
             System.out.println();
-            option = scanner.nextInt();
 
-            if (option == 1) {
-                if (dropChance == 1) {
-                    hero.newHelm(helm);
-                    System.out.println("\nYou have gained a new Helmet!\n");
-                } else if (dropChance == 2) {
-                    hero.newArmor(armor);
-                    System.out.println("\nYou have gained new Armor!\n");
-                } else if (dropChance == 3) {
-                    hero.newWeapon(weapon);
-                    System.out.println("\nYou have gained a new Weapon!\n");
+            if (scanner.hasNextInt()) {
+                option = scanner.nextInt();
+
+                if (option == 1) {
+                    if (dropChance == 1) {
+                        hero.newHelm(helm);
+                        System.out.println("\nYou have gained a new Helmet!\n");
+                    } else if (dropChance == 2) {
+                        hero.newArmor(armor);
+                        System.out.println("\nYou have gained new Armor!\n");
+                    } else if (dropChance == 3) {
+                        hero.newWeapon(weapon);
+                        System.out.println("\nYou have gained a new Weapon!\n");
+                    }
+                } else if (option == 2) {
+                } else {
+                    System.out.println("\nIncorrect Value. No selected.\n");
                 }
+
+            } else {
+                System.out.println("\nIncorrect Value. No selected.\n");
+                dropArtifact();
             }
         }
     }
@@ -234,14 +260,20 @@ public class Map {
             System.out.println("You have successfully defeated all levels.");
             System.out.println("Congratulations! You, " + hero.getName() + ", have ascended to LEGENDARY status!\n");
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     public int getSize() {
         return size;
     }
-    
+
     public Character getCharacter(int y, int x) {
         return (map[y][x]);
+    }
+
+    public Hero getHero() {
+        return hero;
     }
 }

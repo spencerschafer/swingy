@@ -23,7 +23,7 @@ public class Main {
             changeViewGui();
         } else if (args.length == 1) {
             if (args[0].equals("console")) {
-                changeViewConsole();
+                changeViewConsole(hero);
             } else if (args[0].equals("gui")) {
                 changeViewGui();
             }
@@ -41,21 +41,30 @@ public class Main {
         System.out.println("\n0. Exit");
         System.out.println();
         Scanner scanner = new Scanner(System.in);
-        option = scanner.nextInt();
+        if (scanner.hasNextInt()) {
+            option = scanner.nextInt();
 
-        switch (option) {
-            case 1:
-                startGame();
-                break;
-            case 2:
-                selectCharacter();
-                break;
-            case 3:
-                selectView();
-                break;
-            case 0:
-                saveAndExit();
-                break;
+            switch (option) {
+                case 1:
+                    startGame();
+                    break;
+                case 2:
+                    selectCharacter();
+                    break;
+                case 3:
+                    selectView();
+                    break;
+                case 0:
+                    saveAndExit();
+                    break;
+                default:
+                    System.out.println("\nIncorrect Value.\n");
+                    mainMenu();
+                    break;
+            }
+        } else {
+            System.out.println("\nIncorrect Value.\n");
+            mainMenu();
         }
     }
 
@@ -71,6 +80,7 @@ public class Main {
 
     private static void selectCharacter() {
         int option;
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("\nSelect Character");
         System.out.println("-------------");
@@ -78,27 +88,36 @@ public class Main {
         System.out.println("2. Load Character");
         System.out.println("\n0. Cancel");
         System.out.println();
-        Scanner scanner = new Scanner(System.in);
-        option = scanner.nextInt();
 
-        switch (option) {
-            case 1:
-                newCharacter();
-                break;
-            case 2:
-                loadCharacter();
-                break;
-            case 0:
-                System.out.println();
-                mainMenu();
-                break;
+        if (scanner.hasNextInt()) {
+            option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    newCharacter();
+                    break;
+                case 2:
+                    loadCharacter();
+                    break;
+                case 0:
+                    System.out.println();
+                    mainMenu();
+                    break;
+                default:
+                    System.out.println("\nIncorrect Value.");
+                    selectCharacter();
+                    break;
+            }
+        } else {
+            System.out.println("\nIncorrect Value.");
+            selectCharacter();
         }
     }
 
     private static void newCharacter() {
         int option;
         String name;
-        String type;
+        String type = "Spence!";
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nEnter Character name: ");
@@ -108,17 +127,24 @@ public class Main {
         System.out.println("1. Warrior  ");
         System.out.println("2. Archer  ");
         System.out.println();
-        option = scanner.nextInt();
-        switch (option) {
-            case 1:
-                type = "Warrior";
-                break;
-            case 2:
-                type = "Archer";
-                break;
-            default:
-                type = "Default";
-                break;
+
+        if (scanner.hasNextInt()) {
+            option = scanner.nextInt();
+            switch (option) {
+                case 1:
+                    type = "Warrior";
+                    break;
+                case 2:
+                    type = "Archer";
+                    break;
+                default:
+                    System.out.println("\nIncorrect Value.");
+                    newCharacter();
+                    break;
+            }
+        } else {
+            System.out.println("\nIncorrect Value.");
+            newCharacter();
         }
 
         System.out.println("\nCreate Character '" + name + "' of type '" + type + "'?");
@@ -126,21 +152,31 @@ public class Main {
         System.out.println("2. No");
         System.out.println("\n0. Cancel");
         System.out.println();
-        option = scanner.nextInt();
-        switch (option) {
-            case 0:
-                System.out.println();
-                mainMenu();
-                break;
-            case 1:
-                System.out.println("\nCharacter Created.");
-                createCharacter(name, type);
-                System.out.println();
-                mainMenu();
-                break;
-            case 2:
-                selectCharacter();
-                break;
+
+        if (scanner.hasNextInt()) {
+            option = scanner.nextInt();
+            switch (option) {
+                case 0:
+                    System.out.println();
+                    mainMenu();
+                    break;
+                case 1:
+                    System.out.println("\nCharacter Created.");
+                    createCharacter(name, type);
+                    System.out.println();
+                    mainMenu();
+                    break;
+                case 2:
+                    selectCharacter();
+                    break;
+                default:
+                    System.out.println("\nIncorrect Value.");
+                    newCharacter();
+                    break;
+            }
+        } else {
+            System.out.println("\nIncorrect Value.");
+            newCharacter();
         }
     }
 
@@ -193,29 +229,37 @@ public class Main {
         System.out.println("2. GUI View");
         System.out.println("\n0. Cancel");
         System.out.println();
-        option = scanner.nextInt();
 
-        switch (option) {
-            case 0:
-                System.out.println();
-                mainMenu();
-                break;
-            case 1:
-                selectView = 1;
-                System.out.println("\nConsole View selected.\n");
-                mainMenu();
-                break;
-            case 2:
-                selectView = 2;
-                System.out.println("\nGUI View selected.\n");
-                //mainMenu();
-                View gui = new View(new Map(hero), hero);
+        if (scanner.hasNextInt()) {
+            option = scanner.nextInt();
 
-                break;
+            switch (option) {
+                case 0:
+                    System.out.println();
+                    mainMenu();
+                    break;
+                case 1:
+                    selectView = 1;
+                    System.out.println("\nConsole View selected.\n");
+                    mainMenu();
+                    break;
+                case 2:
+                    selectView = 2;
+                    //hero = GameViews.updateHero();
+                    changeViewGui();
+                    break;
+                default:
+                    System.out.println("\nIncorrect Value.");
+                    selectView();
+                    break;
+            }
+        } else {
+            System.out.println("\nIncorrect Value.");
+            selectView();
         }
     }
-
     //menu option 0
+
     private static void saveAndExit() {
 
         if (hero != null) {
@@ -231,46 +275,66 @@ public class Main {
             System.out.println("\n0. Cancel");
             System.out.println();
 
-            option = scanner.nextInt();
-            switch (option) {
-                case 0:
-                    System.out.println();
-                    mainMenu();
-                    break;
-                case 1:
-                    try {
-                        String textFile = hero.getName() + "_" + hero.getType() + "_"
-                                + hero.getLevel() + "_" + hero.getExperience() + ".txt";
-                        String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/" + textFile;
-                        PrintWriter file = new PrintWriter(fileName);
-                        list = hero.saveAttributes();
-                        for (String str : list) {
-                            file.println(str);
-                        }
-                        file.close();
-                    } catch (FileNotFoundException e) {
+            if (scanner.hasNextInt()) {
+                option = scanner.nextInt();
+                switch (option) {
+                    case 0:
+                        System.out.println();
+                        mainMenu();
+                        break;
+                    case 1:
+                        try {
+                            String textFile = hero.getName() + "_" + hero.getType() + "_"
+                                    + hero.getLevel() + "_" + hero.getExperience() + ".txt";
+                            String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/" + textFile;
+                            PrintWriter file = new PrintWriter(fileName);
+                            list = hero.saveAttributes();
+                            for (String str : list) {
+                                file.println(str);
+                            }
+                            file.close();
+                        } catch (FileNotFoundException e) {
 
-                        //TODO: Catch exception
-                        System.out.println("OOPS");
-                    }
-                    System.out.println("\nGame Saved.");
-                    break;
-                case 2:
-                    System.exit(0);
-                    break;
+                            //TODO: Catch exception
+                            System.out.println("OOPS");
+                        }
+                        System.out.println("\nGame Saved.");
+                        break;
+                    case 2:
+                        System.exit(0);
+                        break;
+                    default:
+                        System.out.println("\nIncorrect Value.");
+                        saveAndExit();
+                        break;
+                }
+            } else {
+                System.out.println("\nIncorrect Value.");
+                saveAndExit();
             }
         }
     }
 
-    public static void changeViewConsole() {
+    public static void changeViewConsole(Hero guiHero) {
         if (view != null) {
             view.closeFrame();
             view = null;
         }
-        mainMenu();
+        if (hero != null) {
+            hero = guiHero;
+            mainMenu();
+        } else {
+            mainMenu();
+        }
     }
 
     public static void changeViewGui() {
         view = new View();
+//        if (hero == null) {
+//            Hero temp = new Hero();
+//            view = new View(new Map(hero), temp);
+//        } else {
+//            view = new View(new Map(hero), hero);
+//        }
     }
 }
