@@ -20,10 +20,10 @@ import javax.swing.UIManager;
  *
  * @author spencer
  */
-public class View {
+public class GuiView {
 
-    private static Map map;
-    private static Hero hero;
+    private Map map;
+    private Hero hero;
     private JFrame frame;
     private MainMenu mainMenu;
     private StartGame startGame;
@@ -31,14 +31,11 @@ public class View {
     private LoadCharacter loadCharacter;
     private SwitchView switchView;
 
-    public View() {
-        setVariablesNull();
+    public GuiView() {
         initialiseView();
     }
 
-    public View(Map map, Hero hero) {
-        setVariablesNull();
-        System.out.println("@1");
+    public GuiView(Map map, Hero hero) {
         this.hero = hero;
         this.map = map;
 
@@ -46,7 +43,6 @@ public class View {
     }
 
     public void initialiseView() {
-        System.out.println("@2");
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
@@ -55,9 +51,6 @@ public class View {
         frame = new JFrame();
         frame.addPropertyChangeListener(new MainMenuListener());
 
-//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//        double x = (double) screenSize.getWidth();
-//        double y = (double) screenSize.getHeight();
         mainMenu = new MainMenu();
         mainMenu.addPropertyChangeListener(new MainMenuListener());
 
@@ -68,7 +61,6 @@ public class View {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        System.out.println("@3");
     }
 
     private class MainMenuListener implements PropertyChangeListener {
@@ -76,7 +68,7 @@ public class View {
         @Override
         public void propertyChange(PropertyChangeEvent pce) {
             String source = pce.getPropertyName();
-            if (source == "StartGame") {
+            if (source.equals("StartGame")) {
                 if (hero == null) {
                     JOptionPane.showMessageDialog(null, "No Hero Selected.",
                             "WARNING", JOptionPane.ERROR_MESSAGE);
@@ -84,16 +76,16 @@ public class View {
                     removeMainMenu();
                     newStartGame();
                 }
-            } else if (source == "CreateHero") {
+            } else if (source.equals("CreateHero")) {
                 removeMainMenu();
                 newCreateHero();
-            } else if (source == "LoadCharacter") {
+            } else if (source.equals("LoadCharacter")) {
                 removeMainMenu();
                 newLoadCharacter();
-            } else if (source == "SwitchView") {
+            } else if (source.equals("SwitchView")) {
                 removeMainMenu();
                 newSwitchView();
-            } else if (source == "Exit") {
+            } else if (source.equals("Exit")) {
                 System.exit(0);
             }
         }
@@ -110,6 +102,7 @@ public class View {
                 newMainMenu();
                 System.out.println("END");
             } else if (source == "HeroAttributes") {
+//                this.hero = StartGame.getHero();
                 displayHeroAttributes();
             } else if (source == "Help") {
                 displayHelp();
@@ -172,7 +165,9 @@ public class View {
                 removeSwitchView();
                 newMainMenu();
             } else if (source == "ConsoleView") {
-                Main.changeViewConsole(View.hero);
+                Main.setMap(map);
+                Main.setHero(hero);
+                Main.closeGui();
             }
         }
     }
@@ -191,7 +186,7 @@ public class View {
     }
 
     private void newStartGame() {
-        startGame = new StartGame();
+        startGame = new StartGame(map, hero);
         startGame.addPropertyChangeListener(new StartGameListener());
 
         frame.add(startGame);
@@ -297,22 +292,6 @@ public class View {
         }
     }
 
-    public static Map getMap() {
-        return map;
-    }
-
-    public static void setMap(Map map) {
-        View.map = map;
-    }
-
-    public static Hero getHero() {
-        return hero;
-    }
-
-    public static void setHero(Hero hero) {
-        View.hero = hero;
-    }
-
     public void restartGame() {
         removeStartGame();
         newMainMenu();
@@ -324,14 +303,19 @@ public class View {
         frame = null;
     }
 
-    private void setVariablesNull() {
-        map = null;
-        hero = null;
-        frame = null;
-        mainMenu = null;
-        startGame = null;
-        createHero = null;
-        loadCharacter = null;
-        switchView = null;
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
+
+    public void setHero(Hero hero) {
+        this.hero = hero;
     }
 }

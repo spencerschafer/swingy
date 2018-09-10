@@ -5,18 +5,14 @@
  */
 package View.Gui;
 
-import Controller.Main;
 import Model.Artifacts.Armor;
 import Model.Artifacts.Helm;
 import Model.Artifacts.Weapon;
-import Model.Characters.Empty;
 import Model.Characters.Hero;
-import Model.Characters.Villain;
 import Model.Map;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Random;
-import java.util.Scanner;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -26,29 +22,28 @@ import javax.swing.JOptionPane;
  */
 public class StartGame extends javax.swing.JPanel {
 
-    private static Hero hero;
+    private Hero hero;
     private Map map;
-    private static Armor tempArmor;
-    private static Helm tempHelm;
-    private static Weapon tempWeapon;
+    private static Armor tempArmor = null;
+    private static Helm tempHelm = null;;
+    private static Weapon tempWeapon = null;;
     private Random rand;
     private JDialog dialogWindow;
 
     /**
      * Creates new form StartGame
      */
-    public StartGame() {
+    
+    public StartGame(Map map, Hero hero) {
         initComponents();
-        map = View.getMap();
-        hero = View.getHero();
-        Armor tempArmor = null;
-        Helm tempHelm = null;;
-        Weapon tempWeapon = null;;
+
+        this.map = map;
+        this.hero = hero;
         rand = new Random();
         displayMap();
     }
 
-    public static Hero getHero() {
+    public Hero getHero() {
         return hero;
     }
 
@@ -198,7 +193,7 @@ public class StartGame extends javax.swing.JPanel {
             Weapon weapon = new Weapon(hero);
 
             dialogWindow = new JDialog();
-            SelectArtifact panel = new SelectArtifact();
+            SelectArtifact panel = new SelectArtifact(map, hero);
 
             panel.addPropertyChangeListener(new ArtifactListener());
             dialogWindow.setTitle("Artifact Dropped.");
@@ -254,7 +249,7 @@ public class StartGame extends javax.swing.JPanel {
                         JOptionPane.INFORMATION_MESSAGE);
                 mainMenuButton.doClick();
             }
-            this.hero.levelUp();
+            hero.levelUp();
             map = new Map(hero);
         }
     }
@@ -422,19 +417,22 @@ public class StartGame extends javax.swing.JPanel {
 
     private void mainMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainMenuButtonActionPerformed
         // TODO add your handling code here:
-        View.setHero(hero);
+//        GuiView.setMap(map);
+//        GuiView.setHero(hero);
         this.firePropertyChange("MainMenu", null, evt);
     }//GEN-LAST:event_mainMenuButtonActionPerformed
 
     private void heroAttributesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heroAttributesButtonActionPerformed
         // TODO add your handling code here:
-        View.setHero(hero);
+//        GuiView.setMap(map);
+//        GuiView.setHero(hero);
         this.firePropertyChange("HeroAttributes", null, evt);
     }//GEN-LAST:event_heroAttributesButtonActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
         // TODO add your handling code here:
-        View.setHero(hero);
+//        GuiView.setMap(map);
+//        GuiView.setHero(hero);
         this.firePropertyChange("Help", null, evt);
     }//GEN-LAST:event_helpButtonActionPerformed
 

@@ -2,28 +2,26 @@ package Controller;
 
 import Model.Characters.Hero;
 import Model.Map;
-import View.GameViews;
-import View.Gui.View;
+import View.ConsoleView;
+import View.Gui.GuiView;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//    Reminder: When going back in main menu, methods are recalled, double check that recalling these methods do not create new instances of existing characters.
-//    Reminder: User input validation not checked
-//    Reminder: When loading hero, it is assumed the file format (input) is correct as no validation has yet to be done on the file
 public class Main {
 
-    private static View view = null;
+    private static GuiView guiView = null;
+    private static ConsoleView consoleView = null;
     private static Hero hero = null;
-    private static int selectView = 1;
+    private static Map map = null;
 
     public static void main(String[] args) {
         if (args.length == 0) {
             changeViewGui();
         } else if (args.length == 1) {
             if (args[0].equals("console")) {
-                changeViewConsole(hero);
+                changeViewConsole();
             } else if (args[0].equals("gui")) {
                 changeViewGui();
             }
@@ -74,7 +72,8 @@ public class Main {
             System.out.println("\nNo hero selected. Please select a hero.");
             selectCharacter();
         } else {
-            GameViews view = new GameViews(selectView, hero);
+            map = new Map(hero);
+            changeViewConsole();
         }
     }
 
@@ -239,13 +238,10 @@ public class Main {
                     mainMenu();
                     break;
                 case 1:
-                    selectView = 1;
                     System.out.println("\nConsole View selected.\n");
                     mainMenu();
                     break;
                 case 2:
-                    selectView = 2;
-                    //hero = GameViews.updateHero();
                     changeViewGui();
                     break;
                 default:
@@ -258,7 +254,6 @@ public class Main {
             selectView();
         }
     }
-    //menu option 0
 
     private static void saveAndExit() {
 
@@ -315,26 +310,38 @@ public class Main {
         }
     }
 
-    public static void changeViewConsole(Hero guiHero) {
-        if (view != null) {
-            view.closeFrame();
-            view = null;
-        }
-        if (hero != null) {
-            hero = guiHero;
-            mainMenu();
-        } else {
-            mainMenu();
-        }
+    public static void closeGui() {
+        guiView.closeFrame();
+        guiView = null;
+        mainMenu();
+    }
+    public static void changeViewConsole() {
+            consoleView = new ConsoleView(map, hero);
     }
 
     public static void changeViewGui() {
-        view = new View();
-//        if (hero == null) {
-//            Hero temp = new Hero();
-//            view = new View(new Map(hero), temp);
-//        } else {
-//            view = new View(new Map(hero), hero);
-//        }
+        guiView = new GuiView(map, hero);
     }
+    
+    public void loadMenu() {
+        consoleView = null;
+    }
+
+    public static Hero getHero() {
+        return hero;
+    }
+
+    public static void setHero(Hero hero) {
+        Main.hero = hero;
+    }
+
+    public static Map getMap() {
+        return map;
+    }
+
+    public static void setMap(Map map) {
+        Main.map = map;
+    }
+    
+    
 }

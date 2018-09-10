@@ -8,6 +8,8 @@ package View.Gui;
 import Model.Artifacts.Armor;
 import Model.Artifacts.Helm;
 import Model.Artifacts.Weapon;
+import Model.Characters.Hero;
+import Model.Map;
 import java.util.Random;
 
 /**
@@ -16,46 +18,44 @@ import java.util.Random;
  */
 public class SelectArtifact extends javax.swing.JPanel {
 
+    private Map map;
+    private Hero hero;
     private Random rand;
-    private Helm helm;
-    private Armor armor;
-    private Weapon weapon;
+    private Helm helm = null;
+    private Armor armor = null;
+    private Weapon weapon = null;
     private int dropChance;
 
     /**
      * Creates new form HeroBattle
      */
-    public SelectArtifact() {
+    public SelectArtifact(Map map, Hero hero) {
         initComponents();
-        helm = null;
-        armor = null;
-        weapon = null;
+        this.map = map;
+        this.hero = hero;
         rand = new Random();
         displayArtifact();
     }
 
     private void displayArtifact() {
         dropChance = rand.nextInt(3) + 1;
-        
-        System.out.println("dropChance: " + dropChance);
-        
             if (dropChance == 1) {
-                helm = new Helm(StartGame.getHero());
+                helm = new Helm(hero);
                 artifactTextArea.setText(null);
                 artifactTextArea.setText("New Helmet:");
-                artifactTextArea.append("\n\nOld HP: " + StartGame.getHero().getHelmet().getHitPoints());
+                artifactTextArea.append("\n\nOld HP: " + hero.getHelmet().getHitPoints());
                 artifactTextArea.append("\nNew HP: " + helm.getHitPoints());
             } else if (dropChance == 2) {
-                armor = new Armor(StartGame.getHero());
+                armor = new Armor(hero);
                 artifactTextArea.setText(null);
                 artifactTextArea.setText("New Armor:");
-                artifactTextArea.append("\n\nOld DEF: " + StartGame.getHero().getArmor().getDefense());
+                artifactTextArea.append("\n\nOld DEF: " + hero.getArmor().getDefense());
                 artifactTextArea.append("\nNew DEF: " + armor.getDefense());
             } else if (dropChance == 3) {
-                weapon = new Weapon(StartGame.getHero());
+                weapon = new Weapon(hero);
                 artifactTextArea.setText(null);
                 artifactTextArea.setText("New Weapon:");
-                artifactTextArea.append("\n\nOld ATT: " + StartGame.getHero().getWeapon().getAttack());
+                artifactTextArea.append("\n\nOld ATT: " + hero.getWeapon().getAttack());
                 artifactTextArea.append("\nNew ATT: " + weapon.getAttack());
             }
     }

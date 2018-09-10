@@ -79,7 +79,7 @@ public class Hero extends Character {
         this.setMapLimit((this.getLevel() - 1) * 5 + 10 - (this.getLevel() % 2));
     }
 
-    public void move() {
+    public boolean move() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         System.out.println();
@@ -106,8 +106,9 @@ public class Hero extends Character {
         } else if (input.equalsIgnoreCase("c")) {
             printControls();
         } else if (input.equalsIgnoreCase("q")) {
-            Main.mainMenu();
+            return false;
         }
+        return true;
     }
 
     public void increaseExperience() {

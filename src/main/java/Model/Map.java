@@ -158,7 +158,7 @@ public class Map {
 //                System.out.println("H HP: " + heroHitPoints);
 //                System.out.println("V HP: " + villainHitPoints + "\n");
                 System.out.println("\nBattle lost!\n");
-                Main.mainMenu();
+                return false;
             }
         }
         System.out.println("\n---\n");
@@ -192,7 +192,7 @@ public class Map {
         if ((hero.getX() == 0) || (hero.getX() == (size - 1)) || (hero.getY() == 0) || (hero.getY() == (size - 1))) {
             System.out.println("Level Complete!\n");
             if (checkHeroLevel()) {
-                Main.mainMenu();
+                return false;
             }
             this.hero.levelUp();
             return true;
