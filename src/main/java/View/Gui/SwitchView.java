@@ -28,8 +28,7 @@ public class SwitchView extends javax.swing.JPanel {
     private void initComponents() {
 
         backButton = new javax.swing.JButton();
-        switchViewComboBox = new javax.swing.JComboBox<>();
-        loadButton = new javax.swing.JButton();
+        loadConsoleButton = new javax.swing.JButton();
 
         backButton.setText("Back");
         backButton.setMaximumSize(new java.awt.Dimension(165, 30));
@@ -40,23 +39,13 @@ public class SwitchView extends javax.swing.JPanel {
             }
         });
 
-        switchViewComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select View", "GUI", "Console" }));
-        switchViewComboBox.setMaximumSize(new java.awt.Dimension(400, 30));
-        switchViewComboBox.setMinimumSize(new java.awt.Dimension(400, 30));
-        switchViewComboBox.setPreferredSize(new java.awt.Dimension(400, 30));
-        switchViewComboBox.addActionListener(new java.awt.event.ActionListener() {
+        loadConsoleButton.setText("Console View");
+        loadConsoleButton.setMaximumSize(new java.awt.Dimension(165, 30));
+        loadConsoleButton.setMinimumSize(new java.awt.Dimension(165, 30));
+        loadConsoleButton.setPreferredSize(new java.awt.Dimension(165, 30));
+        loadConsoleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                switchViewComboBoxActionPerformed(evt);
-            }
-        });
-
-        loadButton.setText("Load");
-        loadButton.setMaximumSize(new java.awt.Dimension(165, 30));
-        loadButton.setMinimumSize(new java.awt.Dimension(165, 30));
-        loadButton.setPreferredSize(new java.awt.Dimension(165, 30));
-        loadButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadButtonActionPerformed(evt);
+                loadConsoleButtonActionPerformed(evt);
             }
         });
 
@@ -64,25 +53,19 @@ public class SwitchView extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
-                .addComponent(switchViewComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(150, 150, 150))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(275, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(loadConsoleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(switchViewComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
-                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap(183, Short.MAX_VALUE)
+                .addComponent(loadConsoleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
         );
@@ -93,19 +76,14 @@ public class SwitchView extends javax.swing.JPanel {
         this.firePropertyChange("Back", null, evt);
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+    private void loadConsoleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadConsoleButtonActionPerformed
         // TODO add your handling code here:
-        this.firePropertyChange("Load", null, evt);
-    }//GEN-LAST:event_loadButtonActionPerformed
-
-    private void switchViewComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_switchViewComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_switchViewComboBoxActionPerformed
+        this.firePropertyChange("ConsoleView", null, evt);
+    }//GEN-LAST:event_loadConsoleButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JButton loadButton;
-    private javax.swing.JComboBox<String> switchViewComboBox;
+    private javax.swing.JButton loadConsoleButton;
     // End of variables declaration//GEN-END:variables
 }

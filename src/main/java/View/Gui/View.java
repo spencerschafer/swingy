@@ -5,6 +5,7 @@
  */
 package View.Gui;
 
+import Controller.Main;
 import Model.Characters.*;
 import Model.Map;
 import java.awt.Dimension;
@@ -94,11 +95,9 @@ public class View {
             } else if (source == "LoadCharacter") {
                 removeMainMenu();
                 newLoadCharacter();
-
             } else if (source == "SwitchView") {
                 removeMainMenu();
                 newSwitchView();
-
             } else if (source == "Exit") {
                 System.exit(0);
             }
@@ -177,6 +176,9 @@ public class View {
             if (source == "Back") {
                 removeSwitchView();
                 newMainMenu();
+            } else if (source == "ConsoleView") {
+                System.out.println("@@FIRED");
+                Main.changeViewConsole();
             }
         }
     }
@@ -320,5 +322,11 @@ public class View {
     public void restartGame() {
         removeStartGame();
         newMainMenu();
+    }
+    
+    public void closeFrame() {
+        frame.dispose();
+        frame.setVisible(false);
+        frame = null;
     }
 }

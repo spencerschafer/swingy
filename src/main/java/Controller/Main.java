@@ -12,19 +12,27 @@ import java.util.Scanner;
 //    Reminder: When going back in main menu, methods are recalled, double check that recalling these methods do not create new instances of existing characters.
 //    Reminder: User input validation not checked
 //    Reminder: When loading hero, it is assumed the file format (input) is correct as no validation has yet to be done on the file
-
-
 public class Main {
+
+    private static View view = null;
     private static Hero hero = null;
     private static int selectView = 1;
 
     public static void main(String[] args) {
-
-        View view = new View();
-//        mainMenu();
+        if (args.length == 0) {
+            changeViewGui();
+        } else if (args.length == 1) {
+            if (args[0].equals("console")) {
+                changeViewConsole();
+            } else if (args[0].equals("gui")) {
+                changeViewGui();
+            }
+        }
     }
 
-    public static void mainMenu() {
+
+
+public static void mainMenu() {
         int option;
 
         System.out.println("Main Menu");
@@ -98,7 +106,6 @@ public class Main {
         System.out.println("\nEnter Character name: ");
         name = scanner.next();
 
-//      perhaps only limit to 2 classes
         System.out.println("\nSelect Character type:  ");
         System.out.println("1. Warrior  ");
         System.out.println("2. Archer  ");
@@ -205,7 +212,7 @@ public class Main {
                 System.out.println("\nGUI View selected.\n");
                 //mainMenu();
                 View gui = new View(new Map(hero), hero);
-                
+
                 break;
         }
     }
@@ -239,8 +246,9 @@ public class Main {
                         String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/" + textFile;
                         PrintWriter file = new PrintWriter(fileName);
                         list = hero.saveAttributes();
-                        for (String str : list)
+                        for (String str : list) {
                             file.println(str);
+                        }
                         file.close();
                     } catch (FileNotFoundException e) {
 
@@ -254,5 +262,15 @@ public class Main {
                     break;
             }
         }
+    }
+
+    public static void changeViewConsole() {
+        view.closeFrame();
+        view = null;
+        mainMenu();    
+    }
+
+    public static void changeViewGui() {
+        view = new View();
     }
 }

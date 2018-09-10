@@ -33,4 +33,5 @@
             <version>SNAPSHOT</version>
         </dependency>
     </dependencies>
+    <name>swingy</name>
 </project>
