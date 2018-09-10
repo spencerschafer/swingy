@@ -28,7 +28,6 @@ public class CreateHero extends javax.swing.JPanel {
     }
 
     public static Hero getHero() {
-        System.out.println("TESTY");
         return hero;
     }
 
@@ -46,6 +45,7 @@ public class CreateHero extends javax.swing.JPanel {
         heroNameField = new javax.swing.JTextField();
         selectClassComboBox = new javax.swing.JComboBox<>();
         heroInfoArea = new javax.swing.JTextArea();
+        nameLabel = new javax.swing.JLabel();
 
         CreateButton.setText("Create");
         CreateButton.setMaximumSize(new java.awt.Dimension(165, 30));
@@ -67,7 +67,7 @@ public class CreateHero extends javax.swing.JPanel {
             }
         });
 
-        heroNameField.setText("Enter Hero Name");
+        heroNameField.setToolTipText("Press Enter to apply name.");
         heroNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 heroNameFieldActionPerformed(evt);
@@ -85,6 +85,8 @@ public class CreateHero extends javax.swing.JPanel {
         heroInfoArea.setRows(5);
         heroInfoArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        nameLabel.setText("Enter Hero Name:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,16 +99,20 @@ public class CreateHero extends javax.swing.JPanel {
                 .addContainerGap(275, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(selectClassComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(heroNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(heroInfoArea, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameLabel)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(selectClassComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(heroNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                        .addComponent(heroInfoArea, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(275, 275, 275))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(134, 134, 134)
+                .addGap(110, 110, 110)
+                .addComponent(nameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(heroNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(selectClassComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,21 +154,19 @@ public class CreateHero extends javax.swing.JPanel {
         if (selectClassComboBox.getSelectedItem() == "Warrior") {
             heroInfoArea.setText("Base Attributes:\n\n");
             heroInfoArea.append("DEF: +20\n");
-            heroInfoArea.append("HP   : +50");
+            heroInfoArea.append("HP   : +50\n");
+            type = "Warrior";
         } else if (selectClassComboBox.getSelectedItem() == "Archer") {
             heroInfoArea.setText("Base Attributes:\n\n");
             heroInfoArea.append("ATT: +20");
+            type = "Archer";
         }
     }//GEN-LAST:event_selectClassComboBoxActionPerformed
 
     private void heroNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heroNameFieldActionPerformed
         // TODO add your handling code here:
-        if (heroNameField.getText() == "Enter Hero Name") {
-            System.out.println(name);
-        } else {
-            name = heroNameField.getText();
-            System.out.println(name);
-        }   
+        name = heroNameField.getText();
+        System.out.println(name);
     }//GEN-LAST:event_heroNameFieldActionPerformed
 
 
@@ -171,6 +175,7 @@ public class CreateHero extends javax.swing.JPanel {
     private javax.swing.JButton backButton;
     private javax.swing.JTextArea heroInfoArea;
     private javax.swing.JTextField heroNameField;
+    private javax.swing.JLabel nameLabel;
     private javax.swing.JComboBox<String> selectClassComboBox;
     // End of variables declaration//GEN-END:variables
 }
