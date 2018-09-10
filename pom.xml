@@ -6,7 +6,7 @@
 
     <groupId>swingy</groupId>
     <artifactId>swingy</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>swingy</version>
     <build>
         <plugins>
             <plugin>
@@ -15,6 +15,21 @@
                 <configuration>
                     <source>7</source>
                     <target>7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <!--<version>3.1.0</version> -->
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>Controller.Main</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>

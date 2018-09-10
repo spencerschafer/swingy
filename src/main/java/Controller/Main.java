@@ -30,9 +30,7 @@ public class Main {
         }
     }
 
-
-
-public static void mainMenu() {
+    public static void mainMenu() {
         int option;
 
         System.out.println("Main Menu");
@@ -265,9 +263,11 @@ public static void mainMenu() {
     }
 
     public static void changeViewConsole() {
-        view.closeFrame();
-        view = null;
-        mainMenu();    
+        if (view != null) {
+            view.closeFrame();
+            view = null;
+        }
+        mainMenu();
     }
 
     public static void changeViewGui() {
