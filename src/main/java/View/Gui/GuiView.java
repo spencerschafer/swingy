@@ -97,12 +97,9 @@ public class GuiView {
         public void propertyChange(PropertyChangeEvent pce) {
             String source = pce.getPropertyName();
             if (source == "MainMenu") {
-                System.out.println("START");
                 removeStartGame();
                 newMainMenu();
-                System.out.println("END");
             } else if (source == "HeroAttributes") {
-//                this.hero = StartGame.getHero();
                 displayHeroAttributes();
             } else if (source == "Help") {
                 displayHelp();

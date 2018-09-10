@@ -109,7 +109,6 @@ public class StartGame extends javax.swing.JPanel {
         @Override
         public void propertyChange(PropertyChangeEvent pce) {
             String source = pce.getPropertyName();
-            System.out.println("0");
             if (source == "Fight") {
                 if (!battleFight(hero, map.getCharacter(hero.getY(), hero.getX()))) {
                     dialogWindow.dispose();
@@ -138,11 +137,12 @@ public class StartGame extends javax.swing.JPanel {
         int heroHitPoints = hero.getHitPoints();
         int villainHitPoints = villain.getHitPoints();
 
-        System.out.println("\nHero     | Villain2");
-        System.out.println("--------------------");
-        System.out.println("HP : " + hero.getHitPoints() + " | " + villain.getHitPoints());
-        System.out.println("DEF:  " + hero.getDefense() + " | " + villain.getDefense());
-        System.out.println("ATT:  " + hero.getAttack() + " | " + villain.getAttack());
+//        TODO:Add display that shows Hero/Villain Stats
+//        System.out.println("\nHero     | Villain");
+//        System.out.println("--------------------");
+//        System.out.println("HP : " + hero.getHitPoints() + " | " + villain.getHitPoints());
+//        System.out.println("DEF:  " + hero.getDefense() + " | " + villain.getDefense());
+//        System.out.println("ATT:  " + hero.getAttack() + " | " + villain.getAttack());
 
         while (heroHitPoints > 0 && villainHitPoints > 0) {
 
@@ -212,7 +212,6 @@ public class StartGame extends javax.swing.JPanel {
         @Override
         public void propertyChange(PropertyChangeEvent pce) {
             String source = pce.getPropertyName();
-            System.out.println("1");
             if (source == "Equip") {
                 if (tempHelm != null) {
                     hero.newHelm(tempHelm);
