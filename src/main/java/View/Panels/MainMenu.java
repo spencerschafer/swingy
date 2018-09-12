@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Panels;
+package View.Panels;
 
 /**
  *
@@ -96,7 +96,7 @@ public class MainMenu extends javax.swing.JPanel {
         });
 
         versionLabel.setFont(new java.awt.Font("Courier", 0, 12)); // NOI18N
-        versionLabel.setText("v1.0");
+        versionLabel.setText("v1.1");
 
         createButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         createButton.setText("Create");

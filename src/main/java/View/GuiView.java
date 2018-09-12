@@ -8,11 +8,11 @@ package View;
 import Controller.Main;
 import Model.Characters.*;
 import Model.Map;
-import Panels.CreateHero;
-import Panels.LoadCharacter;
-import Panels.MainMenu;
-import Panels.StartGame;
-import Panels.SwitchView;
+import View.Panels.CreateHero;
+import View.Panels.LoadCharacter;
+import View.Panels.MainMenu;
+import View.Panels.StartGame;
+import View.Panels.SwitchView;
 import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -162,6 +162,9 @@ public class GuiView {
                         JOptionPane.INFORMATION_MESSAGE);
             } else if (source == "Default") {
                 JOptionPane.showMessageDialog(null, "No Hero Selected.",
+                        "WARNING", JOptionPane.ERROR_MESSAGE);
+            } else if (source == "NoFile") {
+                JOptionPane.showMessageDialog(null, "No Saved Files Detected.",
                         "WARNING", JOptionPane.ERROR_MESSAGE);
             } else if (source == "Back") {
                 removeLoadCharacter();

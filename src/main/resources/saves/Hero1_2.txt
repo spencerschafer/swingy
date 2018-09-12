@@ -1,5 +1,5 @@
 Hero1
-ClassNotYetImplemented
+Archer
 2
 0
 30

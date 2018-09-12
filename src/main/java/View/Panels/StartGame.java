@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Panels;
+package View.Panels;
 
 import Model.Artifacts.Armor;
 import Model.Artifacts.Helm;
@@ -449,16 +449,13 @@ public class StartGame extends javax.swing.JPanel {
 
     private void northButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_northButtonActionPerformed
         // TODO add your handling code here:
-//        this.firePropertyChange("North", null, evt);
         if (hero.getY() != 0) {
             hero.setPreviousPosition(hero.getX(), hero.getY());
             hero.setY(hero.getY() - 1);
-
             displayMap();
         }
         battle();
         if (victory == false) {
-            System.out.println(victory);
             firePropertyChange("Defeat", null, evt);
         }
         if (victory == true) {
@@ -471,16 +468,13 @@ public class StartGame extends javax.swing.JPanel {
 
     private void southButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_southButtonActionPerformed
         // TODO add your handling code here:
-//        this.firePropertyChange("South", null, evt);
         if (hero.getY() != hero.getMapLimit() - 1) {
             hero.setPreviousPosition(hero.getX(), hero.getY());
             hero.setY(hero.getY() + 1);
-
             displayMap();
         }
         battle();
         if (victory == false) {
-            System.out.println(victory);
             firePropertyChange("Defeat", null, evt);
         }
         if (victory == true) {
@@ -493,16 +487,13 @@ public class StartGame extends javax.swing.JPanel {
 
     private void westButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_westButtonActionPerformed
         // TODO add your handling code here:
-//        this.firePropertyChange("West", null, evt);
         if (hero.getX() != 0) {
             hero.setPreviousPosition(hero.getX(), hero.getY());
             hero.setX(hero.getX() - 1);
-
             displayMap();
         }
         battle();
         if (victory == false) {
-            System.out.println(victory);
             firePropertyChange("Defeat", null, evt);
         }
         if (victory == true) {
@@ -519,12 +510,10 @@ public class StartGame extends javax.swing.JPanel {
         if (hero.getX() != hero.getMapLimit() - 1) {
             hero.setPreviousPosition(hero.getX(), hero.getY());
             hero.setX(hero.getX() + 1);
-
             displayMap();
         }
         battle();
         if (victory == false) {
-            System.out.println(victory);
             firePropertyChange("Defeat", null, evt);
         }
         if (victory == true) {

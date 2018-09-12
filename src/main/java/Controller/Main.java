@@ -146,7 +146,8 @@ public class Main {
             newCharacter();
         }
 
-        System.out.println("\nCreate Character '" + name + "' of type '" + type + "'?");
+        System.out.println("\nCreate Character '" + name + "' of type '" 
+                + type + "'?");
         System.out.println("1. Yes");
         System.out.println("2. No");
         System.out.println("\n0. Cancel");
@@ -185,9 +186,11 @@ public class Main {
 
     private static void loadCharacter() {
 
+        try {
         ArrayList<String> list = new ArrayList<>();
 
-        String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/";
+        String fileName = System.getProperty("user.dir") 
+                + "/src/main/resources/saves/";
         File folder = new File(fileName);
         File[] listOfFiles = folder.listFiles();
         System.out.println("\nSaved Files");
@@ -199,11 +202,14 @@ public class Main {
         }
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\nEnter the name of the file you would like to load:");
+        System.out.println("\nEnter the name of the file "
+                + "you would like to load:");
         String textFile = scanner.nextLine();
-        fileName = System.getProperty("user.dir") + "/src/main/resources/saves/" + textFile;
+        fileName = System.getProperty("user.dir") + "/src/main/resources/saves/"
+                + textFile;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));
+            BufferedReader reader = new BufferedReader(
+                    new FileReader(new File(fileName)));
             String line;
             while ((line = reader.readLine()) != null) {
                 list.add(line);
@@ -216,6 +222,10 @@ public class Main {
         hero = new Hero(list);
         System.out.println("\nCharacter Loaded.\n");
         mainMenu();
+        } catch (Exception E) {
+            System.out.println("\n No Saved Files Detected.\n");
+            mainMenu();
+        }
     }
 
     private static void selectView() {
@@ -279,9 +289,12 @@ public class Main {
                         break;
                     case 1:
                         try {
-                            String textFile = hero.getName() + "_" + hero.getType() + "_"
-                                    + hero.getLevel() + "_" + hero.getExperience() + ".txt";
-                            String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/" + textFile;
+                            String textFile = hero.getName() + "_" 
+                                    + hero.getType() + "_"
+                                    + hero.getLevel() + "_" 
+                                    + hero.getExperience() + ".txt";
+                            String fileName = System.getProperty("user.dir") +
+                                    "/src/main/resources/saves/" + textFile;
                             PrintWriter file = new PrintWriter(fileName);
                             list = hero.saveAttributes();
                             for (String str : list) {
@@ -289,9 +302,8 @@ public class Main {
                             }
                             file.close();
                         } catch (FileNotFoundException e) {
-
-                            //TODO: Catch exception
-                            System.out.println("OOPS");
+                            System.out.println("No save directory. "
+                                    + "Unable to save.");
                         }
                         System.out.println("\nGame Saved.");
                         break;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Panels;
+package View.Panels;
 
 import Model.Characters.Hero;
 import java.io.BufferedReader;
@@ -19,7 +19,8 @@ import java.util.ArrayList;
 public class LoadCharacter extends javax.swing.JPanel {
 
     private ArrayList<String> list;
-    private static Hero hero;
+    private static Hero hero = null;
+    private boolean validFile = false;
 
     /**
      * Creates new form LoadCharacter
@@ -32,14 +33,17 @@ public class LoadCharacter extends javax.swing.JPanel {
 
     private void addItems() {
 //        ArrayList<String> list = new ArrayList<>();
+        try {
+            String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/";
+            File folder = new File(fileName);
+            File[] listOfFiles = folder.listFiles();
 
-        String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/";
-        File folder = new File(fileName);
-        File[] listOfFiles = folder.listFiles();
-
-        //TODO: check for exception
-        for (File file : listOfFiles) {
-            loadCharacterComboBox.addItem(file.getName());
+            //TODO: check for exception
+            for (File file : listOfFiles) {
+                loadCharacterComboBox.addItem(file.getName());
+            }
+        } catch (Exception e) {
+            loadButton.doClick();
         }
     }
 
@@ -182,8 +186,12 @@ public class LoadCharacter extends javax.swing.JPanel {
         if (loadCharacterComboBox.getSelectedItem() == "Select Hero") {
             this.firePropertyChange("Default", null, evt);
         } else {
-            hero = new Hero(list);
-            this.firePropertyChange("Load", null, evt);
+            if (validFile = false) {
+                this.firePropertyChange("NoFile", null, evt);
+            } else {
+                hero = new Hero(list);
+                this.firePropertyChange("Load", null, evt);
+            }
         }
     }//GEN-LAST:event_loadButtonActionPerformed
 
