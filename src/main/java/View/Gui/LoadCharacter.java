@@ -63,6 +63,7 @@ public class LoadCharacter extends javax.swing.JPanel {
         heroInfoTextArea = new javax.swing.JTextArea();
         loadButton = new javax.swing.JButton();
 
+        backButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         backButton.setText("Back");
         backButton.setMaximumSize(new java.awt.Dimension(165, 30));
         backButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -73,6 +74,7 @@ public class LoadCharacter extends javax.swing.JPanel {
             }
         });
 
+        loadCharacterComboBox.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         loadCharacterComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Hero" }));
         loadCharacterComboBox.setMaximumSize(new java.awt.Dimension(400, 30));
         loadCharacterComboBox.setMinimumSize(new java.awt.Dimension(400, 30));
@@ -84,9 +86,11 @@ public class LoadCharacter extends javax.swing.JPanel {
         });
 
         heroInfoTextArea.setColumns(20);
+        heroInfoTextArea.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         heroInfoTextArea.setRows(5);
         heroInfoScrollPanel.setViewportView(heroInfoTextArea);
 
+        loadButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         loadButton.setText("Load");
         loadButton.setMaximumSize(new java.awt.Dimension(165, 30));
         loadButton.setMinimumSize(new java.awt.Dimension(165, 30));

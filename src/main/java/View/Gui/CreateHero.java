@@ -82,6 +82,7 @@ public class CreateHero extends javax.swing.JPanel {
         });
 
         heroInfoArea.setColumns(20);
+        heroInfoArea.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         heroInfoArea.setRows(5);
         heroInfoArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

@@ -6,12 +6,18 @@
 
     <groupId>swingy</groupId>
     <artifactId>swingy</artifactId>
-    <version>9</version>
+    <version>1.0</version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
                 <configuration>
                     <source>7</source>
                     <target>7</target>
@@ -21,7 +27,7 @@
                 <!-- Build an executable JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <!--<version>3.1.0</version> -->
+                <version>3.1.0</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -42,11 +48,7 @@
         </repository>
     </repositories>
     <dependencies>
-        <dependency>
-            <groupId>unknown.binary</groupId>
-            <artifactId>AbsoluteLayout</artifactId>
-            <version>SNAPSHOT</version>
-        </dependency>
+        
     </dependencies>
-    <name>swingy</name>
+    <name>Swingy</name>
 </project>

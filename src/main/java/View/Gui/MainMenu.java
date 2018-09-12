@@ -47,7 +47,7 @@ public class MainMenu extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        swingyTitle.setFont(new java.awt.Font("Karumbi", 0, 190)); // NOI18N
+        swingyTitle.setFont(new java.awt.Font("Courier New", 0, 60)); // NOI18N
         swingyTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         swingyTitle.setText("Swingy");
         swingyTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

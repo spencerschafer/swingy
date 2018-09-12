@@ -282,7 +282,7 @@ public class StartGame extends javax.swing.JPanel {
         helpButton = new javax.swing.JButton();
 
         mapDisplayArea.setColumns(20);
-        mapDisplayArea.setFont(new java.awt.Font("Courier 10 Pitch", 0, 15)); // NOI18N
+        mapDisplayArea.setFont(new java.awt.Font("Courier New", 0, 15)); // NOI18N
         mapDisplayArea.setRows(5);
         mapScrollPane.setViewportView(mapDisplayArea);
 
@@ -290,6 +290,7 @@ public class StartGame extends javax.swing.JPanel {
         heroStatsDisplay.setRows(5);
         heroStatsDisplay.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        northButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         northButton.setText("North");
         northButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         northButton.setMaximumSize(new java.awt.Dimension(165, 30));
@@ -301,6 +302,7 @@ public class StartGame extends javax.swing.JPanel {
             }
         });
 
+        westButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         westButton.setText("West");
         westButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         westButton.setMaximumSize(new java.awt.Dimension(165, 30));
@@ -312,6 +314,7 @@ public class StartGame extends javax.swing.JPanel {
             }
         });
 
+        eastButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         eastButton.setText("East");
         eastButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         eastButton.setMaximumSize(new java.awt.Dimension(60, 50));
@@ -322,6 +325,7 @@ public class StartGame extends javax.swing.JPanel {
             }
         });
 
+        southButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         southButton.setText("South");
         southButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         southButton.setPreferredSize(new java.awt.Dimension(60, 50));
@@ -331,6 +335,7 @@ public class StartGame extends javax.swing.JPanel {
             }
         });
 
+        mainMenuButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         mainMenuButton.setText("Main Menu");
         mainMenuButton.setMaximumSize(new java.awt.Dimension(165, 30));
         mainMenuButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -341,6 +346,7 @@ public class StartGame extends javax.swing.JPanel {
             }
         });
 
+        heroAttributesButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         heroAttributesButton.setText("Hero Attributes");
         heroAttributesButton.setMaximumSize(new java.awt.Dimension(165, 30));
         heroAttributesButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -351,6 +357,7 @@ public class StartGame extends javax.swing.JPanel {
             }
         });
 
+        helpButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         helpButton.setText("Help");
         helpButton.setPreferredSize(new java.awt.Dimension(165, 30));
         helpButton.addActionListener(new java.awt.event.ActionListener() {
@@ -367,24 +374,22 @@ public class StartGame extends javax.swing.JPanel {
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(mapScrollPane)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(mainMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(35, 35, 35)
-                            .addComponent(heroAttributesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(35, 35, 35)
-                            .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(heroStatsDisplay, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(128, 128, 128)
-                                .addComponent(westButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(northButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(southButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(eastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(mainMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(heroAttributesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(heroStatsDisplay, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(westButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(northButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(southButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(eastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(90, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
