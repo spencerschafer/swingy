@@ -223,7 +223,7 @@ public class Main {
         System.out.println("\nCharacter Loaded.\n");
         mainMenu();
         } catch (Exception E) {
-            System.out.println("\n No Saved Files Detected.\n");
+            System.out.println("\nNo Saved Files Detected.\n");
             mainMenu();
         }
     }

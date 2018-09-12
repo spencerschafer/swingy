@@ -6,6 +6,8 @@
 package View.Panels;
 
 import Model.Characters.Hero;
+
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -13,12 +15,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- *
  * @author spencer
  */
 public class LoadCharacter extends javax.swing.JPanel {
 
     private ArrayList<String> list;
+    private File[] listOfFiles = null;
     private static Hero hero = null;
     private boolean validFile = false;
 
@@ -36,7 +38,7 @@ public class LoadCharacter extends javax.swing.JPanel {
         try {
             String fileName = System.getProperty("user.dir") + "/src/main/resources/saves/";
             File folder = new File(fileName);
-            File[] listOfFiles = folder.listFiles();
+            listOfFiles = folder.listFiles();
 
             //TODO: check for exception
             for (File file : listOfFiles) {
@@ -145,39 +147,52 @@ public class LoadCharacter extends javax.swing.JPanel {
     private void loadCharacterComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadCharacterComboBoxActionPerformed
         // TODO add your handling code here:
         heroInfoTextArea.setText(null);
+        String fileName;
+        File file = null;
 
-        if (!(loadCharacterComboBox.getSelectedItem() == "Select Hero")) {
-            String fileName = System.getProperty("user.dir")
-                    + "/src/main/resources/saves/"
-                    + loadCharacterComboBox.getSelectedItem();
-            list = new ArrayList<>();
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    list.add(line);
+        try {
+            if (!(loadCharacterComboBox.getSelectedItem() == "Select Hero")) {
+                fileName = System.getProperty("user.dir")
+                        + "/src/main/resources/saves/"
+                        + loadCharacterComboBox.getSelectedItem();
+                list = new ArrayList<>();
+                try {
+                    file = new File(fileName);
+                    BufferedReader reader = new BufferedReader(new FileReader(file));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        list.add(line);
+                    }
+                    reader.close();
+                } catch (IOException e) {
+                    System.out.println("\nThat file does not exist.");
                 }
-                reader.close();
-            } catch (IOException e) {
-                System.out.println("\nThat file does not exist.");
-            }
 
-            heroInfoTextArea.setText(
-                    "Hero Attributes\n"
-                    + "- - - - - - - - "
-                    + "\nName:   " + list.get(0)
-                    + "\nClass:  " + list.get(1)
-                    + "\nLevel:  " + list.get(2)
-                    + "\nEXP:    " + list.get(3)
-                    + "\nATT:    " + list.get(4)
-                    + "\nDEF:    " + list.get(5)
-                    + "\nHP:     " + list.get(6)
-                    + "\n\nHero Artifacts"
-                    + "\n- - - - - - - -"
-                    + "\nHelmet: " + list.get(7) + " HP"
-                    + "\nArmor:  " + list.get(8) + " DEF"
-                    + "\nWeapon: " + list.get(9) + " ATT\n"
-            );
+                heroInfoTextArea.setText(
+                        "Hero Attributes\n"
+                                + "- - - - - - - - "
+                                + "\nName:   " + list.get(0)
+                                + "\nClass:  " + list.get(1)
+                                + "\nLevel:  " + list.get(2)
+                                + "\nEXP:    " + list.get(3)
+                                + "\nATT:    " + list.get(4)
+                                + "\nDEF:    " + list.get(5)
+                                + "\nHP:     " + list.get(6)
+                                + "\n\nHero Artifacts"
+                                + "\n- - - - - - - -"
+                                + "\nHelmet: " + list.get(7) + " HP"
+                                + "\nArmor:  " + list.get(8) + " DEF"
+                                + "\nWeapon: " + list.get(9) + " ATT\n"
+                );
+            }
+        } catch (Exception E) {
+            loadCharacterComboBox.hidePopup();
+            if (file != null) {
+                file.delete();
+                loadCharacterComboBox.removeItem(loadCharacterComboBox.getSelectedItem());
+            }
+            JOptionPane.showMessageDialog(null, "Incorrect File Format. File has been removed",
+                    "WARNING", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_loadCharacterComboBoxActionPerformed
 
