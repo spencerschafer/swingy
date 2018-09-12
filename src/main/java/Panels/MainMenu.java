@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View.Gui;
+package Panels;
 
 /**
  *
@@ -47,11 +47,12 @@ public class MainMenu extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        swingyTitle.setFont(new java.awt.Font("Courier New", 0, 60)); // NOI18N
+        swingyTitle.setFont(new java.awt.Font("Courier", 0, 95)); // NOI18N
         swingyTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         swingyTitle.setText("Swingy");
         swingyTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        startGameButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         startGameButton.setText("Start Game");
         startGameButton.setMaximumSize(new java.awt.Dimension(165, 30));
         startGameButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -62,6 +63,7 @@ public class MainMenu extends javax.swing.JPanel {
             }
         });
 
+        loadButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         loadButton.setText("Load");
         loadButton.setMaximumSize(new java.awt.Dimension(165, 30));
         loadButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -72,6 +74,7 @@ public class MainMenu extends javax.swing.JPanel {
             }
         });
 
+        switchViewButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         switchViewButton.setText("View");
         switchViewButton.setMaximumSize(new java.awt.Dimension(165, 30));
         switchViewButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -81,6 +84,7 @@ public class MainMenu extends javax.swing.JPanel {
             }
         });
 
+        exitButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         exitButton.setText("Exit");
         exitButton.setMaximumSize(new java.awt.Dimension(165, 30));
         exitButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -91,9 +95,10 @@ public class MainMenu extends javax.swing.JPanel {
             }
         });
 
-        versionLabel.setFont(new java.awt.Font("Ubuntu", 0, 12)); // NOI18N
+        versionLabel.setFont(new java.awt.Font("Courier", 0, 12)); // NOI18N
         versionLabel.setText("v1.0");
 
+        createButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         createButton.setText("Create");
         createButton.setMaximumSize(new java.awt.Dimension(165, 30));
         createButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -142,7 +147,7 @@ public class MainMenu extends javax.swing.JPanel {
                 .addComponent(switchViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(versionLabel)
                 .addContainerGap())
         );

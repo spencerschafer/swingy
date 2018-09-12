@@ -37,11 +37,11 @@ public class ConsoleView {
 
             if (!map.battle()) {
                 gameOn = false;
-            }
-
-            if (map.victory()) {
-                
-                map = new Map(hero);
+            } else if (map.victory()) {
+                if (map.checkHeroLevel())
+                    gameOn = false;
+                else
+                    map = new Map(hero);
             }
         }
         

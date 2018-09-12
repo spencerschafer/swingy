@@ -3,7 +3,7 @@ package Controller;
 import Model.Characters.Hero;
 import Model.Map;
 import View.ConsoleView;
-import View.Gui.GuiView;
+import View.GuiView;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class Main {
             changeViewGui();
         } else if (args.length == 1) {
             if (args[0].equals("console")) {
-                changeViewConsole();
+                mainMenu();
             } else if (args[0].equals("gui")) {
                 changeViewGui();
             }

@@ -1,6 +1,5 @@
 package Model;
 
-import Controller.Main;
 import Model.Artifacts.Armor;
 import Model.Artifacts.Helm;
 import Model.Artifacts.Weapon;
@@ -189,14 +188,16 @@ public class Map {
     }
 
     public boolean victory() {
-        if ((hero.getX() == 0) || (hero.getX() == (size - 1)) || (hero.getY() == 0) || (hero.getY() == (size - 1))) {
-            System.out.println("Level Complete!\n");
-            if (checkHeroLevel()) {
-                return false;
-            }
-            this.hero.levelUp();
+         return (hero.getX() == 0) || (hero.getX() == (size - 1)) || (hero.getY() == 0) || (hero.getY() == (size - 1));
+    }
+    
+    public boolean checkHeroLevel() {
+        if (this.hero.getLevel() >= this.hero.getMAX_LEVEL()) {
+            System.out.println("You have successfully defeated all levels.");
+            System.out.println("Congratulations! You, " + hero.getName() + ", have ascended to LEGENDARY status!\n");
             return true;
         }
+        this.hero.levelUp();
         return false;
     }
 
@@ -252,16 +253,6 @@ public class Map {
                 System.out.println("\nIncorrect Value. No selected.\n");
                 dropArtifact();
             }
-        }
-    }
-
-    private boolean checkHeroLevel() {
-        if (this.hero.getLevel() >= this.hero.getMAX_LEVEL()) {
-            System.out.println("You have successfully defeated all levels.");
-            System.out.println("Congratulations! You, " + hero.getName() + ", have ascended to LEGENDARY status!\n");
-            return true;
-        } else {
-            return false;
         }
     }
 

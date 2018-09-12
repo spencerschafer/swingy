@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View.Gui;
+package View;
 
 import Controller.Main;
 import Model.Characters.*;
 import Model.Map;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import Panels.CreateHero;
+import Panels.LoadCharacter;
+import Panels.MainMenu;
+import Panels.StartGame;
+import Panels.SwitchView;
+import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.JFrame;
@@ -45,6 +49,7 @@ public class GuiView {
     public void initialiseView() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.put("OptionPane.messageFont", new Font("Courier", Font.PLAIN, 13));
         } catch (Exception e) {
             System.out.println("Error setting native LAF: " + e);
         }
@@ -103,6 +108,18 @@ public class GuiView {
                 displayHeroAttributes();
             } else if (source == "Help") {
                 displayHelp();
+            } else if (source.equals("Defeat")) {
+                removeStartGame();
+                newMainMenu();
+            } else if (source.equals("Victory")) {
+                JOptionPane.showMessageDialog(null, "You have successfully"
+                        + " defeated all levels.\nCongratulations! You, "
+                        + hero.getName() + ", have ascended to LEGENDARY"
+                        + " status!\n", "GAME WON!",
+                        JOptionPane.INFORMATION_MESSAGE);
+                hero = startGame.getHero();
+                removeStartGame();
+                newMainMenu();
             }
         }
     }
@@ -183,7 +200,7 @@ public class GuiView {
     }
 
     private void newStartGame() {
-        startGame = new StartGame(map, hero);
+        startGame = new StartGame(hero);
         startGame.addPropertyChangeListener(new StartGameListener());
 
         frame.add(startGame);
@@ -238,19 +255,19 @@ public class GuiView {
         if (hero != null) {
             JOptionPane.showMessageDialog(null,
                     "Hero Attributes\n"
-                    + "- - - - - - - - - - - - - - - -"
-                    + "\nName:   " + hero.getName()
-                    + "\nClass:    " + hero.getType()
-                    + "\nLevel:    " + hero.getLevel()
-                    + "\nEXP:       " + hero.getExperience()
-                    + "\nATT:       " + hero.getAttack()
-                    + "\nDEF:      " + hero.getDefense()
-                    + "\nHP:         " + hero.getHitPoints()
-                    + "\n\nHero Artifacts"
-                    + "\n- - - - - - - - - - - - - -"
-                    + "\nHelmet:    " + hero.getHelmet().getHitPoints() + " HP"
-                    + "\nArmor:      " + hero.getArmor().getDefense() + " DEF"
-                    + "\nWeapon:  " + hero.getWeapon().getAttack() + " ATT\n",
+                    + "- - - - - - - - -\n"
+                    + "Name:   " + hero.getName() + "\n"
+                    + "Class:  " + hero.getType() + "\n"
+                    + "Level:  " + hero.getLevel() + "\n"
+                    + "EXP:    " + hero.getExperience() + "\n"
+                    + "ATT:    " + hero.getAttack() + "\n"
+                    + "DEF:    " + hero.getDefense() + "\n"
+                    + "HP:     " + hero.getHitPoints() + "\n\n"
+                    + "Hero Artifacts\n"
+                    + "- - - - - - - -\n"
+                    + "Helmet: " + hero.getHelmet().getHitPoints() + " HP\n"
+                    + "Armor:  " + hero.getArmor().getDefense() + " DEF\n"
+                    + "Weapon: " + hero.getWeapon().getAttack() + " ATT\n",
                     "Help", JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -259,16 +276,16 @@ public class GuiView {
         if (hero != null) {
             JOptionPane.showMessageDialog(null,
                     "Controls\n"
-                    + "- - - - - - - - -\n"
+                    + "- - - - -\n"
                     + "North -  Up\n"
-                    + "West   -  Left\n"
+                    + "West  -  Left\n"
                     + "South -  Down\n"
-                    + "East     -  Right\n\n"
+                    + "East  -  Right\n\n"
                     + "Map Key\n"
-                    + "- - - - - - - - -\n"
-                    + "o  -  Hero\n"
-                    + "x   -  Villain\n"
-                    + ".   -  Empty\n",
+                    + "- - - - -\n"
+                    + "o     -  Hero\n"
+                    + "x     -  Villain\n"
+                    + ".     -  Empty\n",
                     "Help", JOptionPane.INFORMATION_MESSAGE);
         }
     }

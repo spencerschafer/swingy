@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View.Gui;
+package Panels;
 
 import Model.Characters.Hero;
 
@@ -47,6 +47,7 @@ public class CreateHero extends javax.swing.JPanel {
         heroInfoArea = new javax.swing.JTextArea();
         nameLabel = new javax.swing.JLabel();
 
+        CreateButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         CreateButton.setText("Create");
         CreateButton.setMaximumSize(new java.awt.Dimension(165, 30));
         CreateButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -57,6 +58,7 @@ public class CreateHero extends javax.swing.JPanel {
             }
         });
 
+        backButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         backButton.setText("Back");
         backButton.setMaximumSize(new java.awt.Dimension(165, 30));
         backButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -67,6 +69,7 @@ public class CreateHero extends javax.swing.JPanel {
             }
         });
 
+        heroNameField.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         heroNameField.setToolTipText("Press Enter to apply name.");
         heroNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +77,7 @@ public class CreateHero extends javax.swing.JPanel {
             }
         });
 
+        selectClassComboBox.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         selectClassComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Class", "Warrior", "Archer" }));
         selectClassComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,10 +86,11 @@ public class CreateHero extends javax.swing.JPanel {
         });
 
         heroInfoArea.setColumns(20);
-        heroInfoArea.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        heroInfoArea.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         heroInfoArea.setRows(5);
         heroInfoArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        nameLabel.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         nameLabel.setText("Enter Hero Name:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -104,7 +109,7 @@ public class CreateHero extends javax.swing.JPanel {
                     .addComponent(nameLabel)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(selectClassComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(heroNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                        .addComponent(heroNameField)
                         .addComponent(heroInfoArea, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(275, 275, 275))
         );
@@ -118,12 +123,12 @@ public class CreateHero extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(selectClassComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(heroInfoArea, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                .addComponent(heroInfoArea, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(CreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                .addGap(69, 69, 69))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,7 +138,6 @@ public class CreateHero extends javax.swing.JPanel {
             this.firePropertyChange("Default", null, evt);
         } else {
             if (name == null) {
-                //
                 this.firePropertyChange("nullName", null, evt);
             } else if (type == null) {
                 this.firePropertyChange("nullType", null, evt);
@@ -155,7 +159,7 @@ public class CreateHero extends javax.swing.JPanel {
         if (selectClassComboBox.getSelectedItem() == "Warrior") {
             heroInfoArea.setText("Base Attributes:\n\n");
             heroInfoArea.append("DEF: +20\n");
-            heroInfoArea.append("HP   : +50\n");
+            heroInfoArea.append("HP : +50\n");
             type = "Warrior";
         } else if (selectClassComboBox.getSelectedItem() == "Archer") {
             heroInfoArea.setText("Base Attributes:\n\n");
@@ -167,7 +171,7 @@ public class CreateHero extends javax.swing.JPanel {
     private void heroNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heroNameFieldActionPerformed
         // TODO add your handling code here:
         name = heroNameField.getText();
-        System.out.println(name);
+        //System.out.println(name);
     }//GEN-LAST:event_heroNameFieldActionPerformed
 
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View.Gui;
+package Panels;
 
 /**
  *
@@ -30,6 +30,7 @@ public class HeroBattle extends javax.swing.JPanel {
         fightButton = new javax.swing.JButton();
         runButton = new javax.swing.JButton();
 
+        fightButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         fightButton.setText("Fight");
         fightButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -37,6 +38,7 @@ public class HeroBattle extends javax.swing.JPanel {
             }
         });
 
+        runButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         runButton.setText("Run");
         runButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,13 +70,11 @@ public class HeroBattle extends javax.swing.JPanel {
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("@1");
         this.firePropertyChange("Run", null, evt);
     }//GEN-LAST:event_runButtonActionPerformed
 
     private void fightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fightButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("@2");
         this.firePropertyChange("Fight", null, evt);
     }//GEN-LAST:event_fightButtonActionPerformed
 

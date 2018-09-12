@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View.Gui;
+package Panels;
 
 import Model.Artifacts.Armor;
 import Model.Artifacts.Helm;
@@ -25,19 +25,19 @@ public class StartGame extends javax.swing.JPanel {
     private Hero hero;
     private Map map;
     private static Armor tempArmor = null;
-    private static Helm tempHelm = null;;
-    private static Weapon tempWeapon = null;;
+    private static Helm tempHelm = null;
+    private static Weapon tempWeapon = null;
     private Random rand;
     private JDialog dialogWindow;
+    private boolean victory = false;
 
     /**
      * Creates new form StartGame
      */
-    
-    public StartGame(Map map, Hero hero) {
+    public StartGame(Hero hero) {
         initComponents();
 
-        this.map = map;
+        this.map = new Map(hero);
         this.hero = hero;
         rand = new Random();
         displayMap();
@@ -87,6 +87,8 @@ public class StartGame extends javax.swing.JPanel {
     public void battle() {
 
 //        Model.Characters.Character villain = map.getCharacter(hero.getY(), hero.getX());
+        victory = true;
+
         if (map.getCharacter(hero.getY(), hero.getX()).getClass().getSimpleName().equals("Villain")) {
 
             dialogWindow = new JDialog();
@@ -100,7 +102,6 @@ public class StartGame extends javax.swing.JPanel {
             dialogWindow.pack();
             dialogWindow.setLocationRelativeTo(null);
             dialogWindow.setVisible(true);
-
         }
     }
 
@@ -109,22 +110,22 @@ public class StartGame extends javax.swing.JPanel {
         @Override
         public void propertyChange(PropertyChangeEvent pce) {
             String source = pce.getPropertyName();
-            if (source == "Fight") {
+            if (source.equals("Fight")) {
                 if (!battleFight(hero, map.getCharacter(hero.getY(), hero.getX()))) {
                     dialogWindow.dispose();
                     JOptionPane.showMessageDialog(null, "Game Over!", "DEFEAT",
                             JOptionPane.ERROR_MESSAGE);
-                    mainMenuButton.doClick();
+                    victory = false;
                 } else {
+                    victory = true;
                     dialogWindow.dispose();
                     JOptionPane.showMessageDialog(null, "You are victorious!",
                             "VICTORY", JOptionPane.INFORMATION_MESSAGE);
                     hero.increaseExperience();
-                    dropArtifact(hero.getLevel());
+                    dropArtifact();
                     map.removeVillain();
-
                 }
-            } else if (source == "Run") {
+            } else if (source.equals("Run")) {
                 battleRun();
             }
         }
@@ -132,7 +133,6 @@ public class StartGame extends javax.swing.JPanel {
 
     private boolean battleFight(Model.Characters.Character hero,
             Model.Characters.Character villain) {
-
         int attack;
         int heroHitPoints = hero.getHitPoints();
         int villainHitPoints = villain.getHitPoints();
@@ -143,13 +143,12 @@ public class StartGame extends javax.swing.JPanel {
 //        System.out.println("HP : " + hero.getHitPoints() + " | " + villain.getHitPoints());
 //        System.out.println("DEF:  " + hero.getDefense() + " | " + villain.getDefense());
 //        System.out.println("ATT:  " + hero.getAttack() + " | " + villain.getAttack());
-
         while (heroHitPoints > 0 && villainHitPoints > 0) {
-
 //          hero's attack damage on villain
             attack = hero.getAttack() / ((rand.nextInt(5) + 1));
 
             if ((villainHitPoints -= attack) <= 0) {
+                victory = true;
                 return true;
             }
 
@@ -160,32 +159,46 @@ public class StartGame extends javax.swing.JPanel {
             }
 
             if ((heroHitPoints -= attack) <= 0) {
+                victory = false;
                 return false;
             }
         }
+        victory = true;
         return true;
     }
 
     private void battleRun() {
         int outcome = rand.nextInt(5) + 1;
         if (outcome != 1 && outcome != 2) {
+            dialogWindow.dispose();
+            dialogWindow = null;
             JOptionPane.showMessageDialog(null, "You successfulyl evaded the"
                     + " battle!", "VICTORY", JOptionPane.INFORMATION_MESSAGE);
             hero.setCharacterPosition(hero.getPreviousX(), hero.getPreviousY());
-            dialogWindow.dispose();
             displayMap();
-            battle();
         } else {
+            dialogWindow.dispose();
+            dialogWindow = null;
             JOptionPane.showMessageDialog(null, "You were unable to evade"
                     + " the battle.\nPrepare to fight!", "UNLUCKY",
                     JOptionPane.ERROR_MESSAGE);
-            battleFight(hero, map.getCharacter(hero.getY(), hero.getX()));
+            if (!battleFight(hero, map.getCharacter(hero.getY(), hero.getX()))) {
+                JOptionPane.showMessageDialog(null, "Game Over!", "DEFEAT",
+                        JOptionPane.ERROR_MESSAGE);
+                victory = false;
+            } else {
+                victory = true;
+                JOptionPane.showMessageDialog(null, "You are victorious!",
+                        "VICTORY", JOptionPane.INFORMATION_MESSAGE);
+                hero.increaseExperience();
+                dropArtifact();
+                map.removeVillain();
+            }
         }
     }
 
-    private void dropArtifact(int level) {
+    private void dropArtifact() {
         int dropChance = rand.nextInt(6) + 1;
-        int option;
 
         if (dropChance == 1 || dropChance == 2 || dropChance == 3) {
             Armor armor = new Armor(hero);
@@ -212,7 +225,7 @@ public class StartGame extends javax.swing.JPanel {
         @Override
         public void propertyChange(PropertyChangeEvent pce) {
             String source = pce.getPropertyName();
-            if (source == "Equip") {
+            if (source.equals("Equip")) {
                 if (tempHelm != null) {
                     hero.newHelm(tempHelm);
                     tempHelm = null;
@@ -230,35 +243,28 @@ public class StartGame extends javax.swing.JPanel {
                     tempWeapon = null;
                 }
                 dialogWindow.dispose();
-            } else if (source == "Decline") {
+            } else if (source.equals("Decline")) {
                 dialogWindow.dispose();
             }
         }
     }
 
     public void victory() {
+        victory = false;
         if ((hero.getX() == 0) || (hero.getX() == (map.getSize() - 1)) || (hero.getY() == 0) || (hero.getY() == (map.getSize() - 1))) {
-            System.out.println("Level Complete!\n");
+//           System.out.println("Level Complete!\n");
             if (checkHeroLevel()) {
-                dialogWindow.dispose();
-                JOptionPane.showMessageDialog(null, "You have successfully"
-                        + " defeated all levels.\nCongratulations! You, "
-                        + hero.getName() + ", have ascended to LEGENDARY"
-                        + " status!\n", "GAME WON!",
-                        JOptionPane.INFORMATION_MESSAGE);
-                mainMenuButton.doClick();
+                victory = true;
+            } else {
+                hero.levelUp();
+                map = new Map(hero);
+                displayMap();
             }
-            hero.levelUp();
-            map = new Map(hero);
         }
     }
 
     private boolean checkHeroLevel() {
-        if (this.hero.getLevel() >= this.hero.getMAX_LEVEL()) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.hero.getLevel() >= this.hero.getMAX_LEVEL();
     }
 
     /**
@@ -282,15 +288,16 @@ public class StartGame extends javax.swing.JPanel {
         helpButton = new javax.swing.JButton();
 
         mapDisplayArea.setColumns(20);
-        mapDisplayArea.setFont(new java.awt.Font("Courier New", 0, 15)); // NOI18N
+        mapDisplayArea.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         mapDisplayArea.setRows(5);
         mapScrollPane.setViewportView(mapDisplayArea);
 
         heroStatsDisplay.setColumns(20);
+        heroStatsDisplay.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         heroStatsDisplay.setRows(5);
         heroStatsDisplay.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        northButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        northButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         northButton.setText("North");
         northButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         northButton.setMaximumSize(new java.awt.Dimension(165, 30));
@@ -302,7 +309,7 @@ public class StartGame extends javax.swing.JPanel {
             }
         });
 
-        westButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        westButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         westButton.setText("West");
         westButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         westButton.setMaximumSize(new java.awt.Dimension(165, 30));
@@ -314,7 +321,7 @@ public class StartGame extends javax.swing.JPanel {
             }
         });
 
-        eastButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        eastButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         eastButton.setText("East");
         eastButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         eastButton.setMaximumSize(new java.awt.Dimension(60, 50));
@@ -325,7 +332,7 @@ public class StartGame extends javax.swing.JPanel {
             }
         });
 
-        southButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        southButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         southButton.setText("South");
         southButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         southButton.setPreferredSize(new java.awt.Dimension(60, 50));
@@ -335,7 +342,7 @@ public class StartGame extends javax.swing.JPanel {
             }
         });
 
-        mainMenuButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        mainMenuButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         mainMenuButton.setText("Main Menu");
         mainMenuButton.setMaximumSize(new java.awt.Dimension(165, 30));
         mainMenuButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -346,7 +353,7 @@ public class StartGame extends javax.swing.JPanel {
             }
         });
 
-        heroAttributesButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        heroAttributesButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         heroAttributesButton.setText("Hero Attributes");
         heroAttributesButton.setMaximumSize(new java.awt.Dimension(165, 30));
         heroAttributesButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -357,7 +364,7 @@ public class StartGame extends javax.swing.JPanel {
             }
         });
 
-        helpButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        helpButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         helpButton.setText("Help");
         helpButton.setPreferredSize(new java.awt.Dimension(165, 30));
         helpButton.addActionListener(new java.awt.event.ActionListener() {
@@ -446,10 +453,20 @@ public class StartGame extends javax.swing.JPanel {
         if (hero.getY() != 0) {
             hero.setPreviousPosition(hero.getX(), hero.getY());
             hero.setY(hero.getY() - 1);
+
             displayMap();
-            battle();
-            victory();
         }
+        battle();
+        if (victory == false) {
+            System.out.println(victory);
+            firePropertyChange("Defeat", null, evt);
+        }
+        if (victory == true) {
+                victory();
+                if (victory == true) {
+                    firePropertyChange("Victory", null, evt);
+                }
+            }
     }//GEN-LAST:event_northButtonActionPerformed
 
     private void southButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_southButtonActionPerformed
@@ -458,10 +475,20 @@ public class StartGame extends javax.swing.JPanel {
         if (hero.getY() != hero.getMapLimit() - 1) {
             hero.setPreviousPosition(hero.getX(), hero.getY());
             hero.setY(hero.getY() + 1);
+
             displayMap();
-            battle();
-            victory();
         }
+        battle();
+        if (victory == false) {
+            System.out.println(victory);
+            firePropertyChange("Defeat", null, evt);
+        }
+        if (victory == true) {
+                victory();
+                if (victory == true) {
+                    firePropertyChange("Victory", null, evt);
+                }
+            }
     }//GEN-LAST:event_southButtonActionPerformed
 
     private void westButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_westButtonActionPerformed
@@ -470,10 +497,20 @@ public class StartGame extends javax.swing.JPanel {
         if (hero.getX() != 0) {
             hero.setPreviousPosition(hero.getX(), hero.getY());
             hero.setX(hero.getX() - 1);
+
             displayMap();
-            battle();
-            victory();
         }
+        battle();
+        if (victory == false) {
+            System.out.println(victory);
+            firePropertyChange("Defeat", null, evt);
+        }
+        if (victory == true) {
+                victory();
+                if (victory == true) {
+                    firePropertyChange("Victory", null, evt);
+                }
+            }
     }//GEN-LAST:event_westButtonActionPerformed
 
     private void eastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eastButtonActionPerformed
@@ -482,10 +519,20 @@ public class StartGame extends javax.swing.JPanel {
         if (hero.getX() != hero.getMapLimit() - 1) {
             hero.setPreviousPosition(hero.getX(), hero.getY());
             hero.setX(hero.getX() + 1);
+
             displayMap();
-            battle();
-            victory();
         }
+        battle();
+        if (victory == false) {
+            System.out.println(victory);
+            firePropertyChange("Defeat", null, evt);
+        }
+        if (victory == true) {
+                victory();
+                if (victory == true) {
+                    firePropertyChange("Victory", null, evt);
+                }
+            }
     }//GEN-LAST:event_eastButtonActionPerformed
 
 

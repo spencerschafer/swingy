@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View.Gui;
+package Panels;
 
 import Model.Characters.Hero;
 import java.io.BufferedReader;
@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -63,7 +62,7 @@ public class LoadCharacter extends javax.swing.JPanel {
         heroInfoTextArea = new javax.swing.JTextArea();
         loadButton = new javax.swing.JButton();
 
-        backButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        backButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         backButton.setText("Back");
         backButton.setMaximumSize(new java.awt.Dimension(165, 30));
         backButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -74,7 +73,7 @@ public class LoadCharacter extends javax.swing.JPanel {
             }
         });
 
-        loadCharacterComboBox.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        loadCharacterComboBox.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         loadCharacterComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Hero" }));
         loadCharacterComboBox.setMaximumSize(new java.awt.Dimension(400, 30));
         loadCharacterComboBox.setMinimumSize(new java.awt.Dimension(400, 30));
@@ -86,11 +85,11 @@ public class LoadCharacter extends javax.swing.JPanel {
         });
 
         heroInfoTextArea.setColumns(20);
-        heroInfoTextArea.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        heroInfoTextArea.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         heroInfoTextArea.setRows(5);
         heroInfoScrollPanel.setViewportView(heroInfoTextArea);
 
-        loadButton.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        loadButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         loadButton.setText("Load");
         loadButton.setMaximumSize(new java.awt.Dimension(165, 30));
         loadButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -126,11 +125,11 @@ public class LoadCharacter extends javax.swing.JPanel {
                 .addComponent(loadCharacterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(heroInfoScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                .addGap(69, 69, 69))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -157,24 +156,23 @@ public class LoadCharacter extends javax.swing.JPanel {
                 reader.close();
             } catch (IOException e) {
                 System.out.println("\nThat file does not exist.");
-//            loadCharacter();
             }
 
             heroInfoTextArea.setText(
                     "Hero Attributes\n"
-                    + "- - - - - - - - - - - - - - - -"
+                    + "- - - - - - - - "
                     + "\nName:   " + list.get(0)
-                    + "\nClass:    " + list.get(1)
-                    + "\nLevel:    " + list.get(2)
-                    + "\nEXP:       " + list.get(3)
-                    + "\nATT:       " + list.get(4)
-                    + "\nDEF:      " + list.get(5)
-                    + "\nHP:         " + list.get(6)
+                    + "\nClass:  " + list.get(1)
+                    + "\nLevel:  " + list.get(2)
+                    + "\nEXP:    " + list.get(3)
+                    + "\nATT:    " + list.get(4)
+                    + "\nDEF:    " + list.get(5)
+                    + "\nHP:     " + list.get(6)
                     + "\n\nHero Artifacts"
-                    + "\n- - - - - - - - - - - - - -"
-                    + "\nHelmet:    " + list.get(7) + " HP"
-                    + "\nArmor:      " + list.get(8) + " DEF"
-                    + "\nWeapon:  " + list.get(9) + " ATT\n"
+                    + "\n- - - - - - - -"
+                    + "\nHelmet: " + list.get(7) + " HP"
+                    + "\nArmor:  " + list.get(8) + " DEF"
+                    + "\nWeapon: " + list.get(9) + " ATT\n"
             );
         }
     }//GEN-LAST:event_loadCharacterComboBoxActionPerformed

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View.Gui;
+package Panels;
 
 import Model.Artifacts.Armor;
 import Model.Artifacts.Helm;
@@ -74,6 +74,7 @@ public class SelectArtifact extends javax.swing.JPanel {
         artifactScrollPane = new javax.swing.JScrollPane();
         artifactTextArea = new javax.swing.JTextArea();
 
+        equipButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         equipButton.setText("Equip");
         equipButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +82,7 @@ public class SelectArtifact extends javax.swing.JPanel {
             }
         });
 
+        declineButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         declineButton.setText("Decline");
         declineButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +91,7 @@ public class SelectArtifact extends javax.swing.JPanel {
         });
 
         artifactTextArea.setColumns(20);
+        artifactTextArea.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         artifactTextArea.setRows(5);
         artifactScrollPane.setViewportView(artifactTextArea);
 

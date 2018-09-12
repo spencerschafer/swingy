@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View.Gui;
+package Panels;
 
 /**
  *
@@ -30,6 +30,7 @@ public class SwitchView extends javax.swing.JPanel {
         backButton = new javax.swing.JButton();
         loadConsoleButton = new javax.swing.JButton();
 
+        backButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         backButton.setText("Back");
         backButton.setMaximumSize(new java.awt.Dimension(165, 30));
         backButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -39,6 +40,7 @@ public class SwitchView extends javax.swing.JPanel {
             }
         });
 
+        loadConsoleButton.setFont(new java.awt.Font("Courier", 0, 13)); // NOI18N
         loadConsoleButton.setText("Console View");
         loadConsoleButton.setMaximumSize(new java.awt.Dimension(165, 30));
         loadConsoleButton.setMinimumSize(new java.awt.Dimension(165, 30));
@@ -63,11 +65,11 @@ public class SwitchView extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(183, Short.MAX_VALUE)
+                .addContainerGap(177, Short.MAX_VALUE)
                 .addComponent(loadConsoleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(104, 104, 104)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                .addGap(69, 69, 69))
         );
     }// </editor-fold>//GEN-END:initComponents
 

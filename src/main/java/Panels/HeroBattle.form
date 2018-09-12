@@ -41,6 +41,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="fightButton">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Courier" size="13" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Fight"/>
       </Properties>
       <Events>
@@ -49,6 +52,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="runButton">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Courier" size="13" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Run"/>
       </Properties>
       <Events>
